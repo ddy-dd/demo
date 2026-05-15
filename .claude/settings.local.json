@@ -15,7 +15,9 @@
       "Read(//Users/xiaozhang/.ssh/**)",
       "Bash(echo \"EXIT:$?\")",
       "Bash(~/.ssh/id_rsa.pub *)",
-      "Bash(gh ssh-key *)"
+      "Bash(gh ssh-key *)",
+      "Bash(git remote *)",
+      "Bash(git push *)"
     ]
   }
 }
