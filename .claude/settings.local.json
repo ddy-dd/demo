@@ -17,7 +17,31 @@
       "Bash(~/.ssh/id_rsa.pub *)",
       "Bash(gh ssh-key *)",
       "Bash(git remote *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git clone *)",
+      "Bash(npx skills *)",
+      "Bash(npm install *)",
+      "Bash(opencli list *)",
+      "Bash(opencli dianping *)",
+      "Bash(opencli doctor *)",
+      "Bash(opencli google *)",
+      "Bash(curl -sL -o /tmp/opencli-extension.zip \"https://github.com/jackwener/OpenCLI/releases/download/v1.7.21/opencli-extension-v1.0.15.zip\")",
+      "Bash(unzip -q /tmp/opencli-extension.zip -d /tmp/opencli-extension)",
+      "Read(//tmp/**)",
+      "Bash(cp -r /tmp/opencli-extension ~/opencli-extension)",
+      "Bash(rm -f /tmp/opencli-extension.zip)",
+      "Bash(rm -rf /tmp/opencli-extension)",
+      "Bash(opencli daemon *)",
+      "Bash(opencli xiaohongshu *)",
+      "Bash(opencli duckduckgo *)",
+      "Bash(chmod +x *)",
+      "Bash(java *)",
+      "Bash(./gradlew test *)"
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "/Users/xiaozhang/.claude/statusline.sh",
+    "refreshInterval": 30
   }
 }
