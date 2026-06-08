@@ -5,6 +5,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+src/main/java/com/example/demo/*
+!src/main/java/com/example/demo/AI/
+!src/main/java/com/example/demo/AI/**
+
 ### STS ###
 .apt_generated
 .classpath
@@ -35,3 +39,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### agent ###
+.agents/
+.claude/
+
+
+
