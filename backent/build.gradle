@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.14'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+description = 'demo'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(26)
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://maven.aliyun.com/repository/public/'
+    }
+    mavenLocal()
+    //maven { url 'https://maven.aliyun.com/repository/public' }
+    //maven { url 'https://maven.aliyun.com/repository/spring' }
+    //maven { url 'https://maven.aliyun.com/repository/spring-plugin' }
+}
+
+dependencies {
+    implementation platform("org.springframework.ai:spring-ai-bom:1.1.7")
+    //implementation platform('io.grpc:grpc-bom:1.68.1')
+    implementation 'org.redisson:redisson:3.22.0'
+    implementation 'org.springframework.ai:spring-ai-tika-document-reader'
+    implementation 'org.springframework.ai:spring-ai-starter-vector-store-milvus'
+    implementation 'org.springframework.ai:spring-ai-advisors-vector-store'
+    //implementation 'org.springframework.ai:spring-ai-starter-vector-store-chroma'
+    // Replace the following with the specific module dependencies (e.g., spring-ai-openai) or starter modules (e.g., spring-ai-starter-model-openai) that you wish to use
+    implementation 'org.springframework.ai:spring-ai-openai'
+    implementation 'org.springframework.ai:spring-ai-vector-store'
+    //implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+    implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testCompileOnly 'org.projectlombok:lombok'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+task runMemoryTest(type: JavaExec) {
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.example.demo.MaxMessagesOptimizationTest'
+    // 限制最大内存
+    jvmArgs '-Xmx2g'
+}

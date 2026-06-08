@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: demo
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: qwen3.5:0.8b
+      embedding:
+        model: nomic-embed-text
+    vectorstore:
+      milvus:
+        client:
+          port: 19530
+          host: "localhost"
+          username: "root"
+          password: "milvus"
+        databaseName: "default"
+        collectionName: "vector_store"
+        embeddingDimension: 768
+        indexType: IVF_FLAT
+        metricType: COSINE
+        initializeSchema: true
+
+server:
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    org.springframework.ai.chat.client.advisor: DEBUG
+
+kind: Application
+
+
+
+
+
