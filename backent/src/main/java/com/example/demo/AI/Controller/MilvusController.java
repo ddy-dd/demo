@@ -9,9 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @Slf4j
-@RequestMapping("/zvec")
+@RequestMapping("/milvus")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
 public class MilvusController {
 
     private final KnowledgeService knowledgeService;

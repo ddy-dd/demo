@@ -117,7 +117,7 @@ public class MaxMessagesOptimizationTest {
 
         InMemoryChatMemoryRepository baseRepo = new InMemoryChatMemoryRepository();
         SummarizingChatMemoryRepository summarizingRepo = new SummarizingChatMemoryRepository(
-                baseRepo, maxMessages, chatModel
+                baseRepo, maxMessages
         );
         ChatMemory chatMemory = MessageWindowChatMemory.builder()
                 .chatMemoryRepository(summarizingRepo)

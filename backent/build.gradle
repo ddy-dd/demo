@@ -36,7 +36,10 @@ dependencies {
     // Replace the following with the specific module dependencies (e.g., spring-ai-openai) or starter modules (e.g., spring-ai-starter-model-openai) that you wish to use
     implementation 'org.springframework.ai:spring-ai-openai'
     implementation 'org.springframework.ai:spring-ai-vector-store'
-    //implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+    implementation 'org.springframework.ai:spring-ai-advisors-vector-store'
+    implementation 'org.springframework.ai:spring-ai-rag'
+    implementation 'org.springframework.ai:spring-ai-starter-model-deepseek'
+    implementation 'org.springframework.ai:spring-ai-ollama'
     implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'

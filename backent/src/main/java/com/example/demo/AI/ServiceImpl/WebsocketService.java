@@ -11,15 +11,13 @@ import jakarta.websocket.OnOpen;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.sl.usermodel.ObjectMetaData;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.deepseek.DeepSeekAssistantMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 @ServerEndpoint(value = "/websocket/{chatId}")
@@ -84,27 +82,57 @@ public class WebsocketService {
     }
 
     private void handleTextMessage(Session session,String message, String chatId) {
-        Flux<String> flux = chatService.generation(chatId,message);
-        flux.subscribe(
-                chunk -> {
-                    try {
-                        sendResponse(session, "text", chunk);
-                    } catch (Exception e) {
-                        log.error("Error sending chunk: {}", e.getMessage(), e);
+        //Flux<String> flux = chatService.generation(chatId,message);
+        ChatClient.StreamResponseSpec streamResponseSpec = chatService.getStreamResponseSpec(chatId, message);
+//        Flux<String> flux = streamResponseSpec.content();
+//        flux.subscribe(
+//                chunk -> {
+//                    try {
+//                        sendResponse(session, "text", chunk);
+//                    } catch (Exception e) {
+//                        log.error("Error sending chunk: {}", e.getMessage(), e);
+//                    }
+//                },
+//                error -> {
+//                    log.error("Error in flux stream: {}", error.getMessage(), error);
+//                    try {
+//                        sendResponse(session, "error", error.getMessage());
+//                    } catch (Exception e) {
+//                        log.error("Error sending error response: {}", e.getMessage(), e);
+//                    }
+//                },
+//                () -> {
+//                    log.info("Stream completed for chatId: {}", chatId);
+//                }
+//        );
+
+        Flux<ChatResponse> chatResponseFlux = streamResponseSpec.chatResponse();
+        chatResponseFlux.subscribe(
+                chatResponse -> {
+                    DeepSeekAssistantMessage assistantMessage = (DeepSeekAssistantMessage) chatResponse.getResult().getOutput();
+                    String thinking = assistantMessage.getReasoningContent();
+                    if (thinking != null){
+                        try {
+                            sendResponse(session, "thinking", thinking);
+                        } catch (Exception e) {
+                            log.error("Error sending chunk: {}", e.getMessage(), e);
+                        }
+                    }
+                    String content = assistantMessage.getText();
+                    if (content != null){
+                        try {
+                            sendResponse(session, "text", content);
+                        } catch (Exception e) {
+                            log.error("Error sending chunk: {}", e.getMessage(), e);
+                        }
                     }
                 },
                 error -> {
-                    log.error("Error in flux stream: {}", error.getMessage(), error);
-                    try {
-                        sendResponse(session, "error", error.getMessage());
-                    } catch (Exception e) {
-                        log.error("Error sending error response: {}", e.getMessage(), e);
-                    }
-                },
-                () -> {
-                    log.info("Stream completed for chatId: {}", chatId);
+                    log.error("Error in chat response stream: {}", error.getMessage(), error);
+
                 }
         );
+
 
     }
 

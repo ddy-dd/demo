@@ -2,6 +2,15 @@ spring:
   application:
     name: demo
   ai:
+    deepseek:
+      api-key: ${DEEPSEEK_API_KEY}
+      chat:
+        options:
+          model: deepseek-v4-flash
+          temperature: 0.8
+
+      base-url: https://api.deepseek.com
+
     ollama:
       base-url: http://localhost:11434
       chat:

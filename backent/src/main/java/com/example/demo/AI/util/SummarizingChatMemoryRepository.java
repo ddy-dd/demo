@@ -7,10 +7,11 @@ import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.ollama.OllamaChatModel;
+import org.springframework.ai.ollama.api.OllamaApi;
+import org.springframework.ai.ollama.api.OllamaChatOptions;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -22,13 +23,21 @@ public class SummarizingChatMemoryRepository implements ChatMemoryRepository {
     private final ChatModel chatModel;
     private final ConcurrentHashMap<String, ReentrantLock> locks = new ConcurrentHashMap<>();
 
+    //private static ChatModel chatModel;
 
-    public SummarizingChatMemoryRepository(ChatMemoryRepository delegate, int maxMessages, ChatModel chatModel) {
+    //public SummarizingChatMemoryRepository(ChatMemoryRepository delegate, int maxMessages, ChatModel chatModel) {
+    public SummarizingChatMemoryRepository(ChatMemoryRepository delegate, int maxMessages) {
         this.delegate = delegate;
         this.maxMessages = maxMessages;
-        this.chatModel = chatModel;
+        this.chatModel = this.createChatModel();
     }
 
+    private OllamaChatModel createChatModel() {
+        return OllamaChatModel.builder()
+                .ollamaApi(OllamaApi.builder().build())
+                .defaultOptions(OllamaChatOptions.builder().model("qwen3.5:0.8b").disableThinking().temperature(0.9).build())
+                .build();
+    }
 
     @Override
     public List<String> findConversationIds() {
@@ -52,11 +61,16 @@ public class SummarizingChatMemoryRepository implements ChatMemoryRepository {
             List<Message> combinedHistory = new ArrayList<>(currentHistory);
             combinedHistory.addAll(messages);
 
-            // 3. 判断合并后的总长度是否超过限制
-            if (combinedHistory.size() > maxMessages) {
+            // 3. 去重
+            Set<Message> uniqueMessages = new LinkedHashSet<>(combinedHistory);
+            List<Message> uniqueMessagesList = new ArrayList<>(uniqueMessages);
+            // 4. 判断合并后的总长度是否超过限制
+            if ("ASSISTANT".equals(uniqueMessagesList.getLast().getMessageType().name())
+                    && uniqueMessagesList.size() > maxMessages) {
+                log.warn(uniqueMessagesList.toString());
                 // 3.1 调用模型生成摘要
                 String summaryPrompt = "请对以下对话历史进行简明扼要的总结，保留关键信息和用户意图：\n"
-                        + formatMessages(combinedHistory);
+                        + formatMessages(uniqueMessagesList);
                 String summary = chatModel.call(summaryPrompt);
                 log.info("生成历史对话摘要: {}", summary);
 
@@ -69,7 +83,7 @@ public class SummarizingChatMemoryRepository implements ChatMemoryRepository {
                 delegate.saveAll(conversationId, newHistory);
             } else {
                 // 4. 如果没超限，直接保存合并后的完整列表
-                delegate.saveAll(conversationId, combinedHistory); // <--- 注意：这里要保存合并后的，而不是仅 messages
+                delegate.saveAll(conversationId, uniqueMessagesList); // <--- 注意：这里要保存合并后的，而不是仅 messages
             }
         }finally {
             lock.unlock();

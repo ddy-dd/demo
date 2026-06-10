@@ -32,7 +32,7 @@ class AxiosUtils {
     }
 
     static async uploadAndVectorize<T>(data: FormData): Promise<T> {
-        const url = '/zvec/upload'
+        const url = '/milvus/upload'
         const response: AxiosResponse<T> = await this.instance.post(url, data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -41,11 +41,6 @@ class AxiosUtils {
         return response.data
     }
 
-    static async putChatId<T>(data: any): Promise<T> {
-        const url = 'chatId'
-        const response: AxiosResponse<T> = await this.instance.put(url, data)
-        return response.data
-    }
 
 }
 

@@ -12,9 +12,28 @@ import { nanoid } from 'nanoid';
 
 let wsClient: WebsocketClient | null
 const message = ref('')
-const communications = ref<{text: string; isUser: boolean}[]>([])
+
+interface ChatMessage {
+  text: string;
+  isUser: boolean;
+  thinking?: string;
+}
+
+const communications = ref<ChatMessage[]>([])
 const messagesContainer = ref<HTMLElement | null>(null)
 const isConnected = ref(false)
+
+// === Thinking 模式状态 ===
+const isThinking = ref(false)             // 是否正在输出思考过程
+const streamingThinking = ref('')         // 流式积累的思考内容
+const expandedThinking = ref<Set<number>>(new Set())  // 哪些消息的思考展开
+
+function toggleThinking(idx: number) {
+  const next = new Set(expandedThinking.value)
+  if (next.has(idx)) next.delete(idx)
+  else next.add(idx)
+  expandedThinking.value = next
+}
 
 // 查询等待提示
 const showWaiting = ref(false)
@@ -72,16 +91,36 @@ const initWebSocketListener = () => {
           ws.close()
           isConnected.value = false
           break
+        case 'thinking': {
+          // 流式思考内容，在 text 到达前持续积累
+          isThinking.value = true
+          streamingThinking.value += msg.data || ''
+          clearWaiting()
+          scrollToBottom()
+          break
+        }
         case 'text': {
-          // 流式文本：如果上一条也是 AI 消息则追加，否则新建一条
           const msgs = communications.value
           const lastMsg = msgs.length > 0 ? msgs[msgs.length - 1] : null
-          if (lastMsg && !lastMsg.isUser) {
+
+          if (isThinking.value) {
+            // 思考结束，第一条 text：将 thinking 合并到新消息
+            msgs.push({
+              text: msg.data,
+              isUser: false,
+              thinking: streamingThinking.value,
+            })
+            isThinking.value = false
+            streamingThinking.value = ''
+          } else if (lastMsg && !lastMsg.isUser) {
+            // 继续流式输出 text
             lastMsg.text += msg.data
-            communications.value = [...communications.value]
           } else {
-            communications.value.push({text: msg.data, isUser: false})
+            // 没有 thinking，直接新建 AI 消息
+            msgs.push({text: msg.data, isUser: false})
           }
+
+          communications.value = [...msgs]
           clearWaiting()
           scrollToBottom()
           break
@@ -89,6 +128,7 @@ const initWebSocketListener = () => {
         case 'error':
           ElMessage.error(msg.data)
           clearWaiting()
+          isThinking.value = false
           break
         default:
           break
@@ -166,6 +206,7 @@ const renderMarkdown = (text: string): string => {
 const handleClose = () => {
   wsClient?.close()
   isConnected.value = false
+  isThinking.value = false
 }
 
 onUnmounted(() => {
@@ -185,16 +226,63 @@ onUnmounted(() => {
         <div v-if="communications.length === 0" class="messages-empty">
           <p>开始一段新的对话</p>
         </div>
-        <div
-          v-for="(msg, idx) in communications"
-          :key="idx"
-          class="message-bubble"
-          :class="msg.isUser ? 'message-bubble--user' : 'message-bubble--bot'"
-          v-html="renderMarkdown(msg.text)"
-        >
+
+        <template v-for="(msg, idx) in communications" :key="idx">
+          <!-- ── 用户消息 ── -->
+          <div
+            v-if="msg.isUser"
+            class="message-bubble message-bubble--user"
+            v-html="renderMarkdown(msg.text)"
+          >
+          </div>
+
+          <!-- ── AI 回复（含可选的 thinking 区块）── -->
+          <div v-else class="bot-message-group">
+            <!-- Thinking 区块：折叠/展开 -->
+            <div v-if="msg.thinking" class="thinking-section">
+              <button class="thinking-toggle" @click="toggleThinking(idx)">
+                <span class="thinking-label">
+                  {{ expandedThinking.has(idx) ? '收起思考过程' : '查看思考过程' }}
+                </span>
+                <svg
+                  class="thinking-chevron"
+                  :class="{ rotated: expandedThinking.has(idx) }"
+                  width="12" height="12" viewBox="0 0 12 12"
+                >
+                  <path d="M4 8L8 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <div class="thinking-content" :class="{ expanded: expandedThinking.has(idx) }">
+                <div class="thinking-content-inner">
+                  <div class="thinking-text">{{ msg.thinking }}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 正式回复气泡 -->
+            <div class="message-bubble message-bubble--bot" v-html="renderMarkdown(msg.text)"></div>
+          </div>
+        </template>
+
+        <!-- ── 流式 Thinking（text 到达前实时展示） ── -->
+        <div v-if="isThinking" class="bot-message-group">
+          <div class="thinking-section thinking-section--streaming">
+            <div class="thinking-toggle">
+              <span class="thinking-label">AI 正在思考</span>
+              <span class="thinking-dots"><span></span><span></span><span></span></span>
+            </div>
+            <div class="thinking-content expanded">
+              <div class="thinking-content-inner">
+                <div class="thinking-text">
+                  {{ streamingThinking }}<span class="thinking-cursor"></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- 等待提示：AI 正在思考时显示 -->
-        <div v-if="showWaiting" class="message-bubble message-bubble--bot thinking-bubble">
+
+        <!-- 等待提示（退路：没有 thinking 流时显示） -->
+        <div v-if="showWaiting && !isThinking" class="message-bubble message-bubble--bot thinking-bubble">
           <div class="thinking-spinner"></div>
           <span>正在思考…</span>
         </div>
@@ -227,6 +315,7 @@ onUnmounted(() => {
 </template>
 
 <style>
+/* ===== Layout ===== */
 .chat-page {
   height: 100vh;
   display: flex;
@@ -273,6 +362,7 @@ onUnmounted(() => {
   box-shadow: 0 0 0 3px rgba(123,165,135,0.15);
 }
 
+/* ===== Messages Area ===== */
 .messages-area {
   flex: 1;
   overflow-y: auto;
@@ -303,6 +393,16 @@ onUnmounted(() => {
   letter-spacing: 0.04em;
 }
 
+/* ===== Bot message group（thinking + reply 分离） ===== */
+.bot-message-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  align-self: flex-start;
+  max-width: 85%;
+}
+
+/* ===== Message Bubbles ===== */
 .message-bubble {
   background: #f4f3f0;
   color: #2c2c2c;
@@ -363,6 +463,135 @@ onUnmounted(() => {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ===== Thinking 区块 ===== */
+.thinking-section {
+  position: relative;
+  background: #fafaf9;
+  border-radius: 0 8px 8px 0;
+  padding-left: 1rem;   /* 与气泡文字起始位置对齐 */
+  font-size: 0.8rem;
+  color: #8a8680;
+  transition: background 0.2s;
+}
+.thinking-section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: #ddd9d3;
+  border-radius: 2px;
+}
+
+/* 流式思考中 - 略微强调 */
+.thinking-section--streaming {
+  background: #f8f7f5;
+}
+.thinking-section--streaming::before {
+  background: #b3aa9e;
+}
+
+/* ---- 可点击的切换头部 ---- */
+.thinking-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.35rem 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #8a8680;
+  font-family: inherit;
+  font-size: 0.8rem;
+  user-select: none;
+  transition: color 0.2s;
+  width: 100%;
+  text-align: left;
+}
+.thinking-toggle:hover {
+  color: #2c2c2c;
+}
+.thinking-section--streaming .thinking-toggle {
+  cursor: default;
+}
+
+.thinking-label {
+  font-weight: 450;
+}
+
+/* ---- 右箭头 ---- */
+.thinking-chevron {
+  margin-left: auto;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.thinking-chevron.rotated {
+  transform: rotate(-180deg);
+}
+
+/* ---- 折叠/展开内容（max-height 过渡） ---- */
+.thinking-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.25s ease,
+              padding 0.25s ease;
+}
+.thinking-content.expanded {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.thinking-content-inner {
+  padding-bottom: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.thinking-text {
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+  text-align: left;
+}
+
+/* ---- 闪烁光标 ---- */
+.thinking-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: #8a8680;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: cursor-blink 0.8s step-end infinite;
+}
+@keyframes cursor-blink {
+  50% { opacity: 0; }
+}
+
+/* ---- AI 思考动画小点 ---- */
+.thinking-dots {
+  display: inline-flex;
+  gap: 2px;
+  align-items: center;
+}
+.thinking-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #b5b0a8;
+  animation: dot-bounce 1.4s infinite both;
+}
+.thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+.thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dot-bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ===== Input Area ===== */
 .input-area {
   padding: 1rem 1.5rem 1.5rem;
   border-top: 1px solid #f0eeeb;
