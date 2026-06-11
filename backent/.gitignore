@@ -8,6 +8,7 @@ build/
 src/main/java/com/example/demo/*
 !src/main/java/com/example/demo/AI/
 !src/main/java/com/example/demo/AI/**
+!src/main/java/com/example/demo/DemoApplication.java
 
 ### STS ###
 .apt_generated

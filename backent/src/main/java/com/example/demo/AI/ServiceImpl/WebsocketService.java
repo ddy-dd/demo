@@ -129,7 +129,6 @@ public class WebsocketService {
                 },
                 error -> {
                     log.error("Error in chat response stream: {}", error.getMessage(), error);
-
                 }
         );
 
