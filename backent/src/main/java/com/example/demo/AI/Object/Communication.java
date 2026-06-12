@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class Communication {
     public String type;
-    public String data;
+    public Object data;
+    public String uuid;
 }

@@ -2,13 +2,11 @@ package com.example.demo.AI.ServiceImpl;
 
 
 import com.example.demo.AI.Object.Communication;
+import com.example.demo.AI.Pool.ToolAwaitingPoolByCompletableFuture;
 import com.example.demo.AI.ServiceImpl.Service.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
-import jakarta.websocket.OnClose;
-import jakarta.websocket.OnMessage;
-import jakarta.websocket.OnOpen;
-import jakarta.websocket.Session;
+import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import lombok.extern.slf4j.Slf4j;
@@ -17,21 +15,31 @@ import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.deepseek.DeepSeekAssistantMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 @ServerEndpoint(value = "/websocket/{chatId}")
-@Component
 @Slf4j
+@Service
 public class WebsocketService {
     //private static ChatService chatService;
     private static ChatService chatService;
     private static ApplicationContext applicationContext;
+    private static ToolAwaitingPoolByCompletableFuture toolAwaitingPool;
 
+    private static final ConcurrentHashMap<String, Session> SESSION_MAP = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Disposable> ACTIVE_STREAMS = new ConcurrentHashMap<>();
+
+//    private final ChatService chatService;
+//    private final ToolAwaitingPoolByCompletableFuture toolAwaitingPool;
 
     @PostConstruct
     public void init() {
         chatService = applicationContext.getBean(ChatService.class);
+        toolAwaitingPool = applicationContext.getBean(ToolAwaitingPoolByCompletableFuture.class);
     }
 
     @Autowired
@@ -43,6 +51,7 @@ public class WebsocketService {
     public void onOpen(Session session, @PathParam("chatId") String chatId) {
         log.info("WebSocket connection opened.");
         session.getUserProperties().put("chatId", chatId);
+        SESSION_MAP.put(chatId, session);
     }
 
     @OnMessage
@@ -53,20 +62,24 @@ public class WebsocketService {
         try {
             String chatId = (String) session.getUserProperties().get("chatId");
             log.info("chatId: {}", chatId);
-            Communication response = new Communication();
+
             ObjectMapper objectMapper = new ObjectMapper();
             Communication communication = objectMapper.readValue(message, Communication.class);
+            String conversationUUID = communication.getUuid();
             switch (communication.getType()){
                 case "text":
-                    handleTextMessage(session,communication.getData(),chatId);
+                    session.getUserProperties().put("conversationUUID", conversationUUID);
+                    handleTextMessage((String) communication.getData(), chatId, conversationUUID);
                     break;
                 case "stop":
-                    this.onClose(session);
-                    sendResponse(session,"stop","");
+                    cancelStream(conversationUUID);
                     break;
                 case "ping":
-                    sendResponse(session,"pong","");
+                    sendResponse(chatId,"pong","");
                     break;
+                case "tools":
+                    System.out.println("tools");
+                    toolAwaitingPool.completeResult(chatId, objectMapper.writeValueAsString(communication.getData()));
                 default:
                     break;
             }
@@ -78,75 +91,94 @@ public class WebsocketService {
 
     @OnClose
     public void onClose(Session session) {
+        String chatId = (String) session.getUserProperties().get("chatId");
+        String conversationUUId = (String) session.getUserProperties().get("conversationUUID");
+        sendResponse(chatId, "stop", "");
         log.info("WebSocket connection closed.");
-    }
-
-    private void handleTextMessage(Session session,String message, String chatId) {
-        //Flux<String> flux = chatService.generation(chatId,message);
-        ChatClient.StreamResponseSpec streamResponseSpec = chatService.getStreamResponseSpec(chatId, message);
-//        Flux<String> flux = streamResponseSpec.content();
-//        flux.subscribe(
-//                chunk -> {
-//                    try {
-//                        sendResponse(session, "text", chunk);
-//                    } catch (Exception e) {
-//                        log.error("Error sending chunk: {}", e.getMessage(), e);
-//                    }
-//                },
-//                error -> {
-//                    log.error("Error in flux stream: {}", error.getMessage(), error);
-//                    try {
-//                        sendResponse(session, "error", error.getMessage());
-//                    } catch (Exception e) {
-//                        log.error("Error sending error response: {}", e.getMessage(), e);
-//                    }
-//                },
-//                () -> {
-//                    log.info("Stream completed for chatId: {}", chatId);
-//                }
-//        );
-
-        Flux<ChatResponse> chatResponseFlux = streamResponseSpec.chatResponse();
-        chatResponseFlux.subscribe(
-                chatResponse -> {
-                    DeepSeekAssistantMessage assistantMessage = (DeepSeekAssistantMessage) chatResponse.getResult().getOutput();
-                    String thinking = assistantMessage.getReasoningContent();
-                    if (thinking != null){
-                        try {
-                            sendResponse(session, "thinking", thinking);
-                        } catch (Exception e) {
-                            log.error("Error sending chunk: {}", e.getMessage(), e);
-                        }
-                    }
-                    String content = assistantMessage.getText();
-                    if (content != null){
-                        try {
-                            sendResponse(session, "text", content);
-                        } catch (Exception e) {
-                            log.error("Error sending chunk: {}", e.getMessage(), e);
-                        }
-                    }
-                },
-                error -> {
-                    log.error("Error in chat response stream: {}", error.getMessage(), error);
-                }
-        );
-
-
-    }
-
-    private void sendResponse(Session session, String type, String data) throws Exception {
-        if (session == null || !session.isOpen()) {
-            log.warn("Session is null or closed");
-            return;
+        if(chatId != null){
+            SESSION_MAP.remove(chatId);
+            cancelStream(conversationUUId);
         }
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        Communication response = new Communication();
-        response.setType(type);
-        response.setData(data);
+    }
 
-        String jsonResponse = objectMapper.writeValueAsString(response);
-        session.getBasicRemote().sendText(jsonResponse);
+    private void cancelStream(String conversationId) {
+        Disposable disposable = ACTIVE_STREAMS.get(conversationId);
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose(); // 这会触发 Flux 的 doOnCancel 回调
+            log.info("Manually disposed stream for chatId: {}", conversationId);
+        }
+    }
+
+    private void handleTextMessage(String message, String chatId, String conversationUUId) {
+        // 防止同一个 chatId 产生多个流，先清理旧的
+        cancelStream(conversationUUId);
+
+        ChatClient.StreamResponseSpec streamResponseSpec = chatService.getStreamResponseSpec(chatId, message);
+        Flux<ChatResponse> chatResponseFlux = streamResponseSpec.chatResponse();
+
+        Disposable disposable = chatResponseFlux
+                .doOnNext(chatResponse -> {
+                    if (chatResponse.getResult().getOutput() instanceof DeepSeekAssistantMessage) {
+                        DeepSeekAssistantMessage assistantMessage = (DeepSeekAssistantMessage) chatResponse.getResult().getOutput();
+                        // 发送 thinking 内容
+                        String thinking = assistantMessage.getReasoningContent();
+                        if (thinking != null) sendResponse(chatId, "thinking", thinking);
+
+                        // 发送 text 内容
+                        String content = assistantMessage.getText();
+                        if (content != null) sendResponse(chatId, "text", content);
+                    } else {
+                        log.warn("收到非 DeepSeek 消息类型: {}", chatResponse.getResult().getOutput().getClass().getName());
+                    }
+                })
+                .doOnError(error -> {
+                    log.error("Error in flux stream for chatId {}: {}", chatId, error.getMessage(), error);
+                    sendResponse(chatId, "error", error.getMessage());
+                })
+                .doOnComplete(() -> {
+                    log.info("Stream completed normally for chatId: {}", chatId);
+                    sendResponse(chatId, "over", null);
+                    // 正常完成后执行事务
+                })
+                .doOnCancel(() -> {
+                    // 【关键】当流被主动打断时触发
+                    log.info("Stream cancelled by user for chatId: {}", chatId);
+                    sendResponse(chatId, "over", "");
+                    // 在中断时同样需要执行事务（例如保存已生成的部分文本）
+                })
+                .doFinally(signalType -> {
+                    // 无论完成、错误还是取消，最后都从 Map 中移除
+                    ACTIVE_STREAMS.remove(conversationUUId);
+                })
+                .subscribe();
+
+        // 将当前的订阅句柄存入 Map
+        ACTIVE_STREAMS.put(conversationUUId, disposable);
+    }
+
+    public static void sendResponse(String chatId, String type, String data) {
+        Session session = getSession(chatId);
+        if (session == null || !session.isOpen()) {
+            log.warn("Session is null or closed for chatId: {}, skipping message.", chatId);
+            return;
+        }
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Communication response = new Communication();
+            response.setType(type);
+            response.setData(data);
+            String jsonResponse = objectMapper.writeValueAsString(response);
+
+            synchronized (session) {
+                session.getBasicRemote().sendText(jsonResponse);
+            }
+        } catch (Exception e) {
+            log.error("Error sending response safely to chatId: {}: {}", chatId, e.getMessage(), e);
+        }
+    }
+
+    public static Session getSession(String chatId){
+        return SESSION_MAP.get(chatId);
     }
 }

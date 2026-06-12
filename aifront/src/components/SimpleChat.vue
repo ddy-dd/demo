@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import WebsocketClient from "@/api/websocket.ts";
 import type {WsMessage} from "@/type/request.ts";
-//import { UploadFilled } from '@element-plus/icons-vue'
 import {ElMessage} from "element-plus";
 import http from "@/api/http.ts";
 import {ref, nextTick, onUnmounted} from "vue";
@@ -9,19 +8,21 @@ import {marked} from "marked";
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import { nanoid } from 'nanoid';
+import type {userLocation} from "@/type/userLocation.ts";
+import {locationStore} from "@/stores/loaction.ts"
+import {chatStore} from "@/stores/chat.ts"
+import { v4 as uuidv4 } from 'uuid';
 
 let wsClient: WebsocketClient | null
 const message = ref('')
 
-interface ChatMessage {
-  text: string;
-  isUser: boolean;
-  thinking?: string;
-}
+const userLocationStore = locationStore()
+const useChatStore = chatStore()
 
-const communications = ref<ChatMessage[]>([])
+const communications = useChatStore.communications
 const messagesContainer = ref<HTMLElement | null>(null)
 const isConnected = ref(false)
+const isSending = ref(false)            // 是否正在等待 AI 回复，控制停止按钮显示
 
 // === Thinking 模式状态 ===
 const isThinking = ref(false)             // 是否正在输出思考过程
@@ -65,8 +66,8 @@ function scrollToBottom() {
 
 const initWebSocketListener = () => {
   return new Promise((resolve) => {
-    const chatId = nanoid()
-    wsClient = WebsocketClient.getInstance(chatId)
+    const uuid = uuidv4();
+    wsClient = WebsocketClient.getInstance(uuid)
     const ws = wsClient!.getWsConnection()
     ws.onopen = () => {
       console.log('连接成功')
@@ -84,12 +85,16 @@ const initWebSocketListener = () => {
           console.log('websocket 连接正常------------')
           break
         case 'stop':
+          isSending.value = false
           if (wsClient && wsClient.interval) {
             clearInterval(wsClient.interval)
             wsClient.interval = null
           }
           ws.close()
           isConnected.value = false
+          break
+        case 'over':
+          isSending.value = false
           break
         case 'thinking': {
           // 流式思考内容，在 text 到达前持续积累
@@ -100,12 +105,11 @@ const initWebSocketListener = () => {
           break
         }
         case 'text': {
-          const msgs = communications.value
-          const lastMsg = msgs.length > 0 ? msgs[msgs.length - 1] : null
+          const lastMsg = communications.length > 0 ? communications[communications.length - 1] : null
 
           if (isThinking.value) {
             // 思考结束，第一条 text：将 thinking 合并到新消息
-            msgs.push({
+            communications.push({
               text: msg.data,
               isUser: false,
               thinking: streamingThinking.value,
@@ -117,10 +121,9 @@ const initWebSocketListener = () => {
             lastMsg.text += msg.data
           } else {
             // 没有 thinking，直接新建 AI 消息
-            msgs.push({text: msg.data, isUser: false})
+            communications.push({text: msg.data, isUser: false})
           }
 
-          communications.value = [...msgs]
           clearWaiting()
           scrollToBottom()
           break
@@ -130,6 +133,16 @@ const initWebSocketListener = () => {
           clearWaiting()
           isThinking.value = false
           break
+        case 'tools':
+          switch (msg.data){
+            case 'location':
+              getLocation()
+              break
+            default:
+              break;
+          }
+           break
+
         default:
           break
       }
@@ -137,20 +150,107 @@ const initWebSocketListener = () => {
   })
 }
 
+
 const send = async () => {
   if(!message.value.trim()) return
   if(!wsClient){
     await initWebSocketListener();
   }
   if (wsClient) {
-    communications.value.push({text: message.value, isUser: true})
+    const uuid = nanoid()
+    useChatStore.setCurrentUuid(uuid)
+
+    communications.push({text: message.value, isUser: true})
     scrollToBottom()
     wsClient.send({
       type: 'text',
       data: message.value,
+      uuid: uuid,
     })
     message.value = ''
+    isSending.value = true
     startWaitingTimer()
+  }
+}
+
+const stopChat = () => {
+  if (wsClient) {
+    wsClient.send({
+      type: 'stop',
+      data: '',
+      uuid: useChatStore.currentUuid,
+    })
+    isSending.value = false
+  }
+}
+
+function getLocation() {
+  // 1. 检查浏览器是否支持 Geolocation API
+  if(userLocationStore.hasLocation){
+    wsClient!.send({
+      type: 'tools',
+      data: userLocationStore.getLocation(),
+    })
+    return
+  }
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        // 2. 成功回调函数
+        function(position) {
+          let latitude = position.coords.latitude;   // 纬度
+          let longitude = position.coords.longitude; // 经度
+          const ul: userLocation = {
+            latitude,
+            longitude,
+          }
+          console.log(`当前位置: 纬度 ${latitude}, 经度 ${longitude}`);
+          userLocationStore.setLocation(ul)
+          wsClient!.send({
+            type: 'tools',
+            data: ul,
+          })
+        },
+        // 3. 失败回调函数（处理错误）
+        function(error) {
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              console.log("用户拒绝了位置请求");
+              wsClient!.send({
+                type: 'tools',
+                data: "用户拒绝了位置请求",
+              })
+              break;
+            case error.POSITION_UNAVAILABLE:
+              console.log("无法获取位置信息");
+              wsClient!.send({
+                type: 'tools',
+                data: "无法获取位置信息",
+              })
+              break;
+            case error.TIMEOUT:
+              console.log("获取位置超时");
+              wsClient!.send({
+                type: 'tools',
+                data: "获取位置超时",
+              })
+              break;
+            default:
+              console.log("发生未知错误");
+          }
+        },
+        // 4. 可选配置参数
+        {
+          enableHighAccuracy: true,  // 要求高精度
+          timeout: 20000,             // 超时时间（毫秒）
+          maximumAge: 0              // 不使用缓存，强制获取最新位置
+        }
+    );
+  } else {
+    alert("您的浏览器不支持地理定位功能");
+    wsClient!.send({
+      type: 'tools',
+      data: "您的浏览器不支持地理定位功能",
+    })
   }
 }
 
@@ -297,8 +397,11 @@ onUnmounted(() => {
             class="chat-input"
             @keyup.enter="send"
           />
-          <button class="btn btn-send" @click="send" :disabled="!message.trim()">
+          <button v-if="!isSending" class="btn btn-send" @click="send" :disabled="!message.trim()">
             发送
+          </button>
+          <button v-else class="btn btn-stop" @click="stopChat">
+            <span class="stop-icon">■</span> 停止
           </button>
         </div>
         <div class="action-row">
@@ -650,6 +753,22 @@ onUnmounted(() => {
 .btn-send:disabled {
   opacity: 0.35;
   cursor: not-allowed;
+}
+
+.btn-stop {
+  background: #e05050;
+  color: #fff;
+  font-weight: 450;
+  letter-spacing: 0.03em;
+}
+.btn-stop:hover {
+  background: #c43a3a;
+}
+.stop-icon {
+  font-size: 0.65rem;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.1rem;
 }
 
 .action-row {

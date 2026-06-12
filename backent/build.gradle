@@ -43,6 +43,7 @@ dependencies {
     implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -60,4 +61,9 @@ task runMemoryTest(type: JavaExec) {
     mainClass = 'com.example.demo.MaxMessagesOptimizationTest'
     // 限制最大内存
     jvmArgs '-Xmx2g'
+}
+
+test {
+    // 其他配置...
+    jvmArgs "-javaagent:${classpath.find { it.name.contains('mockito-core') }.absolutePath}"
 }
