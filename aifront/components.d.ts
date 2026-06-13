@@ -11,10 +11,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    ElButton: typeof import('element-plus/es')['ElButton']
-    ElIcon: typeof import('element-plus/es')['ElIcon']
-    ElInput: typeof import('element-plus/es')['ElInput']
-    ElUpload: typeof import('element-plus/es')['ElUpload']
     SimpleChat: typeof import('./src/components/SimpleChat.vue')['default']
   }
 }

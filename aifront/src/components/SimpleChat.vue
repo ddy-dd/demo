@@ -19,22 +19,11 @@ const message = ref('')
 const userLocationStore = locationStore()
 const useChatStore = chatStore()
 
-const communications = useChatStore.communications
+const conversations = useChatStore.conversations
+
 const messagesContainer = ref<HTMLElement | null>(null)
 const isConnected = ref(false)
 const isSending = ref(false)            // 是否正在等待 AI 回复，控制停止按钮显示
-
-// === Thinking 模式状态 ===
-const isThinking = ref(false)             // 是否正在输出思考过程
-const streamingThinking = ref('')         // 流式积累的思考内容
-const expandedThinking = ref<Set<number>>(new Set())  // 哪些消息的思考展开
-
-function toggleThinking(idx: number) {
-  const next = new Set(expandedThinking.value)
-  if (next.has(idx)) next.delete(idx)
-  else next.add(idx)
-  expandedThinking.value = next
-}
 
 // 查询等待提示
 const showWaiting = ref(false)
@@ -79,13 +68,14 @@ const initWebSocketListener = () => {
     }
     ws.onmessage = (event) => {
       const msg: WsMessage = JSON.parse(event.data)
-      console.log('收到消息', msg)
+      //console.log('收到消息', msg)
       switch (msg.type){
         case 'pong':
           console.log('websocket 连接正常------------')
           break
         case 'stop':
           isSending.value = false
+          useChatStore.completeConversation(msg.uuid)
           if (wsClient && wsClient.interval) {
             clearInterval(wsClient.interval)
             wsClient.interval = null
@@ -95,35 +85,16 @@ const initWebSocketListener = () => {
           break
         case 'over':
           isSending.value = false
+          useChatStore.completeConversation(msg.uuid)
           break
         case 'thinking': {
-          // 流式思考内容，在 text 到达前持续积累
-          isThinking.value = true
-          streamingThinking.value += msg.data || ''
+          useChatStore.appendThinking(msg.uuid || '', msg.data || '')
           clearWaiting()
           scrollToBottom()
           break
         }
         case 'text': {
-          const lastMsg = communications.length > 0 ? communications[communications.length - 1] : null
-
-          if (isThinking.value) {
-            // 思考结束，第一条 text：将 thinking 合并到新消息
-            communications.push({
-              text: msg.data,
-              isUser: false,
-              thinking: streamingThinking.value,
-            })
-            isThinking.value = false
-            streamingThinking.value = ''
-          } else if (lastMsg && !lastMsg.isUser) {
-            // 继续流式输出 text
-            lastMsg.text += msg.data
-          } else {
-            // 没有 thinking，直接新建 AI 消息
-            communications.push({text: msg.data, isUser: false})
-          }
-
+          useChatStore.appendResponse(msg.uuid || '', msg.data || '')
           clearWaiting()
           scrollToBottom()
           break
@@ -131,7 +102,7 @@ const initWebSocketListener = () => {
         case 'error':
           ElMessage.error(msg.data)
           clearWaiting()
-          isThinking.value = false
+          useChatStore.completeConversation(msg.uuid)
           break
         case 'tools':
           switch (msg.data){
@@ -158,10 +129,10 @@ const send = async () => {
   }
   if (wsClient) {
     const uuid = nanoid()
-    useChatStore.setCurrentUuid(uuid)
 
-    communications.push({text: message.value, isUser: true})
+    useChatStore.startConversation(uuid, message.value)
     scrollToBottom()
+
     wsClient.send({
       type: 'text',
       data: message.value,
@@ -173,14 +144,16 @@ const send = async () => {
   }
 }
 
-const stopChat = () => {
+const overChat = () => {
   if (wsClient) {
+    const targetUuid = useChatStore.currentUuid
     wsClient.send({
-      type: 'stop',
+      type: 'over',
       data: '',
-      uuid: useChatStore.currentUuid,
+      uuid: targetUuid,
     })
     isSending.value = false
+    useChatStore.completeConversation(targetUuid)
   }
 }
 
@@ -306,7 +279,6 @@ const renderMarkdown = (text: string): string => {
 const handleClose = () => {
   wsClient?.close()
   isConnected.value = false
-  isThinking.value = false
 }
 
 onUnmounted(() => {
@@ -323,69 +295,82 @@ onUnmounted(() => {
       </header>
 
       <div class="messages-area" ref="messagesContainer">
-        <div v-if="communications.length === 0" class="messages-empty">
+        <div v-if="conversations.length === 0" class="messages-empty">
           <p>开始一段新的对话</p>
         </div>
 
-        <template v-for="(msg, idx) in communications" :key="idx">
-          <!-- ── 用户消息 ── -->
-          <div
-            v-if="msg.isUser"
-            class="message-bubble message-bubble--user"
-            v-html="renderMarkdown(msg.text)"
-          >
-          </div>
+        <template v-for="conv in conversations" :key="conv.uuid">
+          <div class="conversation-group" :class="'conv-status--' + conv.status">
 
-          <!-- ── AI 回复（含可选的 thinking 区块）── -->
-          <div v-else class="bot-message-group">
-            <!-- Thinking 区块：折叠/展开 -->
-            <div v-if="msg.thinking" class="thinking-section">
-              <button class="thinking-toggle" @click="toggleThinking(idx)">
+            <!-- ── 用户消息 ── -->
+            <div
+              class="message-bubble message-bubble--user"
+              v-html="renderMarkdown(conv.userMessage)"
+            >
+            </div>
+
+            <!-- ── 等待指示器（当前对话刚发送，尚未开始流式回复） ── -->
+            <div
+              v-if="conv.uuid === useChatStore.currentUuid && conv.status === 'thinking' && !conv.thinking && showWaiting"
+              class="message-bubble message-bubble--bot thinking-bubble"
+            >
+              <div class="thinking-spinner"></div>
+              <span>正在思考…</span>
+            </div>
+
+            <!-- ── 思考区块（有思考内容时展示） ── -->
+            <div
+              v-if="conv.thinking"
+              class="thinking-section"
+              :class="{ 'thinking-section--streaming': conv.status === 'thinking' }"
+            >
+              <!-- 流式思考中（自动展开，无折叠按钮） -->
+              <div v-if="conv.status === 'thinking'" class="thinking-toggle" style="cursor: default;">
+                <span class="thinking-label">AI 正在思考</span>
+                <span class="thinking-dots"><span></span><span></span><span></span></span>
+              </div>
+
+              <!-- 思考完成（可折叠切换） -->
+              <button
+                v-else
+                class="thinking-toggle"
+                @click="useChatStore.toggleThinking(conv.uuid)"
+              >
                 <span class="thinking-label">
-                  {{ expandedThinking.has(idx) ? '收起思考过程' : '查看思考过程' }}
+                  {{ useChatStore.expandedThinking.has(conv.uuid) ? '收起思考过程' : '查看思考过程' }}
                 </span>
                 <svg
                   class="thinking-chevron"
-                  :class="{ rotated: expandedThinking.has(idx) }"
+                  :class="{ rotated: useChatStore.expandedThinking.has(conv.uuid) }"
                   width="12" height="12" viewBox="0 0 12 12"
                 >
                   <path d="M4 8L8 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
                 </svg>
               </button>
-              <div class="thinking-content" :class="{ expanded: expandedThinking.has(idx) }">
+
+              <!-- 思考内容 -->
+              <div
+                class="thinking-content"
+                :class="{ expanded: conv.status === 'thinking' || useChatStore.expandedThinking.has(conv.uuid) }"
+              >
                 <div class="thinking-content-inner">
-                  <div class="thinking-text">{{ msg.thinking }}</div>
+                  <div class="thinking-text">
+                    {{ conv.thinking }}<span v-if="conv.status === 'thinking'" class="thinking-cursor"></span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- 正式回复气泡 -->
-            <div class="message-bubble message-bubble--bot" v-html="renderMarkdown(msg.text)"></div>
+            <!-- ── AI 回复 ── -->
+            <div
+              v-if="conv.response"
+              class="message-bubble message-bubble--bot"
+              v-html="renderMarkdown(conv.response)"
+            >
+            </div>
+
           </div>
         </template>
-
-        <!-- ── 流式 Thinking（text 到达前实时展示） ── -->
-        <div v-if="isThinking" class="bot-message-group">
-          <div class="thinking-section thinking-section--streaming">
-            <div class="thinking-toggle">
-              <span class="thinking-label">AI 正在思考</span>
-              <span class="thinking-dots"><span></span><span></span><span></span></span>
-            </div>
-            <div class="thinking-content expanded">
-              <div class="thinking-content-inner">
-                <div class="thinking-text">
-                  {{ streamingThinking }}<span class="thinking-cursor"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 等待提示（退路：没有 thinking 流时显示） -->
-        <div v-if="showWaiting && !isThinking" class="message-bubble message-bubble--bot thinking-bubble">
-          <div class="thinking-spinner"></div>
-          <span>正在思考…</span>
-        </div>
       </div>
 
       <div class="input-area">
@@ -400,7 +385,7 @@ onUnmounted(() => {
           <button v-if="!isSending" class="btn btn-send" @click="send" :disabled="!message.trim()">
             发送
           </button>
-          <button v-else class="btn btn-stop" @click="stopChat">
+          <button v-else class="btn btn-stop" @click="overChat">
             <span class="stop-icon">■</span> 停止
           </button>
         </div>
@@ -496,13 +481,17 @@ onUnmounted(() => {
   letter-spacing: 0.04em;
 }
 
-/* ===== Bot message group（thinking + reply 分离） ===== */
-.bot-message-group {
+/* ===== Conversation Group (每轮对话) ===== */
+.conversation-group {
   display: flex;
   flex-direction: column;
-  gap: 0.375rem;
-  align-self: flex-start;
-  max-width: 85%;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0eeeb;
+}
+.conversation-group:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 /* ===== Message Bubbles ===== */

@@ -32,6 +32,7 @@ public class WebsocketService {
 
     private static final ConcurrentHashMap<String, Session> SESSION_MAP = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, Disposable> ACTIVE_STREAMS = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, String> ACTIVE_CONVERSATION_MAP = new ConcurrentHashMap<>();
 
 //    private final ChatService chatService;
 //    private final ToolAwaitingPoolByCompletableFuture toolAwaitingPool;
@@ -71,11 +72,15 @@ public class WebsocketService {
                     session.getUserProperties().put("conversationUUID", conversationUUID);
                     handleTextMessage((String) communication.getData(), chatId, conversationUUID);
                     break;
-                case "stop":
+                case "over":
+                    if(conversationUUID == null || conversationUUID.isEmpty()){
+                        log.warn("conversationUUID is null or empty");
+                        break;
+                    }
                     cancelStream(conversationUUID);
                     break;
                 case "ping":
-                    sendResponse(chatId,"pong","");
+                    sendResponse(chatId,"pong","","");
                     break;
                 case "tools":
                     System.out.println("tools");
@@ -93,7 +98,7 @@ public class WebsocketService {
     public void onClose(Session session) {
         String chatId = (String) session.getUserProperties().get("chatId");
         String conversationUUId = (String) session.getUserProperties().get("conversationUUID");
-        sendResponse(chatId, "stop", "");
+        sendResponse(chatId, "stop", "", conversationUUId);
         log.info("WebSocket connection closed.");
         if(chatId != null){
             SESSION_MAP.remove(chatId);
@@ -112,7 +117,14 @@ public class WebsocketService {
 
     private void handleTextMessage(String message, String chatId, String conversationUUId) {
         // 防止同一个 chatId 产生多个流，先清理旧的
-        cancelStream(conversationUUId);
+        String oldConversationUUId = ACTIVE_CONVERSATION_MAP.get(chatId);
+        if(oldConversationUUId != null && !oldConversationUUId.equals(conversationUUId)){
+            cancelStream(oldConversationUUId);
+            log.info("哈哈哈哈哈Cancel stream for chatId: {}", oldConversationUUId);
+        }
+            cancelStream(conversationUUId);
+
+        ACTIVE_CONVERSATION_MAP.put(chatId, conversationUUId);
 
         ChatClient.StreamResponseSpec streamResponseSpec = chatService.getStreamResponseSpec(chatId, message);
         Flux<ChatResponse> chatResponseFlux = streamResponseSpec.chatResponse();
@@ -123,32 +135,36 @@ public class WebsocketService {
                         DeepSeekAssistantMessage assistantMessage = (DeepSeekAssistantMessage) chatResponse.getResult().getOutput();
                         // 发送 thinking 内容
                         String thinking = assistantMessage.getReasoningContent();
-                        if (thinking != null) sendResponse(chatId, "thinking", thinking);
+                        if (thinking != null) sendResponse(chatId, "thinking", thinking, conversationUUId);
 
                         // 发送 text 内容
                         String content = assistantMessage.getText();
-                        if (content != null) sendResponse(chatId, "text", content);
+                        if (content != null) sendResponse(chatId, "text", content, conversationUUId);
                     } else {
                         log.warn("收到非 DeepSeek 消息类型: {}", chatResponse.getResult().getOutput().getClass().getName());
                     }
                 })
                 .doOnError(error -> {
                     log.error("Error in flux stream for chatId {}: {}", chatId, error.getMessage(), error);
-                    sendResponse(chatId, "error", error.getMessage());
+                    sendResponse(chatId, "error", error.getMessage(), conversationUUId);
                 })
                 .doOnComplete(() -> {
                     log.info("Stream completed normally for chatId: {}", chatId);
-                    sendResponse(chatId, "over", null);
+                    sendResponse(chatId, "over", null, conversationUUId);
                     // 正常完成后执行事务
                 })
                 .doOnCancel(() -> {
                     // 【关键】当流被主动打断时触发
                     log.info("Stream cancelled by user for chatId: {}", chatId);
-                    sendResponse(chatId, "over", "");
+                    sendResponse(chatId, "over", "", conversationUUId);
                     // 在中断时同样需要执行事务（例如保存已生成的部分文本）
                 })
                 .doFinally(signalType -> {
                     // 无论完成、错误还是取消，最后都从 Map 中移除
+                    String currentActiveUuid = ACTIVE_CONVERSATION_MAP.get(chatId);
+                    if (conversationUUId.equals(currentActiveUuid)) {
+                        ACTIVE_CONVERSATION_MAP.remove(chatId);
+                    }
                     ACTIVE_STREAMS.remove(conversationUUId);
                 })
                 .subscribe();
@@ -157,7 +173,7 @@ public class WebsocketService {
         ACTIVE_STREAMS.put(conversationUUId, disposable);
     }
 
-    public static void sendResponse(String chatId, String type, String data) {
+    public static void sendResponse(String chatId, String type, String data,String conversationUUID) {
         Session session = getSession(chatId);
         if (session == null || !session.isOpen()) {
             log.warn("Session is null or closed for chatId: {}, skipping message.", chatId);
@@ -168,6 +184,7 @@ public class WebsocketService {
             Communication response = new Communication();
             response.setType(type);
             response.setData(data);
+            response.setUuid(conversationUUID);
             String jsonResponse = objectMapper.writeValueAsString(response);
 
             synchronized (session) {

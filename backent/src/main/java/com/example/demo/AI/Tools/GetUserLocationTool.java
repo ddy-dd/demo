@@ -29,7 +29,7 @@ public class GetUserLocationTool {
             if (toolContext != null) {
                 chatId = (String) toolContext.getContext().get("chatId");
             }
-            WebsocketService.sendResponse(chatId, "tools", "location");
+            WebsocketService.sendResponse(chatId, "tools", "location",null);
             Object locationData = toolAwaitingPool.waitForResult(chatId);
             ObjectMapper mapper = new ObjectMapper();
             return mapper.writeValueAsString(locationData);
