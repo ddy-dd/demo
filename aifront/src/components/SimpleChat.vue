@@ -1,3 +1,15 @@
+/*
+ * SimpleChat — AI 对话主组件
+ *
+ * 核心功能：
+ * 1. 通过 WebSocket 与后端建立实时通信
+ * 2. 流式展示 AI 的思考链（thinking）和最终回复（text）
+ * 3. 支持打断 AI 生成（停止按钮）
+ * 4. 支持 AI 交互式 Tool Calling（如请求位置）
+ * 5. 渲染 Markdown + 数学公式（KaTeX）
+ * 6. 文件上传 → 知识库向量化
+ */
+
 <script setup lang="ts">
 import WebsocketClient from "@/api/websocket.ts";
 import type {WsMessage} from "@/type/request.ts";
@@ -25,7 +37,7 @@ const messagesContainer = ref<HTMLElement | null>(null)
 const isConnected = ref(false)
 const isSending = ref(false)            // 是否正在等待 AI 回复，控制停止按钮显示
 
-// 查询等待提示
+// 查询等待提示（发送后延迟 500ms 显示，避免一闪而过的闪烁）
 const showWaiting = ref(false)
 let waitingTimer: ReturnType<typeof setTimeout> | null = null
 
@@ -53,6 +65,11 @@ function scrollToBottom() {
   })
 }
 
+/**
+ * 初始化 WebSocket 连接并注册消息处理器
+ *
+ * ⚠️ 当前管理了独立的心跳定时器（与 WebsocketClient.ts 内部的 ping 可能重复）
+ */
 const initWebSocketListener = () => {
   return new Promise((resolve) => {
     const uuid = uuidv4();
@@ -61,6 +78,7 @@ const initWebSocketListener = () => {
     ws.onopen = () => {
       console.log('连接成功')
       isConnected.value = true
+      // 启动心跳（每 20s）
       wsClient!.interval = setInterval(() => {
         wsClient!.ping()
       }, 20000)
@@ -68,12 +86,12 @@ const initWebSocketListener = () => {
     }
     ws.onmessage = (event) => {
       const msg: WsMessage = JSON.parse(event.data)
-      //console.log('收到消息', msg)
       switch (msg.type){
         case 'pong':
-          console.log('websocket 连接正常------------')
+          console.debug('心跳正常')
           break
         case 'stop':
+          // 服务端要求停止连接
           isSending.value = false
           useChatStore.completeConversation(msg.uuid)
           if (wsClient && wsClient.interval) {
@@ -84,27 +102,32 @@ const initWebSocketListener = () => {
           isConnected.value = false
           break
         case 'over':
+          // AI 回复结束
           isSending.value = false
           useChatStore.completeConversation(msg.uuid)
           break
         case 'thinking': {
+          // AI 思考链内容（流式追加）
           useChatStore.appendThinking(msg.uuid || '', msg.data || '')
           clearWaiting()
           scrollToBottom()
           break
         }
         case 'text': {
+          // AI 文本回复（流式追加）
           useChatStore.appendResponse(msg.uuid || '', msg.data || '')
           clearWaiting()
           scrollToBottom()
           break
         }
         case 'error':
+          // 服务端错误
           ElMessage.error(msg.data)
           clearWaiting()
           useChatStore.completeConversation(msg.uuid)
           break
         case 'tools':
+          // AI 请求 Tool 交互（如获取位置）
           switch (msg.data){
             case 'location':
               getLocation()
@@ -122,6 +145,10 @@ const initWebSocketListener = () => {
 }
 
 
+/**
+ * 发送用户消息
+ * 先建立 WebSocket 连接（如未连接），然后发送消息并开始流式接收 AI 回复
+ */
 const send = async () => {
   if(!message.value.trim()) return
   if(!wsClient){
@@ -144,6 +171,10 @@ const send = async () => {
   }
 }
 
+/**
+ * 停止 AI 回复（打断）
+ * 通过 WebSocket 发送 "over" 消息，服务端会 dispose 掉当前 Flux 流
+ */
 const overChat = () => {
   if (wsClient) {
     const targetUuid = useChatStore.currentUuid
@@ -157,6 +188,12 @@ const overChat = () => {
   }
 }
 
+/**
+ * 获取用户地理位置（响应 AI 的 Tool 请求）
+ *
+ * 利用浏览器 Geolocation API 获取经纬度，优先使用缓存结果。
+ * 结果通过 WebSocket 回传给服务端，唤醒等待中的 Tool 线程。
+ */
 function getLocation() {
   // 1. 检查浏览器是否支持 Geolocation API
   if(userLocationStore.hasLocation){
@@ -227,6 +264,10 @@ function getLocation() {
   }
 }
 
+/**
+ * 上传文件并向量化存入知识库
+ * 使用 REST API（非 WebSocket），通过 Axios 发送 multipart/form-data
+ */
 const upload = async (options: any) => {
   const formData = new FormData()
   formData.append('file', options.file)
@@ -238,6 +279,17 @@ const upload = async (options: any) => {
     ElMessage.error('上传失败')
   }
 }
+
+/**
+ * 将文本渲染为 HTML（Markdown + 数学公式）
+ *
+ * 处理顺序（重要）：
+ * 1. 先用占位符替换所有数学公式（$$...$$ 和 $...$）
+ * 2. 用 marked 解析 Markdown
+ * 3. 还原 KaTeX 渲染后的公式 HTML
+ *
+ * 这保证了 marked 不会破坏公式中的特殊字符（如下划线、星号）
+ */
 const renderMarkdown = (text: string): string => {
   // 1) 用占位符替换所有数学公式，防止被 marked 破坏
   const placeholders: string[] = []
@@ -408,7 +460,7 @@ onUnmounted(() => {
   height: 100vh;
   display: flex;
   background: #f7f6f3;
-  font-family: "SF Pro Text", "Hiragino Sans", "Noto Sans SC", -apple-system, sans-serif;
+  font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "SF Pro Text", -apple-system, sans-serif;
   position: relative;
 }
 

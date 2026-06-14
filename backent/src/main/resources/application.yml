@@ -1,53 +1,75 @@
+# =============================================================================
+# AI Demo — 主配置文件
+# 敏感信息全部通过环境变量注入，禁止硬编码
+# =============================================================================
 spring:
   application:
-    name: demo
+    name: ai-demo
+
   ai:
+    # ── DeepSeek 大模型 ──────────────────────────────────────────────────
     deepseek:
       api-key: ${DEEPSEEK_API_KEY}
+      base-url: https://api.deepseek.com
       chat:
         options:
-          model: deepseek-v4-flash
-          temperature: 0.8
+          model: ${DEEPSEEK_MODEL:deepseek-v4-flash}
+          temperature: ${DEEPSEEK_TEMPERATURE:0.8}
 
-      base-url: https://api.deepseek.com
-
+    # ── 本地 Ollama 模型（用于对话摘要等轻量任务） ─────────────────────
     ollama:
-      base-url: http://localhost:11434
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
       chat:
-        model: qwen3.5:0.8b
+        model: ${OLLAMA_CHAT_MODEL:qwen3.5:0.8b}
       embedding:
-        model: nomic-embed-text
+        model: ${OLLAMA_EMBED_MODEL:nomic-embed-text}
+
+    # ── Milvus 向量数据库 ──────────────────────────────────────────────
     vectorstore:
       milvus:
         client:
-          port: 19530
-          host: "localhost"
-          username: "root"
-          password: "milvus"
-        databaseName: "default"
-        collectionName: "vector_store"
-        embeddingDimension: 768
+          host: ${MILVUS_HOST:localhost}
+          port: ${MILVUS_PORT:19530}
+          username: ${MILVUS_USERNAME:root}
+          password: ${MILVUS_PASSWORD:milvus}
+        databaseName: ${MILVUS_DATABASE:default}
+        collectionName: ${MILVUS_COLLECTION:vector_store}
+        embeddingDimension: ${MILVUS_DIMENSION:768}
         indexType: IVF_FLAT
         metricType: COSINE
         initializeSchema: true
+
+  # ── Redis 缓存 ─────────────────────────────────────────────────────────
   data:
     redis:
-      host: localhost
-      port: 6379            # 端口号
-      password:             # 密码（无密码则留空）
-      database: 0           # 选择数据库索引
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: ${REDIS_DATABASE:0}
       lettuce:
         pool:
-          max-active: 8     # 最大连接数
-          max-idle: 8       # 最大空闲连接数
-          min-idle: 2       # 最小空闲连接数
+          max-active: ${REDIS_POOL_MAX_ACTIVE:8}
+          max-idle: ${REDIS_POOL_MAX_IDLE:8}
+          min-idle: ${REDIS_POOL_MIN_IDLE:2}
 
+# ── 应用自定义配置 ──────────────────────────────────────────────────────
+app:
+  # API 认证密钥（如为空则跳过鉴权，仅用于演示/开发环境）
+  api-key: ${APP_API_KEY:}
+  # CORS 允许的来源，逗号分隔
+  cors-allowed-origins: ${APP_CORS_ORIGINS:*}
+
+# ── 服务端 ──────────────────────────────────────────────────────────────
 server:
   servlet:
     context-path: /api
+  port: ${SERVER_PORT:8080}
 
+# ── 日志级别 ────────────────────────────────────────────────────────────
 logging:
   level:
+    root: ${LOG_LEVEL_ROOT:INFO}
+    com.example.demo: ${LOG_LEVEL_APP:DEBUG}
     org.springframework.ai.chat.client.advisor: DEBUG
 
 kind: Application

@@ -1,0 +1,210 @@
+2026-06-14 13:11:50.637 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 55214 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-14 13:11:50.637 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v3.5.14, Spring v6.2.18
+2026-06-14 13:11:50.638 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-14 13:11:51.078 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-14 13:11:51.079 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-14 13:11:51.094 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2026-06-14 13:11:51.273 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8080 (http)
+2026-06-14 13:11:51.279 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-14 13:11:51.279 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-06-14 13:11:51.279 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/10.1.54]
+2026-06-14 13:11:51.304 [main] INFO  o.a.c.c.C.[.[localhost].[/api] [no-trace] — Initializing Spring embedded WebApplicationContext
+2026-06-14 13:11:51.305 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext [no-trace] — Root WebApplicationContext: initialization completed in 651 ms
+2026-06-14 13:11:51.333 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-14 13:11:51.334 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-14 13:11:51.334 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-14 13:11:51.334 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-14 13:11:51.334 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-14 13:11:51.334 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-14 13:11:51.334 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-14 13:11:51.334 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-14 13:11:51.892 [main] WARN  i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-06-14 13:11:52.071 [main] INFO  org.redisson.Version [no-trace] — Redisson 3.22.0
+2026-06-14 13:11:52.114 [redisson-netty-4-4] INFO  o.r.c.p.MasterPubSubConnectionPool [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-14 13:11:52.153 [redisson-netty-4-19] INFO  o.r.c.pool.MasterConnectionPool [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-14 13:11:52.296 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-8080"]
+2026-06-14 13:11:52.299 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer [no-trace] — Tomcat started on port 8080 (http) with context path '/api'
+2026-06-14 13:11:52.303 [main] INFO  com.example.demo.DemoApplication [no-trace] — Started DemoApplication in 1.911 seconds (process running for 2.22)
+2026-06-14 13:13:02.892 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] [no-trace] — Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-14 13:13:02.892 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Initializing Servlet 'dispatcherServlet'
+2026-06-14 13:13:02.895 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Completed initialization in 3 ms
+2026-06-14 13:13:02.912 [http-nio-8080-exec-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接已建立, chatId=5f55930a-7e99-4ed6-8e53-41be969aac53
+2026-06-14 13:13:02.913 [http-nio-8080-exec-1] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"介绍一下线性代数","uuid":"L-IQEVFKBXnZ5jsAe_yXu"}
+2026-06-14 13:13:02.956 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='介绍一下线性代数', metadata={messageType=USER}, messageType=USER}
+2026-06-14 13:13:05.914 [http-nio-8080-exec-2] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"over","data":"","uuid":"L-IQEVFKBXnZ5jsAe_yXu"}
+2026-06-14 13:13:05.915 [http-nio-8080-exec-2] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成被用户打断, chatId=5f55930a-7e99-4ed6-8e53-41be969aac53
+2026-06-14 13:13:05.918 [http-nio-8080-exec-2] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 已取消流式生成, conversationId=L-IQEVFKBXnZ5jsAe_yXu
+2026-06-14 13:13:10.898 [http-nio-8080-exec-3] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"你好","uuid":"6bvPTE2lijap10_tnxE-z"}
+2026-06-14 13:13:10.903 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-06-14 13:13:19.165 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！线性代数是数学的一个重要分支，主要研究**向量、向量空间（线性空间）、线性变换和矩阵**等内容。它在现代科学和工程中有着极其广泛的应用。下面我来为你做一个简要的介绍：
+
+---
+
+## 🧩 线性代数的核心概念
+
+### 1. **向量**
+- 向量是既有大小又有方向的量，可以理解为空间中的一个点或箭头
+- 例如：$\vec{v} = (v_1, v_2, v_3)$ 表示三维空间中的一个向量
+
+### 2. **矩阵**
+- 矩阵是按行和列排列的数值矩形阵列
+- 例如：$A = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}$
+- 矩阵可以用来表示线性变换、方程组等
+
+### 3. **线性方程组**
+- 形如 $Ax = b$ 的方程组
+- 线性代数提供了系统的解法，如高斯消元法、矩阵求逆等
+
+### 4. **行列式**
+- 标量值，反映矩阵是否可逆、线性变换的体积缩放因子等
+- 记作 $\det(A)$ 或 $|A|$
+
+### 5. **特征值与特征向量**
+- 对于矩阵 $A$，若有向量 $x$ 满足 $Ax = \lambda x$，则 $\lambda$ 是特征值，$x$ 是特征向量
+- 在数据降维（PCA）、振动分析等领域非常重要
+
+### 6. **向量空间与基**
+- 向量空间是满足一定运算规则的向量集合
+- 基是空间中一组线性无关的向量，可以张成整个空间
+
+---
+
+## 🔬 主要应用领域
+
+| 领域 | 应用 |
+|------|------|
+| 🤖 机器学习/AI | 神经网络、PCA降维、推荐系统 |
+| 🖥️ 计算机图形学 | 3D旋转、缩放、投影变换 |
+| 🔐 密码学 | 编码解码、加密算法 |
+| 📊 数据科学 | 矩阵分解、SVD奇异值分解 |
+| ⚡ 物理学 | 量子力学、电磁学、力学 |
+| 🌐 网络分析 | PageRank算法、社交网络分析 |
+
+---
+
+## 📚 学习路线建议
+
+1. **基础入门**：向量运算、矩阵运算、线性方程组求解
+2. **进阶概念**：行列式、向量空间、线性变换、基变换
+3. **深入内容**：特征值与特征向量、正交化、SVD分解
+4. **应用实践**：结合编程（如Python的NumPy库）做实际项目
+
+---
+
+线性代数不仅仅是抽象的数学理论，更是现代科技**最核心的数学工具之一**。你想了解某个具体概念，或者想知道它在某个领域的应用吗？我可以进一步为你详细讲解！😊, metadata={finishReason=STOP, id=c632096c-09ed-4776-8c52-683cb93b260f, role=ASSISTANT, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-06-14 13:13:19.166 [boundedElastic-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=5f55930a-7e99-4ed6-8e53-41be969aac53
+2026-06-14 13:13:22.912 [http-nio-8080-exec-4] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:13:34.183 [http-nio-8080-exec-5] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"你好","uuid":"o-2Ene6p59OEbW1_KsKJA"}
+2026-06-14 13:13:34.187 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-06-14 13:13:35.477 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=, metadata={finishReason=STOP, id=e1c76371-0ff0-492b-8361-5df2ce39036d, role=ASSISTANT, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-06-14 13:13:35.477 [boundedElastic-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=5f55930a-7e99-4ed6-8e53-41be969aac53
+2026-06-14 13:13:42.912 [http-nio-8080-exec-6] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:14:03.138 [http-nio-8080-exec-7] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:14:23.137 [http-nio-8080-exec-8] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:14:43.136 [http-nio-8080-exec-9] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:15:03.137 [http-nio-8080-exec-10] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:15:23.137 [http-nio-8080-exec-1] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:15:25.709 [http-nio-8080-exec-2] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"你好","uuid":"rk87NZmjAoCNtXWlEnOUO"}
+2026-06-14 13:15:25.719 [boundedElastic-3] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-06-14 13:15:26.956 [boundedElastic-3] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！😊 很高兴又见到你！
+
+有什么我可以帮你的吗？无论是想继续了解线性代数，还是有其他问题，随时都可以问我哦～, metadata={finishReason=STOP, id=e4ecb0e3-ef32-4403-aad1-466adda240e7, role=ASSISTANT, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-06-14 13:15:26.957 [boundedElastic-3] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=5f55930a-7e99-4ed6-8e53-41be969aac53
+2026-06-14 13:15:43.139 [http-nio-8080-exec-3] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:16:03.137 [http-nio-8080-exec-4] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:16:23.137 [http-nio-8080-exec-5] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:17:04.671 [http-nio-8080-exec-6] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:17:07.015 [http-nio-8080-exec-7] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接关闭, chatId=5f55930a-7e99-4ed6-8e53-41be969aac53
+2026-06-14 13:17:07.016 [http-nio-8080-exec-7] WARN  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 会话不可用, chatId=5f55930a-7e99-4ed6-8e53-41be969aac53, 跳过消息
+2026-06-14 13:17:09.285 [http-nio-8080-exec-8] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接已建立, chatId=1c900f67-d20f-4ea3-b215-0e4fe2d2526b
+2026-06-14 13:17:09.287 [http-nio-8080-exec-9] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"你好","uuid":"zxP5RVvb0CNqnWAzZzju2"}
+2026-06-14 13:17:09.295 [boundedElastic-5] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-06-14 13:17:10.840 [boundedElastic-5] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！很高兴见到你！😊 有什么我可以帮你的吗？你可以问我问题、聊天，或者让我帮你查询天气、日期时间等信息，随时吩咐！, metadata={finishReason=STOP, id=a802f091-f06d-4a3e-ad56-4a58fc3c754e, role=ASSISTANT, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-06-14 13:17:10.841 [boundedElastic-5] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=1c900f67-d20f-4ea3-b215-0e4fe2d2526b
+2026-06-14 13:17:29.288 [http-nio-8080-exec-10] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:17:29.295 [http-nio-8080-exec-1] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"介绍一下线性代数","uuid":"twJjZS2n9eJ9c1DT96WuW"}
+2026-06-14 13:17:29.296 [boundedElastic-5] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='介绍一下线性代数', metadata={messageType=USER}, messageType=USER}
+2026-06-14 13:17:31.798 [http-nio-8080-exec-2] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"介绍一下信号与系统","uuid":"lLlXLATnt9cjefkuOLXZb"}
+2026-06-14 13:17:31.798 [http-nio-8080-exec-2] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成被用户打断, chatId=1c900f67-d20f-4ea3-b215-0e4fe2d2526b
+2026-06-14 13:17:31.799 [http-nio-8080-exec-2] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 已取消流式生成, conversationId=twJjZS2n9eJ9c1DT96WuW
+2026-06-14 13:17:31.799 [http-nio-8080-exec-2] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 发现旧对话流，已取消: twJjZS2n9eJ9c1DT96WuW
+2026-06-14 13:17:31.803 [boundedElastic-5] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='介绍一下信号与系统', metadata={messageType=USER}, messageType=USER}
+2026-06-14 13:17:41.875 [boundedElastic-5] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=好的！我来为你分别介绍**线性代数**和**信号与系统**这两门重要的学科。📚
+
+---
+
+## 一、线性代数
+
+### 1. 什么是线性代数？
+线性代数是数学的一个分支，主要研究**向量、向量空间（线性空间）、线性变换**以及**矩阵理论**。它是现代科学和工程中最基础的数学工具之一。
+
+### 2. 核心概念
+| 概念 | 说明 |
+|------|------|
+| **向量** | 既有大小又有方向的量，可表示为一组有序数 |
+| **矩阵** | 按矩形排列的数字阵列，用于表示线性变换或方程组 |
+| **行列式** | 衡量矩阵是否可逆、反映线性变换缩放比例的值 |
+| **特征值与特征向量** | 描述线性变换中方向不变、仅缩放的特殊向量 |
+| **线性方程组** | 用矩阵形式 \(Ax=b\) 表示的多变量一次方程组 |
+
+### 3. 主要应用
+- **计算机图形学**：三维变换、旋转、缩放
+- **机器学习/深度学习**：神经网络中的权重矩阵运算、PCA降维
+- **量子力学**：状态向量与算符
+- **工程控制**：状态空间模型
+- **密码学**：加密与解密算法
+
+> 一句话总结：线性代数是研究**线性关系**的科学，用矩阵和向量来描述世界的结构。
+
+---
+
+## 二、信号与系统
+
+### 1. 什么是信号与系统？
+信号与系统是电子信息、通信、自动化等领域的核心基础课，研究**信号的表示、传输与处理**，以及**系统对信号的响应**。
+
+### 2. 核心概念
+
+#### 信号分类
+| 类型 | 示例 |
+|------|------|
+| 连续时间信号 vs 离散时间信号 | 语音（连续） vs 数字音频（离散） |
+| 确定性信号 vs 随机信号 | 正弦波 vs 噪声 |
+| 周期信号 vs 非周期信号 | 方波 vs 语音信号 |
+
+#### 系统分类
+- **线性 vs 非线性**
+- **时不变 vs 时变**
+- **因果 vs 非因果**
+- **稳定 vs 不稳定**
+
+#### 重要分析方法
+| 方法 | 说明 |
+|------|------|
+| **卷积** | 计算系统对输入信号的响应 |
+| **傅里叶变换** | 将时域信号分解到频域，分析频率成分 |
+| **拉普拉斯变换** | 分析连续系统的稳定性与特性 |
+| **Z 变换** | 分析离散系统的工具 |
+
+### 3. 主要应用
+- **通信系统**：调制解调、滤波、信道编码
+- **音频处理**：降噪、语音识别、音乐合成
+- **图像处理**：边缘检测、压缩（JPEG）、增强
+- **控制系统**：PID控制、自动驾驶
+- **生物医学**：心电图（ECG）、脑电图（EEG）分析
+
+> 一句话总结：信号与系统研究的是**信号在系统中如何流动和变化**，核心是时域与频域的转换分析。
+
+---
+
+### 🔗 两者之间的联系
+线性代数是信号与系统的**数学基础**之一。例如：
+- 离散信号可看作**向量**
+- 离散系统可用**矩阵**表示
+- 傅里叶变换本质上是**线性变换**
+- 特征值分析用于系统稳定性判断
+
+如果你想深入了解其中某一个概念，或者有具体的疑问，欢迎继续问我！😊, metadata={finishReason=STOP, id=f2f211d4-09a8-4e6c-85db-d07e60525537, role=ASSISTANT, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-06-14 13:17:41.876 [boundedElastic-5] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=1c900f67-d20f-4ea3-b215-0e4fe2d2526b
+2026-06-14 13:17:49.287 [http-nio-8080-exec-3] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}
+2026-06-14 13:18:09.290 [http-nio-8080-exec-4] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"ping","data":null}

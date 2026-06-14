@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AI Demo — Logback 日志配置
+
+  设计说明：
+  - 开发环境：控制台彩色输出 + 文件日志（方便回溯）
+  - 生产环境：可引入 logback-spring-prod.xml 覆盖为 JSON 格式
+  - 每个日志行包含 traceId 用于请求链路追踪（由 ApiKeyAuthFilter 注入 MDC）
+-->
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <!-- ===== 属性定义 ===== -->
+    <property name="LOG_PATH" value="${LOG_PATH:-./logs}"/>
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{36}) [%X{traceId:-no-trace}] — %msg%n"/>
+
+    <!-- ===== 控制台输出 ===== -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- ===== 文件输出（滚动归档） ===== -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/ai-demo.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 按天滚动，保留 30 天 -->
+            <fileNamePattern>${LOG_PATH}/ai-demo.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%X{traceId:-no-trace}] — %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- ===== 根日志级别 ===== -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <!-- ===== 应用日志级别 ===== -->
+    <logger name="com.example.demo" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <!-- ===== Spring AI 相关 ===== -->
+    <logger name="org.springframework.ai.chat.client.advisor" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+</configuration>
