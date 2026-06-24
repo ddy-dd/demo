@@ -36,6 +36,11 @@ const conversations = useChatStore.conversations
 const messagesContainer = ref<HTMLElement | null>(null)
 const isConnected = ref(false)
 const isSending = ref(false)            // 是否正在等待 AI 回复，控制停止按钮显示
+const isComposing = ref(false)          // 是否处在输入法选词状态
+
+const showSkillDialog = ref(false)
+const skillFile = ref<File | null>(null)
+const skillPackageName = ref('')
 
 // 查询等待提示（发送后延迟 500ms 显示，避免一闪而过的闪烁）
 const showWaiting = ref(false)
@@ -280,6 +285,31 @@ const upload = async (options: any) => {
   }
 }
 
+/** 上传 skill */
+const onSkillFileSelected = (e: Event) => {
+  const input = e.target as HTMLInputElement
+  const file = input.files?.[0]
+  if (!file) return
+  skillFile.value = file
+  skillPackageName.value = ''
+  showSkillDialog.value = true
+  input.value = ''
+}
+
+const uploadSkill = async () => {
+  if (!skillFile.value || !skillPackageName.value.trim()) return
+  const formData = new FormData()
+  formData.append('file', skillFile.value)
+  formData.append('packageName', skillPackageName.value.trim())
+  try {
+    await http.uploadSkill(formData)
+    ElMessage.success('Skill 上传成功')
+    showSkillDialog.value = false
+  } catch {
+    ElMessage.error('上传失败')
+  }
+}
+
 /**
  * 将文本渲染为 HTML（Markdown + 数学公式）
  *
@@ -326,6 +356,27 @@ const renderMarkdown = (text: string): string => {
   })
 
   return html
+}
+
+/** 去掉 thinking 中的 markdown 标记，只留纯文本 */
+function stripMarkdown(text: string): string {
+  if (!text) return text
+  return text
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
+    .replace(/\[([^\]]*)\]\([^)]+\)/g, '$1')
+    .replace(/\*\*(.+?)\*\*/g, '$1').replace(/__(.+?)__/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1').replace(/_(.+?)_/g, '$1')
+    .replace(/~~(.+?)~~/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^>\s+/gm, '')
+    .replace(/^[\s]*[-*+]\s+\[[ x]\]\s+/gm, '')
+    .replace(/^[\s]*[-*+]\s+/gm, '')
+    .replace(/^[\s]*\d+\.\s+/gm, '')
+    .replace(/^-{3,}$|^\*{3,}$|^_{3,}$/gm, '\n\n')
+    .replace(/\n{4,}/g, '\n\n\n')
+    .trim()
 }
 
 const handleClose = () => {
@@ -407,7 +458,7 @@ onUnmounted(() => {
               >
                 <div class="thinking-content-inner">
                   <div class="thinking-text">
-                    {{ conv.thinking }}<span v-if="conv.status === 'thinking'" class="thinking-cursor"></span>
+                    {{ stripMarkdown(conv.thinking) }}<span v-if="conv.status === 'thinking'" class="thinking-cursor"></span>
                   </div>
                 </div>
               </div>
@@ -417,7 +468,7 @@ onUnmounted(() => {
             <div
               v-if="conv.response"
               class="message-bubble message-bubble--bot"
-              v-html="renderMarkdown(conv.response)"
+              v-html="renderMarkdown(conv.response.replace(/^\s*[-*_]\s*[-*_]\s*[-*_]\s*$/gm, '\n\n'))"
             >
             </div>
 
@@ -432,7 +483,9 @@ onUnmounted(() => {
             v-model="message"
             placeholder="输入消息…"
             class="chat-input"
-            @keyup.enter="send"
+            @compositionstart="isComposing = true"
+            @compositionend="isComposing = false"
+            @keydown.enter="!isComposing && send()"
           />
           <button v-if="!isSending" class="btn btn-send" @click="send" :disabled="!message.trim()">
             发送
@@ -448,6 +501,37 @@ onUnmounted(() => {
             <input type="file" hidden @change="(e: any) => upload({ file: e.target.files[0] })" />
             <span class="upload-trigger">上传文件</span>
           </label>
+          <label class="upload-label">
+            <input type="file" accept=".md" hidden @change="onSkillFileSelected" />
+            <span class="upload-trigger">上传 Skill</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skill 包名输入弹窗 -->
+    <div v-if="showSkillDialog" class="skill-overlay" @click.self="showSkillDialog = false">
+      <div class="skill-dialog">
+        <h3 class="skill-dialog-title">上传 Skill</h3>
+        <p class="skill-file-name">{{ skillFile?.name }}</p>
+
+        <div class="skill-desc-guide">
+          <p class="guide-title">输入包名（用作目录名，尽量不要重复使用同一个名称）</p>
+          <ul class="guide-list">
+            <li>简短，几个字符即可</li>
+            <li>小写英文 + 连字符，例如 <code>my-tool</code></li>
+          </ul>
+        </div>
+
+        <input
+          class="skill-pkg-input"
+          v-model="skillPackageName"
+          placeholder="例如：my-tool"
+        />
+
+        <div class="skill-dialog-actions">
+          <button class="btn btn-outline" @click="showSkillDialog = false">取消</button>
+          <button class="btn btn-send" :disabled="!skillPackageName.trim()" @click="uploadSkill">上传</button>
         </div>
       </div>
     </div>
@@ -851,6 +935,83 @@ onUnmounted(() => {
   background: #f4f3f0;
   border-color: #b5b0a8;
   color: #2c2c2c;
+}
+
+/* ===== Skill 弹窗 ===== */
+.skill-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.skill-dialog {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.5rem;
+  width: 360px;
+  max-width: 90vw;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+.skill-dialog-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 0.25rem;
+  color: #2c2c2c;
+}
+.skill-file-name {
+  font-size: 0.8rem;
+  color: #8a8680;
+  margin: 0 0 1rem;
+  word-break: break-all;
+}
+.skill-desc-guide {
+  background: #f8f7f5;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.75rem;
+}
+.guide-title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #2c2c2c;
+  margin: 0 0 0.3rem;
+}
+.guide-list {
+  font-size: 0.75rem;
+  color: #7d7a74;
+  margin: 0;
+  padding-left: 1rem;
+  line-height: 1.6;
+}
+.guide-list code {
+  background: #e8e7e3;
+  padding: 0 0.3em;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+.skill-pkg-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #e5e3df;
+  border-radius: 10px;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  color: #2c2c2c;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 1rem;
+}
+.skill-pkg-input:focus {
+  border-color: #b5b0a8;
+}
+.skill-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }
 
 .deerflow-badge {

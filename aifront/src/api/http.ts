@@ -51,6 +51,17 @@ class AxiosUtils {
     });
     return response.data;
   }
+
+  /** 上传 skill .md 文件 */
+  static async uploadSkill<T>(data: FormData): Promise<T> {
+    const url = '/skill/upload';
+    const response: AxiosResponse<T> = await this.instance.post(url, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  }
 }
 
 export default AxiosUtils;

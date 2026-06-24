@@ -90,7 +90,6 @@ public class WebsocketService {
 
     @OnMessage
     public void onMessage(String message, Session session) {
-        log.debug("收到消息: {}", message);
         try {
             String chatId = (String) session.getUserProperties().get("chatId");
             Communication communication = objectMapper.readValue(message, Communication.class);
@@ -98,6 +97,7 @@ public class WebsocketService {
 
             switch (communication.getType()) {
                 case "text":
+                    log.debug("收到消息: {}", message);
                     session.getUserProperties().put("conversationUUID", conversationUUID);
                     handleTextMessage((String) communication.getData(), chatId, conversationUUID);
                     break;

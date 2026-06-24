@@ -1,6 +1,9 @@
 package com.example.demo.ai.serviceImpl;
 
 import com.example.demo.ai.serviceImpl.service.ChatService;
+import com.example.demo.ai.skill.SkillAgentService;
+import com.example.demo.ai.skill.SkillFormatter;
+import com.example.demo.ai.skill.SkillRegistry;
 import com.example.demo.ai.util.SummarizingChatMemoryRepository;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -52,11 +55,26 @@ public class ChatServiceImpl implements ChatService {
     private final VectorStore vectorStore;
     private final ChatModel chatModel;
 
+    /** 技能系统提示词，指导 AI 如何使用技能 */
+    private static final String SKILL_SYSTEM_PROMPT = """
+            你有以下技能可供使用。技能是预定义的能力包，包含详细的执行指令。
+
+            使用规则：
+            1. 调用 listSkills() 查看所有可用技能
+            2. 调用 readSkill("<技能名>") 读取技能的完整指令
+            3. 根据技能指令执行后续操作
+
+            重要：技能调用是内部行为，直接执行即可，不要向用户报告你调用了什么技能、读取了什么内容。
+            就像你不会报告"我正在调用 getWeather 工具"一样，技能调用也不需要告知用户，也不要对话和在思考中出现工具的名称，这是机密。
+            """.stripIndent();
+
     public ChatServiceImpl(
             ChatClient.Builder chatClientBuilder,
             VectorStore vectorStore,
             ChatModel chatModel,
-            @Qualifier("myCustomTools") List<Object> toolBeans) {
+            @Qualifier("myCustomTools") List<Object> toolBeans,
+            SkillAgentService skillAgentService,
+            SkillRegistry skillRegistry) {
 
         // ── 1. 构建对话记忆系统（支持自动摘要） ─────────────────
         // 底层使用 InMemoryChatMemoryRepository，
@@ -91,16 +109,27 @@ public class ChatServiceImpl implements ChatService {
                         .build())
                 .collect(Collectors.toList());
 
-        // ── 5. 请求/响应日志 Advisor ─────────────────────────
+        // ── 4b. 注册技能 Agent Tool（listSkills / readSkill） ──
+        providers.add(MethodToolCallbackProvider.builder()
+                .toolObjects(skillAgentService)
+                .build());
+
+        // ── 5. 构建系统提示（含技能清单） ─────────────────
+        String skillListing = buildSkillListing(skillRegistry);
+        String systemPrompt = "你是一个对话智能体，你必须用中文回答，除非用户强制你用英文。\n\n"
+                + SKILL_SYSTEM_PROMPT
+                + (skillListing.isEmpty() ? "" : "\n\n当前可用技能：\n" + skillListing);
+
+        // ── 6. 请求/响应日志 Advisor ─────────────────────────
         SimpleLoggerAdvisor customLogger = new SimpleLoggerAdvisor(
                 request -> "请求: " + request.prompt().getUserMessage(),
                 response -> "响应: " + response.getResult(),
                 0
         );
 
-        // ── 6. 构建 ChatClient ──────────────────────────────
+        // ── 7. 构建 ChatClient ──────────────────────────────
         this.chatClient = chatClientBuilder
-                .defaultSystem("你是一个对话智能体，你必须用中文回答，除非用户强制你用英文")
+                .defaultSystem(systemPrompt)
                 .defaultAdvisors(retrievalAugmentationAdvisor, memoryAdvisor, customLogger)
                 .defaultToolCallbacks(providers.toArray(new ToolCallbackProvider[0]))
                 .build();
@@ -132,5 +161,12 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public Flux<String> generation(String chatId, String userInput) {
         return this.getStreamResponseSpec(chatId, userInput).content();
+    }
+
+    /** 构建技能清单文本（系统技能完整显示，用户技能按预算截断） */
+    private static String buildSkillListing(SkillRegistry registry) {
+        var all = registry.listAll();
+        if (all.isEmpty()) return "";
+        return SkillFormatter.format(all, registry.systemSkillNames(), 0);
     }
 }
