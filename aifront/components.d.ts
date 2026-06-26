@@ -11,6 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    FileManager: typeof import('./src/components/FileManager.vue')['default']
     SimpleChat: typeof import('./src/components/SimpleChat.vue')['default']
   }
 }

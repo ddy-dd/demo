@@ -15,7 +15,7 @@ import WebsocketClient from "@/api/websocket.ts";
 import type {WsMessage} from "@/type/request.ts";
 import {ElMessage} from "element-plus";
 import http from "@/api/http.ts";
-import {ref, nextTick, onUnmounted} from "vue";
+import {ref, nextTick, onMounted, onUnmounted} from "vue";
 import {marked} from "marked";
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
@@ -23,6 +23,9 @@ import { nanoid } from 'nanoid';
 import type {userLocation} from "@/type/userLocation.ts";
 import {locationStore} from "@/stores/loaction.ts"
 import {chatStore} from "@/stores/chat.ts"
+import {useKnowledgeStore} from "@/stores/knowledge.ts"
+import {useSkillStore} from "@/stores/skill.ts"
+import FileManager from "@/components/FileManager.vue"
 import { v4 as uuidv4 } from 'uuid';
 
 let wsClient: WebsocketClient | null
@@ -30,6 +33,9 @@ const message = ref('')
 
 const userLocationStore = locationStore()
 const useChatStore = chatStore()
+const knowledgeStore = useKnowledgeStore()
+const skillStore = useSkillStore()
+const showFileManager = ref(false)
 
 const conversations = useChatStore.conversations
 
@@ -37,10 +43,23 @@ const messagesContainer = ref<HTMLElement | null>(null)
 const isConnected = ref(false)
 const isSending = ref(false)            // 是否正在等待 AI 回复，控制停止按钮显示
 const isComposing = ref(false)          // 是否处在输入法选词状态
+const userScrolledUp = ref(false)       // 用户是否手动向上滚动了（不跟随流式）
 
 const showSkillDialog = ref(false)
 const skillFile = ref<File | null>(null)
 const skillPackageName = ref('')
+
+// 上传反馈状态：null / 'success' / 'error'
+const uploadFeedback = ref<{ type: 'success' | 'error'; msg: string } | null>(null)
+let feedbackTimer: ReturnType<typeof setTimeout> | null = null
+
+function showFeedback(type: 'success' | 'error', msg: string) {
+  if (feedbackTimer) clearTimeout(feedbackTimer)
+  uploadFeedback.value = { type, msg }
+  feedbackTimer = setTimeout(() => {
+    uploadFeedback.value = null
+  }, 3000)
+}
 
 // 查询等待提示（发送后延迟 500ms 显示，避免一闪而过的闪烁）
 const showWaiting = ref(false)
@@ -62,12 +81,39 @@ function clearWaiting() {
   }
 }
 
+/** 判断用户是否在底部附近（阈值 100px） */
+function isNearBottom(): boolean {
+  const el = messagesContainer.value
+  if (!el) return true
+  return el.scrollHeight - el.scrollTop - el.clientHeight < 100
+}
+
 function scrollToBottom() {
   nextTick(() => {
     if (messagesContainer.value) {
+      // 如果用户已经手动滚上去了，不抢滚动，避免干扰阅读历史内容
+      if (userScrolledUp.value && !isNearBottom()) return
       messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+      userScrolledUp.value = false
     }
   })
+}
+
+/** 监听滚动，判断用户是否主动向上滚动 */
+function onScroll() {
+  if (!messagesContainer.value) return
+  // 用户不在底部 → 标记为手动滚上去了
+  if (!isNearBottom()) {
+    userScrolledUp.value = true
+  } else {
+    userScrolledUp.value = false
+  }
+}
+
+/** 手动跳回底部（由按钮触发） */
+function jumpToBottom() {
+  userScrolledUp.value = false
+  scrollToBottom()
 }
 
 /**
@@ -276,12 +322,29 @@ function getLocation() {
 const upload = async (options: any) => {
   const formData = new FormData()
   formData.append('file', options.file)
+  const file = options.file as File
   try{
     const res = await http.uploadAndVectorize(formData)
     ElMessage.success('上传成功')
+    showFeedback('success', '文件上传成功')
+    knowledgeStore.addRecord({
+      id: nanoid(),
+      name: file.name,
+      size: file.size,
+      uploadTime: new Date().toISOString(),
+      status: 'success',
+    })
     console.log(res)
   }catch (e) {
     ElMessage.error('上传失败')
+    showFeedback('error', '文件上传失败')
+    knowledgeStore.addRecord({
+      id: nanoid(),
+      name: file.name,
+      size: file.size,
+      uploadTime: new Date().toISOString(),
+      status: 'error',
+    })
   }
 }
 
@@ -298,15 +361,33 @@ const onSkillFileSelected = (e: Event) => {
 
 const uploadSkill = async () => {
   if (!skillFile.value || !skillPackageName.value.trim()) return
+  const file = skillFile.value
+  const pkg = skillPackageName.value.trim()
   const formData = new FormData()
-  formData.append('file', skillFile.value)
-  formData.append('packageName', skillPackageName.value.trim())
+  formData.append('file', file)
+  formData.append('packageName', pkg)
   try {
     await http.uploadSkill(formData)
     ElMessage.success('Skill 上传成功')
+    showFeedback('success', 'Skill 上传成功')
+    skillStore.addRecord({
+      id: nanoid(),
+      name: file.name,
+      packageName: pkg,
+      uploadTime: new Date().toISOString(),
+      status: 'success',
+    })
     showSkillDialog.value = false
   } catch {
     ElMessage.error('上传失败')
+    showFeedback('error', 'Skill 上传失败')
+    skillStore.addRecord({
+      id: nanoid(),
+      name: file.name,
+      packageName: pkg,
+      uploadTime: new Date().toISOString(),
+      status: 'error',
+    })
   }
 }
 
@@ -384,8 +465,14 @@ const handleClose = () => {
   isConnected.value = false
 }
 
+onMounted(() => {
+  messagesContainer.value?.addEventListener('scroll', onScroll, { passive: true })
+})
+
 onUnmounted(() => {
+  messagesContainer.value?.removeEventListener('scroll', onScroll)
   if (waitingTimer) clearTimeout(waitingTimer)
+  if (feedbackTimer) clearTimeout(feedbackTimer)
 })
 </script>
 
@@ -476,6 +563,17 @@ onUnmounted(() => {
         </template>
       </div>
 
+      <!-- 浮动「回到底部」按钮：用户向上滚动且正在流式输出时出现 -->
+      <button
+        v-if="userScrolledUp && isSending"
+        class="scroll-to-bottom-btn"
+        @click="jumpToBottom"
+        title="回到最新内容"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+        回到底部
+      </button>
+
       <div class="input-area">
         <div class="input-row">
           <input
@@ -505,6 +603,19 @@ onUnmounted(() => {
             <input type="file" accept=".md" hidden @change="onSkillFileSelected" />
             <span class="upload-trigger">上传 Skill</span>
           </label>
+          <button class="btn btn-outline btn-files" @click="showFileManager = true">
+            已上传
+          </button>
+        </div>
+        <!-- 上传反馈提示 -->
+        <div
+          v-if="uploadFeedback"
+          class="upload-feedback"
+          :class="'upload-feedback--' + uploadFeedback.type"
+        >
+          <span v-if="uploadFeedback.type === 'success'" class="feedback-icon">✓</span>
+          <span v-else class="feedback-icon">✕</span>
+          {{ uploadFeedback.msg }}
         </div>
       </div>
     </div>
@@ -516,7 +627,7 @@ onUnmounted(() => {
         <p class="skill-file-name">{{ skillFile?.name }}</p>
 
         <div class="skill-desc-guide">
-          <p class="guide-title">输入包名（用作目录名，尽量不要重复使用同一个名称）</p>
+          <p class="guide-title">输入skill名称（用作目录名，尽量不要重复使用同一个名称）</p>
           <ul class="guide-list">
             <li>简短，几个字符即可</li>
             <li>小写英文 + 连字符，例如 <code>my-tool</code></li>
@@ -535,6 +646,11 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
+    <!-- 文件管理抽屉 -->
+    <FileManager
+      :visible="showFileManager"
+      @close="showFileManager = false"
+    />
   </div>
 </template>
 
@@ -555,6 +671,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;           /* 为其中的绝对值定位元素提供参考 */
 }
 
 .chat-header {
@@ -937,6 +1054,18 @@ onUnmounted(() => {
   color: #2c2c2c;
 }
 
+.btn-files {
+  margin-left: auto;
+  background: #fff;
+  border: 1px solid #d5d2cc;
+  color: #5a5750;
+  font-weight: 450;
+}
+.btn-files:hover {
+  background: #f4f3f0;
+  border-color: #b5b0a8;
+}
+
 /* ===== Skill 弹窗 ===== */
 .skill-overlay {
   position: fixed;
@@ -1045,5 +1174,64 @@ onUnmounted(() => {
 }
 @keyframes thinking-spin {
   to { transform: rotate(360deg); }
+}
+
+/* ===== 浮动「回到底部」按钮 ===== */
+.scroll-to-bottom-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 4.5rem;          /* 刚好在 input-area 上方 */
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 1rem;
+  background: #fff;
+  color: #5a5750;
+  border: 1px solid #e0ddd8;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s, box-shadow 0.2s, opacity 0.25s;
+  z-index: 10;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+.scroll-to-bottom-btn:hover {
+  background: #f4f3f0;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+}
+.scroll-to-bottom-btn svg {
+  flex-shrink: 0;
+}
+
+/* ===== 上传反馈提示 ===== */
+.upload-feedback {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  animation: feedback-in 0.25s ease-out;
+}
+.upload-feedback--success {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+.upload-feedback--error {
+  background: #fce4ec;
+  color: #c62828;
+}
+.feedback-icon {
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+@keyframes feedback-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 </style>
