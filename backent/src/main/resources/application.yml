@@ -60,6 +60,13 @@ app:
   cors-allowed-origins: ${APP_CORS_ORIGINS:*}
   # 技能存放根目录（默认 skills，相对 user.dir；需绝对路径时可设 APP_SKILLS_DIR）
   skills-dir: ${APP_SKILLS_DIR:skills}
+  # 上下文管理
+  context:
+    # Token 估算触发压缩的阈值（默认 80000，约为 100k 上下文窗口的 70%）
+    # DeepSeek V3 上下文窗口约 128k，预留输出和系统提示空间
+    max-summary-tokens: ${APP_CONTEXT_MAX_SUMMARY_TOKENS:80000}
+    # 相邻两次压缩之间至少间隔的消息轮次数（防止频繁压缩）
+    compression-cooldown-rounds: ${APP_CONTEXT_COMPRESSION_COOLDOWN:3}
 
 # ── 服务端 ──────────────────────────────────────────────────────────────
 server:

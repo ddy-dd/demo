@@ -22,6 +22,7 @@ import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -46,7 +47,8 @@ import java.util.stream.Collectors;
  * </pre>
  *
  * 对话记忆使用 {@link SummarizingChatMemoryRepository} 包装，
- * 超过 maxMessages 后自动用本地 Ollama 模型生成摘要压缩。
+ * 基于 Token 估算自动触发摘要压缩。使用主模型（DeepSeek）生成
+ * 结构化摘要，超过阈值后自动压缩以节省上下文窗口。
  */
 @Service
 public class ChatServiceImpl implements ChatService {
@@ -54,6 +56,12 @@ public class ChatServiceImpl implements ChatService {
     private final ChatClient chatClient;
     private final VectorStore vectorStore;
     private final ChatModel chatModel;
+
+    /** Token 触发阈值（由配置注入） */
+    private final int maxSummaryTokens;
+
+    /** 冷却轮数 */
+    private final int compressionCooldown;
 
     /** 技能系统提示词，指导 AI 如何使用技能 */
     private static final String SKILL_SYSTEM_PROMPT = """
@@ -74,16 +82,25 @@ public class ChatServiceImpl implements ChatService {
             ChatModel chatModel,
             @Qualifier("myCustomTools") List<Object> toolBeans,
             SkillAgentService skillAgentService,
-            SkillRegistry skillRegistry) {
+            SkillRegistry skillRegistry,
+            @Value("${app.context.max-summary-tokens:80000}") int maxSummaryTokens,
+            @Value("${app.context.compression-cooldown-rounds:3}") int compressionCooldown) {
 
         // ── 1. 构建对话记忆系统（支持自动摘要） ─────────────────
         // 底层使用 InMemoryChatMemoryRepository，
         // 用 SummarizingChatMemoryRepository 装饰以实现超长对话自动压缩
+        // 触发条件：估算 Token 超过阈值（默认 80000），而非消息条数
+        // 并使用主模型（DeepSeek）做结构化摘要，而非本地小模型
+        this.maxSummaryTokens = maxSummaryTokens;
+        this.compressionCooldown = compressionCooldown;
         ChatMemoryRepository baseRepository = new InMemoryChatMemoryRepository();
-        ChatMemoryRepository summarizingRepo = new SummarizingChatMemoryRepository(baseRepository, 10);
+        ChatMemoryRepository summarizingRepo = new SummarizingChatMemoryRepository(
+                baseRepository, maxSummaryTokens, chatModel, compressionCooldown);
+        // maxMessages 设为较大值（200），让 token 估算的压缩机制做主，
+        // 滑动窗口仅作为安全兜底
         ChatMemory chatMemory = MessageWindowChatMemory.builder()
                 .chatMemoryRepository(summarizingRepo)
-                .maxMessages(20)
+                .maxMessages(200)
                 .build();
 
         // ── 2. RAG 检索增强 Advisor ──────────────────────────
