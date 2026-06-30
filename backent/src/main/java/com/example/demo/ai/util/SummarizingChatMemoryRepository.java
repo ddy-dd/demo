@@ -19,13 +19,15 @@ import java.util.concurrent.locks.ReentrantLock;
  * 包装底层的 ChatMemoryRepository，在对话 Token 估算超过阈值时自动调用
  * 主模型（DeepSeek）生成结构化摘要，用摘要替换完整历史以节省上下文窗口。
  *
- * <h3>相比 v1 的改进</h3>
+ * <h3>缓存前缀保护（v2 改进）</h3>
+ * 引入两级阈值（软/硬），在 "上下文较大但还没到必须压缩" 的阶段
+ * 保持请求前缀不变，让 API 侧 Prompt Caching 保持高命中率。
+ *
  * <ol>
- *   <li>基于 Token 估算触发压缩，而非消息条数</li>
- *   <li>使用主模型（DeepSeek）做摘要</li>
- *   <li>结构化摘要 Prompt（6 个维度）</li>
- *   <li>压缩冷却期，避免频繁压缩</li>
- *   <li><b>异步压缩</b> —— 模型调用在独立线程池执行，避免和流式回复争抢 HTTP 连接</li>
+ *   <li><b>软阈值（SOFT_RATIO=80%）</b> — 只记录日志提示，不压缩。</li>
+ *   <li><b>硬阈值（HARD_RATIO=100%）</b> — 触发实际压缩。</li>
+ *   <li><b>保留最近消息尾部</b> — 压缩时保留最近 N 条原始消息在摘要之后，
+ *       使压缩后和压缩前的请求前缀部分一致，避免缓存完全归零。</li>
  * </ol>
  */
 @Slf4j
@@ -56,6 +58,27 @@ public class SummarizingChatMemoryRepository implements ChatMemoryRepository {
     /** 缓存安全余量 10% */
     private static final double TOKEN_SAFETY_MARGIN = 1.1;
 
+    /**
+     * 软/硬压缩比率（相对于 maxTokens）。
+     *
+     * 设计理由：
+     * - softRatio=80% 时发通知但不压缩 → 请求前缀稳定 → API 缓存保持命中
+     * - hardRatio=100% 时压缩 → 释放上下文窗口
+     * - 两者之间约 20% 的空间是"缓存保护区"：上下文在增长但缓存不受影响
+     */
+    public static final double SOFT_RATIO = 0.80;
+    public static final double HARD_RATIO = 1.00;
+
+    /** 压缩后保留的最近原始消息数。保留尾部让压缩前后的请求前缀部分一致。 */
+    private static final int RECENT_KEEP = 5;
+
+    /**
+     * 每对话的软通知状态。
+     * 防止软阈值区间多次触发重复日志。
+     * 当上下文回落到软阈值以下时自动复位。
+     */
+    private final ConcurrentHashMap<String, Boolean> softNoticed = new ConcurrentHashMap<>();
+
     /** 异步压缩超时（防止后台任务无限卡住） */
     private static final int SUMMARY_TIMEOUT_SECONDS = 60;
 
@@ -64,7 +87,7 @@ public class SummarizingChatMemoryRepository implements ChatMemoryRepository {
 
     /**
      * @param delegate       底层仓库
-     * @param maxTokens      Token 估算触发阈值
+     * @param maxTokens      Token 估算触发硬压缩的阈值
      * @param chatModel      用于生成摘要的主模型
      * @param cooldownRounds 两次压缩之间的最少对话轮数
      */
@@ -89,17 +112,15 @@ public class SummarizingChatMemoryRepository implements ChatMemoryRepository {
     }
 
     /**
-     * 保存消息，并在必要时触��异步摘要压缩。
+     * 保存消息，三级决策：
      *
-     * <h3>异步设计</h3>
-     * 当估算 Token 超限时，不直接在此方法中调用 chatModel.call()（这会导致
-     * 死锁：流式对话占用着 HTTP 连接，同步压缩请求永远等不到），而是：
      * <ol>
-     *   <li>先把完整历史保存到底层仓库（保证不丢数据）</li>
-     *   <li>在独立线程池中执行模型调用</li>
-     *   <li>模型调用完成后，用摘要替换仓库中的历史</li>
+     *   <li><b>正常区（&lt; SOFT_RATIO）</b>：不做任何特殊操作</li>
+     *   <li><b>软警告区（SOFT_RATIO ~ HARD_RATIO）</b>：记录日志，不压缩，
+     *       保持请求前缀不变以保护 API 缓存命中率</li>
+     *   <li><b>硬压缩区（&ge; HARD_RATIO）</b>：触发异步压缩，压缩后保留
+     *       最近 RECENT_KEEP 条原始消息在摘要之后，让压缩前后的前缀部分一致</li>
      * </ol>
-     * 如果下一次对话在压缩完成前到来，读到的是完整历史（未压缩但安全）。
      */
     @Override
     public void saveAll(String conversationId, List<Message> messages) {
@@ -123,37 +144,67 @@ public class SummarizingChatMemoryRepository implements ChatMemoryRepository {
             }
 
             int estimatedTokens = estimateTokens(uniqueMessagesList);
-            boolean overThreshold = estimatedTokens > maxTokens;
+            double usageRatio = (double) estimatedTokens / maxTokens;
             boolean lastIsAssistant = getLastMessageType(uniqueMessagesList);
 
             // 冷却计数
             int roundsSinceLastCompact = compressionCounters.getOrDefault(conversationId, 0);
             boolean cooldownPassed = roundsSinceLastCompact >= cooldownRounds;
 
-            // === 触发异步压缩 ===
-            if (overThreshold && lastIsAssistant && cooldownPassed) {
-                log.info("对话 [{}] 触发压缩: 估算 {} tokens (阈值 {}), {} 条消息",
+            // ── 三级决策 ───────────────────────────────────────────────
+
+            if (usageRatio >= HARD_RATIO && lastIsAssistant && cooldownPassed) {
+                // ── ③ 硬压缩区：超过阈值，触发异步压缩 ──────────
+                log.info("对话 [{}] 触发硬压缩: 估算 {} tokens (阈值 {}), {} 条消息",
                         conversationId, estimatedTokens, maxTokens, uniqueMessagesList.size());
+
+                softNoticed.remove(conversationId);
 
                 // 先保存完整历史（不丢数据）
                 delegate.saveAll(conversationId, uniqueMessagesList);
 
-                // 异步执行模型调用（独立线程，不阻塞当前线程）
+                // 异步执行模型调用
                 triggerAsyncCompression(conversationId, uniqueMessagesList);
 
                 // 重置冷却
                 compressionCounters.put(conversationId, 0);
 
-            } else {
-                // 未触发压缩，递增冷却计数器
+            } else if (usageRatio >= SOFT_RATIO && lastIsAssistant) {
+                // ── ② 软警告区：只记录日志，不压缩 ─────────────
+                // 保持请求前缀不变 → API 侧 Prompt Caching 继续命中
+                boolean alreadyNoticed = softNoticed.getOrDefault(conversationId, false);
+                if (!alreadyNoticed) {
+                    int softPct = (int) (SOFT_RATIO * 100);
+                    int hardPct = (int) (HARD_RATIO * 100);
+                    int curPct = (int) (usageRatio * 100);
+                    log.info("对话 [{}] 上下文使用 {}%（软阈值 {}%，硬阈值 {}%），"
+                                    + "当前保持缓存前缀稳定，将在 {}% 时压缩",
+                            conversationId, curPct, softPct, hardPct, hardPct);
+                    softNoticed.put(conversationId, true);
+                }
+
                 if (lastIsAssistant) {
                     compressionCounters.put(conversationId, roundsSinceLastCompact + 1);
                 }
 
-                if (overThreshold && !lastIsAssistant) {
-                    log.debug("对话 [{}] 超限但等待 AI 回复再压缩: {} tokens", conversationId, estimatedTokens);
-                } else if (overThreshold && !cooldownPassed) {
-                    log.debug("对话 [{}] 超限但处于冷却期 ({}/{} 轮): {} tokens",
+                delegate.saveAll(conversationId, uniqueMessagesList);
+
+            } else {
+                // ── ① 正常区：未超阈值 ─────────────────────────
+                if (lastIsAssistant) {
+                    compressionCounters.put(conversationId, roundsSinceLastCompact + 1);
+                }
+
+                // 如果上下文回落到软阈值以下，复位软通知以便下次重新警告
+                if (usageRatio < SOFT_RATIO) {
+                    softNoticed.remove(conversationId);
+                }
+
+                if (usageRatio >= HARD_RATIO && !lastIsAssistant) {
+                    log.debug("对话 [{}] 超限但等待 AI 回复再压缩: {} tokens",
+                            conversationId, estimatedTokens);
+                } else if (usageRatio >= HARD_RATIO && !cooldownPassed) {
+                    log.debug("对话 [{}] 超限但处于冷却期 ({}/{}) 轮: {} tokens",
                             conversationId, roundsSinceLastCompact, cooldownRounds, estimatedTokens);
                 }
 
@@ -169,31 +220,62 @@ public class SummarizingChatMemoryRepository implements ChatMemoryRepository {
     /**
      * 在后台线程池中执行摘要压缩。
      *
-     * 模型调用在独立线程执行，即使 HTTP 连接池暂时被流式回复占用，
-     * 也不会阻塞主线程。压缩完成后用摘要替换仓库中的完整历史。
+     * 相较于 v1 的改动：
+     * <ol>
+     *   <li>将消息拆分为"折叠区"（旧消息，用于生成摘要）和"保留区"（最近消息，保持原样）</li>
+     *   <li>压缩结果 = [摘要] + [最近 RECENT_KEEP 条保留消息]</li>
+     *   <li>这样压缩后下一条请求的前缀和压缩前部分一致，API 缓存不会完全归零</li>
+     * </ol>
      */
     private void triggerAsyncCompression(String conversationId, List<Message> messages) {
         CompletableFuture.runAsync(() -> {
             try {
                 log.debug("异步压缩开始: 对话 [{}]", conversationId);
 
+                // ── 拆分折叠区与保留区 ─────────────────────────
+                // 折叠区 → 生成摘要；保留区 → 保持原样拼在摘要后面
+                int keepStart;
+                if (messages.size() > RECENT_KEEP) {
+                    keepStart = messages.size() - RECENT_KEEP;
+                } else {
+                    // 消息太少没什么好保留下来的，直接全部压缩
+                    keepStart = 0;
+                }
+                List<Message> foldMessages = messages.subList(0, keepStart);
+                List<Message> keepMessages = messages.subList(keepStart, messages.size());
+
+                // 如果折叠区为空，不需要调用模型
+                if (foldMessages.isEmpty()) {
+                    log.warn("对话 [{}] 压缩跳过：折叠区为空（总消息数 {} ≤ 保留数 {})",
+                            conversationId, messages.size(), RECENT_KEEP);
+                    return;
+                }
+
                 // chatModel 的同步 call 在后台线程池中执行，
                 // 不阻塞主对话线程。如果连接池满了也只是这个后台线程等，不影响用户。
-                String summary = chatModel.call(buildSummaryPrompt(messages));
+                String summary = chatModel.call(buildSummaryPrompt(foldMessages));
                 String cleaned = cleanSummary(summary);
 
-                // 压缩完成，替换历史
-                List<Message> compressed = Collections.singletonList(
-                        new SystemMessage(BOUNDARY_MARKER + "\n\n" + cleaned + "\n\n" + CONTINUATION_MARKER)
-                );
+                // ── 构建压缩结果 ───────────────────────────────
+                // 结构：[摘要 SystemMessage] + [最近保留的原始消息]
+                // 这样下一条请求中，"摘要 + 最近 N 条" 作为前缀，
+                // 和压缩前的请求前缀有大量重叠字节 → API 缓存保持命中
+                List<Message> compressed = new ArrayList<>(keepMessages.size() + 1);
+                compressed.add(new SystemMessage(
+                        BOUNDARY_MARKER + "\n\n" + cleaned + "\n\n" + CONTINUATION_MARKER));
+                compressed.addAll(keepMessages);
 
-                // 用锁保护写入，防止和正�的 saveAll 竞争
+                // 用锁保护写入，防止和并发的 saveAll 竞争
                 ReentrantLock lock = locks.computeIfAbsent(conversationId, k -> new ReentrantLock());
                 lock.lock();
                 try {
+                    // 先清理旧数据再写入
+                    delegate.deleteByConversationId(conversationId);
                     delegate.saveAll(conversationId, compressed);
-                    log.info("对话 [{}] 异步压缩完成: {} 条消息 → 1 条摘要",
-                            conversationId, messages.size());
+                    log.info("对话 [{}] 异步压缩完成: {} 条折叠 + {} 条保留 → {} 条摘要 + {} 条保留",
+                            conversationId,
+                            foldMessages.size(), keepMessages.size(),
+                            1, keepMessages.size());
                 } finally {
                     lock.unlock();
                     locks.remove(conversationId, lock);
@@ -213,6 +295,7 @@ public class SummarizingChatMemoryRepository implements ChatMemoryRepository {
     @Override
     public void deleteByConversationId(String conversationId) {
         compressionCounters.remove(conversationId);
+        softNoticed.remove(conversationId);
         delegate.deleteByConversationId(conversationId);
     }
 
