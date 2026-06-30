@@ -12,9 +12,8 @@ spring:
       api-key: ${DEEPSEEK_API_KEY}
       base-url: https://api.deepseek.com
       chat:
-        options:
-          model: ${DEEPSEEK_MODEL:deepseek-v4-flash}
-          temperature: ${DEEPSEEK_TEMPERATURE:0.8}
+        model: ${DEEPSEEK_MODEL:deepseek-v4-flash}
+        temperature: ${DEEPSEEK_TEMPERATURE:0.8}
 
     # ── 本地 Ollama 模型（用于对话摘要等轻量任务） ─────────────────────
     ollama:

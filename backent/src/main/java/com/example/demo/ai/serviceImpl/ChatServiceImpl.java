@@ -148,7 +148,7 @@ public class ChatServiceImpl implements ChatService {
         this.chatClient = chatClientBuilder
                 .defaultSystem(systemPrompt)
                 .defaultAdvisors(retrievalAugmentationAdvisor, memoryAdvisor, customLogger)
-                .defaultToolCallbacks(providers.toArray(new ToolCallbackProvider[0]))
+                .defaultTools(providers.toArray())
                 .build();
 
         this.vectorStore = vectorStore;
@@ -165,7 +165,7 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public ChatClient.StreamResponseSpec getStreamResponseSpec(String chatId, String userInput) {
         return this.chatClient.prompt()
-                .options(DeepSeekChatOptions.builder().build())
+                .options(DeepSeekChatOptions.builder())
                 .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, chatId))
                 .toolContext(Map.of("chatId", chatId))
                 .user(userInput)

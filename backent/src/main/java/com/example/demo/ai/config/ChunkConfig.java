@@ -15,6 +15,6 @@ public class ChunkConfig {
 
     @Bean
     public TokenTextSplitter tokenTextSplitter() {
-        return new TokenTextSplitter(true);
+        return TokenTextSplitter.builder().build();
     }
 }
