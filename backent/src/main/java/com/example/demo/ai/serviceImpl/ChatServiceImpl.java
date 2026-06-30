@@ -1,5 +1,6 @@
 package com.example.demo.ai.serviceImpl;
 
+import com.example.demo.ai.config.ThinkingCacheAdvisor;
 import com.example.demo.ai.serviceImpl.service.ChatService;
 import com.example.demo.ai.skill.SkillAgentService;
 import com.example.demo.ai.skill.SkillFormatter;
@@ -137,17 +138,20 @@ public class ChatServiceImpl implements ChatService {
                 + SKILL_SYSTEM_PROMPT
                 + (skillListing.isEmpty() ? "" : "\n\n当前可用技能：\n" + skillListing);
 
-        // ── 6. 请求/响应日志 Advisor ─────────────────────────
+        // ── 6. 缓存前缀 Advisor（给 assistant 消息标记 prefix=true） ──
+        var cacheAdvisor = new ThinkingCacheAdvisor();
+
+        // ── 7. 请求/响应日志 Advisor ─────────────────────────
         SimpleLoggerAdvisor customLogger = new SimpleLoggerAdvisor(
                 request -> "请求: " + request.prompt().getUserMessage(),
                 response -> "响应: " + response.getResult(),
                 0
         );
 
-        // ── 7. 构建 ChatClient ──────────────────────────────
+        // ── 8. 构建 ChatClient ──────────────────────────────
         this.chatClient = chatClientBuilder
                 .defaultSystem(systemPrompt)
-                .defaultAdvisors(retrievalAugmentationAdvisor, memoryAdvisor, customLogger)
+                .defaultAdvisors(retrievalAugmentationAdvisor, memoryAdvisor, cacheAdvisor, customLogger)
                 .defaultTools(providers.toArray())
                 .build();
 

@@ -1519,3 +1519,1321 @@ Caused by: java.lang.IllegalStateException: No @Tool annotated methods found in 
 2026-06-30 16:48:04.867 [boundedElastic-2] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
 2026-06-30 16:48:07.051 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！😊 有什么我可以帮你的吗？, metadata={finishReason=STOP, role=ASSISTANT, id=c4dbd643-7ad8-4ad9-8f24-006c881158a7, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
 2026-06-30 16:48:07.052 [boundedElastic-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=3c8130fb-d1d3-4163-b81f-de029de331b0
+2026-06-30 17:16:15.935 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-30 17:16:15.939 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Graceful shutdown complete
+2026-06-30 17:16:15.964 [SpringApplicationShutdownHook] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接关闭, chatId=3c8130fb-d1d3-4163-b81f-de029de331b0
+2026-06-30 17:16:15.964 [SpringApplicationShutdownHook] WARN  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 会话不可用, chatId=3c8130fb-d1d3-4163-b81f-de029de331b0, 跳过消息
+2026-06-30 17:17:52.640 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 90351 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 17:17:52.640 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 17:17:52.641 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 17:17:52.918 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 17:17:52.919 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 17:17:52.930 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2026-06-30 17:17:53.090 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8080 (http)
+2026-06-30 17:17:53.095 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:17:53.096 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-06-30 17:17:53.096 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-06-30 17:17:53.118 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 461 ms
+2026-06-30 17:17:53.162 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:17:53.162 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 17:17:53.162 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:17:53.162 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-30 17:17:53.163 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 17:17:53.163 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 17:17:53.163 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 17:17:53.163 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:17:53.165 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 17:17:53.166 [main] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 17:17:53.166 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:17:53.166 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 17:17:53.166 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 17:17:53.166 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 17:17:53.166 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 17:17:53.166 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 17:17:53.166 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:17:53.785 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 17:17:53.786 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 17:17:53.787 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 17:17:53.787 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 17:17:53.788 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 17:17:53.788 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 17:17:53.788 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 17:17:53.789 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 17:17:53.789 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 17:17:53.807 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 17:17:54.018 [main] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-06-30 17:17:54.095 [redisson-netty-4-4] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:17:54.121 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:17:54.302 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:17:54.305 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat started on port 8080 (http) with context path '/api'
+2026-06-30 17:17:54.308 [main] INFO  com.example.demo.DemoApplication [no-trace] — Started DemoApplication in 1.857 seconds (process running for 2.166)
+2026-06-30 17:18:05.585 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] [no-trace] — Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-30 17:18:05.585 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Initializing Servlet 'dispatcherServlet'
+2026-06-30 17:18:05.587 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Completed initialization in 2 ms
+2026-06-30 17:18:05.605 [http-nio-8080-exec-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接已建立, chatId=640797a4-7b58-4f43-8b0a-b023139d5d19
+2026-06-30 17:18:05.635 [http-nio-8080-exec-1] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"你好","uuid":"d9MUwvs3qdbS181Pyn_on"}
+2026-06-30 17:18:06.423 [boundedElastic-2] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-06-30 17:18:08.345 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！有什么我可以帮你的吗？😊, metadata={finishReason=STOP, role=ASSISTANT, id=119d132b-31e8-45f1-93af-9dbe82ba878c, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-06-30 17:18:08.347 [boundedElastic-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=640797a4-7b58-4f43-8b0a-b023139d5d19
+2026-06-30 17:28:52.615 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-30 17:28:52.618 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Graceful shutdown complete
+2026-06-30 17:28:52.641 [SpringApplicationShutdownHook] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接关闭, chatId=640797a4-7b58-4f43-8b0a-b023139d5d19
+2026-06-30 17:28:52.641 [SpringApplicationShutdownHook] WARN  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 会话不可用, chatId=640797a4-7b58-4f43-8b0a-b023139d5d19, 跳过消息
+2026-06-30 17:28:53.887 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 93124 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 17:28:53.888 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 17:28:53.888 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 17:28:54.173 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 17:28:54.174 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 17:28:54.186 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-06-30 17:28:54.344 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8080 (http)
+2026-06-30 17:28:54.351 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:28:54.352 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-06-30 17:28:54.352 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-06-30 17:28:54.380 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 478 ms
+2026-06-30 17:28:54.413 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:28:54.413 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 17:28:54.413 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:28:54.413 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-30 17:28:54.414 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 17:28:54.414 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 17:28:54.414 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 17:28:54.414 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:28:54.415 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 17:28:54.415 [main] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 17:28:54.415 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:28:54.415 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 17:28:54.415 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 17:28:54.415 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 17:28:54.416 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 17:28:54.416 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 17:28:54.416 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:28:54.953 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 17:28:54.953 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 17:28:54.954 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 17:28:54.954 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 17:28:54.955 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 17:28:54.955 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 17:28:54.956 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 17:28:54.956 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 17:28:54.956 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 17:28:54.972 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 17:28:55.115 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext [no-trace] — Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatServiceImpl' defined in file [/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main/com/example/demo/ai/serviceImpl/ChatServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'chatClientBuilder' defined in class path resource [org/springframework/ai/model/chat/client/autoconfigure/ChatClientAutoConfiguration.class]: Unsatisfied dependency expressed through method 'chatClientBuilder' parameter 2: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+2026-06-30 17:28:55.122 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Stopping service [Tomcat]
+2026-06-30 17:28:55.133 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger [no-trace] — 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-30 17:28:55.139 [main] ERROR o.s.boot.SpringApplication [no-trace] — Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatServiceImpl' defined in file [/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main/com/example/demo/ai/serviceImpl/ChatServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'chatClientBuilder' defined in class path resource [org/springframework/ai/model/chat/client/autoconfigure/ChatClientAutoConfiguration.class]: Unsatisfied dependency expressed through method 'chatClientBuilder' parameter 2: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1380)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1225)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1191)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at com.example.demo.DemoApplication.main(DemoApplication.java:16)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatClientBuilder' defined in class path resource [org/springframework/ai/model/chat/client/autoconfigure/ChatClientAutoConfiguration.class]: Unsatisfied dependency expressed through method 'chatClientBuilder' parameter 2: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1360)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1192)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:351)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1232)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1711)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 21 common frames omitted
+Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.determinePrimaryCandidate(DefaultListableBeanFactory.java:2105)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.determineAutowireCandidate(DefaultListableBeanFactory.java:2041)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1742)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 33 common frames omitted
+2026-06-30 17:29:56.743 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 93762 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 17:29:56.744 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 17:29:56.744 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 17:29:57.086 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 17:29:57.087 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 17:29:57.099 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-06-30 17:29:57.270 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8080 (http)
+2026-06-30 17:29:57.276 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:29:57.276 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-06-30 17:29:57.276 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-06-30 17:29:57.302 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 543 ms
+2026-06-30 17:29:57.343 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:29:57.343 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 17:29:57.343 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:29:57.344 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-30 17:29:57.344 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 17:29:57.344 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 17:29:57.344 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 17:29:57.344 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:29:57.346 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 17:29:57.346 [main] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 17:29:57.346 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:29:57.346 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 17:29:57.346 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 17:29:57.346 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 17:29:57.346 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 17:29:57.346 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 17:29:57.346 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:29:57.961 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 17:29:57.962 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 17:29:57.962 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 17:29:57.963 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 17:29:57.963 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 17:29:57.964 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 17:29:57.964 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 17:29:57.964 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 17:29:57.964 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 17:29:57.984 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 17:29:58.153 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext [no-trace] — Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatServiceImpl' defined in file [/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main/com/example/demo/ai/serviceImpl/ChatServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'chatClientBuilder' defined in class path resource [org/springframework/ai/model/chat/client/autoconfigure/ChatClientAutoConfiguration.class]: Unsatisfied dependency expressed through method 'chatClientBuilder' parameter 2: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+2026-06-30 17:29:58.160 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Stopping service [Tomcat]
+2026-06-30 17:29:58.164 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger [no-trace] — 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-30 17:29:58.180 [main] ERROR o.s.boot.SpringApplication [no-trace] — Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatServiceImpl' defined in file [/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main/com/example/demo/ai/serviceImpl/ChatServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'chatClientBuilder' defined in class path resource [org/springframework/ai/model/chat/client/autoconfigure/ChatClientAutoConfiguration.class]: Unsatisfied dependency expressed through method 'chatClientBuilder' parameter 2: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1380)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1225)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1191)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at com.example.demo.DemoApplication.main(DemoApplication.java:16)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatClientBuilder' defined in class path resource [org/springframework/ai/model/chat/client/autoconfigure/ChatClientAutoConfiguration.class]: Unsatisfied dependency expressed through method 'chatClientBuilder' parameter 2: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1360)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1192)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:351)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1232)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1711)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 21 common frames omitted
+Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.determinePrimaryCandidate(DefaultListableBeanFactory.java:2105)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.determineAutowireCandidate(DefaultListableBeanFactory.java:2041)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1742)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 33 common frames omitted
+2026-06-30 17:30:45.401 [Test worker] INFO  c.example.demo.DemoApplicationTests [no-trace] — Starting DemoApplicationTests using Java 26 with PID 94100 (started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 17:30:45.403 [Test worker] DEBUG c.example.demo.DemoApplicationTests [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 17:30:45.403 [Test worker] INFO  c.example.demo.DemoApplicationTests [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 17:30:45.652 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 17:30:45.653 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 17:30:45.664 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-06-30 17:30:45.765 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:30:45.766 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 17:30:45.766 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:30:45.766 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-30 17:30:45.766 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 17:30:45.766 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 17:30:45.766 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 17:30:45.766 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:30:45.769 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 17:30:45.769 [Test worker] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 17:30:45.770 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:30:45.770 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 17:30:45.770 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 17:30:45.770 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 17:30:45.770 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 17:30:45.770 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 17:30:45.770 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:30:46.278 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 17:30:46.279 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 17:30:46.279 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 17:30:46.280 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 17:30:46.280 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 17:30:46.281 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 17:30:46.282 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 17:30:46.282 [Test worker] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 17:30:46.282 [Test worker] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 17:30:46.300 [Test worker] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 17:30:46.445 [Test worker] WARN  o.s.w.c.s.GenericWebApplicationContext [no-trace] — Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatServiceImpl' defined in file [/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main/com/example/demo/ai/serviceImpl/ChatServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'chatClientBuilder' defined in class path resource [org/springframework/ai/model/chat/client/autoconfigure/ChatClientAutoConfiguration.class]: Unsatisfied dependency expressed through method 'chatClientBuilder' parameter 2: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+2026-06-30 17:30:46.464 [Test worker] INFO  o.s.b.a.l.ConditionEvaluationReportLogger [no-trace] — 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-30 17:30:46.470 [Test worker] ERROR o.s.boot.SpringApplication [no-trace] — Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatServiceImpl' defined in file [/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main/com/example/demo/ai/serviceImpl/ChatServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'chatClientBuilder' defined in class path resource [org/springframework/ai/model/chat/client/autoconfigure/ChatClientAutoConfiguration.class]: Unsatisfied dependency expressed through method 'chatClientBuilder' parameter 2: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1380)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1225)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1191)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$2(SpringBootContextLoader.java:155)
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58)
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46)
+	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1465)
+	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:600)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:155)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:114)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:247)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.lambda$loadContext$0(DefaultCacheAwareContextLoaderDelegate.java:167)
+	at org.springframework.test.context.cache.DefaultContextCache.put(DefaultContextCache.java:214)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:160)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:128)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:200)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:139)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:242)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$1(ClassBasedTestDescriptor.java:423)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:428)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$0(ClassBasedTestDescriptor.java:422)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1724)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:632)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:422)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$0(ClassBasedTestDescriptor.java:334)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:333)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$1(ClassBasedTestDescriptor.java:322)
+	at java.base/java.util.Optional.orElseGet(Optional.java:368)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$0(ClassBasedTestDescriptor.java:321)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:27)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:126)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$0(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:110)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.processAllTestDefinitions(JUnitPlatformTestDefinitionProcessor.java:179)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.access$000(JUnitPlatformTestDefinitionProcessor.java:122)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor.stop(JUnitPlatformTestDefinitionProcessor.java:116)
+	at org.gradle.api.internal.tasks.testing.SuiteTestDefinitionProcessor.stop(SuiteTestDefinitionProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.gradle.internal.dispatch.MethodInvocation.invokeOn(MethodInvocation.java:77)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:28)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:19)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:88)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:195)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:126)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:122)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatClientBuilder' defined in class path resource [org/springframework/ai/model/chat/client/autoconfigure/ChatClientAutoConfiguration.class]: Unsatisfied dependency expressed through method 'chatClientBuilder' parameter 2: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1360)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1192)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:351)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1232)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1711)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 122 common frames omitted
+Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.determinePrimaryCandidate(DefaultListableBeanFactory.java:2105)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.determineAutowireCandidate(DefaultListableBeanFactory.java:2041)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1742)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 134 common frames omitted
+2026-06-30 17:30:46.475 [Test worker] WARN  o.s.test.context.TestContextManager [no-trace] — Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] to prepare test instance [com.example.demo.DemoApplicationTests@5bd9c367]
+java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@2f6c2c06 testClass = com.example.demo.DemoApplicationTests, locations = [], classes = [com.example.demo.DemoApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.autoconfigure.OnFailureConditionReportContextCustomizerFactory$OnFailureConditionReportContextCustomizer@408613cc, org.springframework.boot.test.context.PropertyMappingContextCustomizer@0, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@49298ce7, org.springframework.boot.test.http.client.DisableReactorResourceFactoryGlobalResourcesContextCustomizerFactory$DisableReactorResourceFactoryGlobalResourcesContextCustomizerCustomizer@6974a715, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@4c9e9fb8, org.springframework.test.context.support.DynamicPropertiesContextCustomizer@0, org.springframework.boot.web.server.context.SpringBootTestRandomPortContextCustomizer@680362a, org.springframework.boot.test.context.SpringBootTestAnnotation@a1cd33eb], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.lambda$loadContext$0(DefaultCacheAwareContextLoaderDelegate.java:195)
+	at org.springframework.test.context.cache.DefaultContextCache.put(DefaultContextCache.java:214)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:160)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:128)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:200)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:139)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:242)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$1(ClassBasedTestDescriptor.java:423)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:428)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$0(ClassBasedTestDescriptor.java:422)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1724)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:632)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:422)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$0(ClassBasedTestDescriptor.java:334)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:333)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$1(ClassBasedTestDescriptor.java:322)
+	at java.base/java.util.Optional.orElseGet(Optional.java:368)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$0(ClassBasedTestDescriptor.java:321)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:27)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:126)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$0(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:110)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.processAllTestDefinitions(JUnitPlatformTestDefinitionProcessor.java:179)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.access$000(JUnitPlatformTestDefinitionProcessor.java:122)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor.stop(JUnitPlatformTestDefinitionProcessor.java:116)
+	at org.gradle.api.internal.tasks.testing.SuiteTestDefinitionProcessor.stop(SuiteTestDefinitionProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.gradle.internal.dispatch.MethodInvocation.invokeOn(MethodInvocation.java:77)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:28)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:19)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:88)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:195)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:126)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:122)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatServiceImpl' defined in file [/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main/com/example/demo/ai/serviceImpl/ChatServiceImpl.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'chatClientBuilder' defined in class path resource [org/springframework/ai/model/chat/client/autoconfigure/ChatClientAutoConfiguration.class]: Unsatisfied dependency expressed through method 'chatClientBuilder' parameter 2: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1380)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1225)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1191)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$2(SpringBootContextLoader.java:155)
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58)
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46)
+	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1465)
+	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:600)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:155)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:114)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:247)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.lambda$loadContext$0(DefaultCacheAwareContextLoaderDelegate.java:167)
+	... 96 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'chatClientBuilder' defined in class path resource [org/springframework/ai/model/chat/client/autoconfigure/ChatClientAutoConfiguration.class]: Unsatisfied dependency expressed through method 'chatClientBuilder' parameter 2: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1360)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1192)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:351)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1232)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1711)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 122 common frames omitted
+Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'org.springframework.ai.chat.model.ChatModel' available: more than one 'primary' bean found among candidates: [primaryChatModel, deepSeekChatModel, ollamaChatModel]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.determinePrimaryCandidate(DefaultListableBeanFactory.java:2105)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.determineAutowireCandidate(DefaultListableBeanFactory.java:2041)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1742)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 134 common frames omitted
+2026-06-30 17:31:09.964 [Test worker] INFO  c.example.demo.DemoApplicationTests [no-trace] — Starting DemoApplicationTests using Java 26 with PID 94267 (started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 17:31:09.965 [Test worker] DEBUG c.example.demo.DemoApplicationTests [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 17:31:09.965 [Test worker] INFO  c.example.demo.DemoApplicationTests [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 17:31:10.231 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 17:31:10.232 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 17:31:10.243 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-06-30 17:31:10.344 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:31:10.344 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 17:31:10.344 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:31:10.344 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-30 17:31:10.344 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 17:31:10.345 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 17:31:10.345 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 17:31:10.345 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:31:10.347 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 17:31:10.347 [Test worker] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 17:31:10.347 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:31:10.347 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 17:31:10.347 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 17:31:10.347 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 17:31:10.347 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 17:31:10.348 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 17:31:10.348 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:31:10.874 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 17:31:10.875 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 17:31:10.876 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 17:31:10.876 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 17:31:10.877 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 17:31:10.877 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 17:31:10.878 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 17:31:10.878 [Test worker] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 17:31:10.878 [Test worker] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 17:31:10.901 [Test worker] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 17:31:11.160 [Test worker] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-06-30 17:31:11.220 [redisson-netty-4-4] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:31:11.252 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:31:11.275 [Test worker] WARN  o.s.w.c.s.GenericWebApplicationContext [no-trace] — Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/example/demo/ai/config/wsConfig.class]: jakarta.websocket.server.ServerContainer not available
+2026-06-30 17:31:11.299 [Test worker] INFO  o.s.b.a.l.ConditionEvaluationReportLogger [no-trace] — 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-30 17:31:11.306 [Test worker] ERROR o.s.boot.SpringApplication [no-trace] — Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/example/demo/ai/config/wsConfig.class]: jakarta.websocket.server.ServerContainer not available
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1815)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1225)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1191)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$2(SpringBootContextLoader.java:155)
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58)
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46)
+	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1465)
+	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:600)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:155)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:114)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:247)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.lambda$loadContext$0(DefaultCacheAwareContextLoaderDelegate.java:167)
+	at org.springframework.test.context.cache.DefaultContextCache.put(DefaultContextCache.java:214)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:160)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:128)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:200)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:139)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:242)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$1(ClassBasedTestDescriptor.java:423)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:428)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$0(ClassBasedTestDescriptor.java:422)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1724)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:632)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:422)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$0(ClassBasedTestDescriptor.java:334)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:333)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$1(ClassBasedTestDescriptor.java:322)
+	at java.base/java.util.Optional.orElseGet(Optional.java:368)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$0(ClassBasedTestDescriptor.java:321)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:27)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:126)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$0(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:110)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.processAllTestDefinitions(JUnitPlatformTestDefinitionProcessor.java:179)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.access$000(JUnitPlatformTestDefinitionProcessor.java:122)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor.stop(JUnitPlatformTestDefinitionProcessor.java:116)
+	at org.gradle.api.internal.tasks.testing.SuiteTestDefinitionProcessor.stop(SuiteTestDefinitionProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.gradle.internal.dispatch.MethodInvocation.invokeOn(MethodInvocation.java:77)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:28)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:19)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:88)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:195)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:126)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:122)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: java.lang.IllegalStateException: jakarta.websocket.server.ServerContainer not available
+	at org.springframework.util.Assert.state(Assert.java:80)
+	at org.springframework.web.socket.server.standard.ServerEndpointExporter.afterPropertiesSet(ServerEndpointExporter.java:104)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1862)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1811)
+	... 119 common frames omitted
+2026-06-30 17:31:11.309 [Test worker] WARN  o.s.test.context.TestContextManager [no-trace] — Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] to prepare test instance [com.example.demo.DemoApplicationTests@7fd25a8c]
+java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@12b27b17 testClass = com.example.demo.DemoApplicationTests, locations = [], classes = [com.example.demo.DemoApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.autoconfigure.OnFailureConditionReportContextCustomizerFactory$OnFailureConditionReportContextCustomizer@408613cc, org.springframework.boot.test.context.PropertyMappingContextCustomizer@0, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@49298ce7, org.springframework.boot.test.http.client.DisableReactorResourceFactoryGlobalResourcesContextCustomizerFactory$DisableReactorResourceFactoryGlobalResourcesContextCustomizerCustomizer@6974a715, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@4c9e9fb8, org.springframework.test.context.support.DynamicPropertiesContextCustomizer@0, org.springframework.boot.web.server.context.SpringBootTestRandomPortContextCustomizer@680362a, org.springframework.boot.test.context.SpringBootTestAnnotation@a1cd33eb], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.lambda$loadContext$0(DefaultCacheAwareContextLoaderDelegate.java:195)
+	at org.springframework.test.context.cache.DefaultContextCache.put(DefaultContextCache.java:214)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:160)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:128)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:200)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:139)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:242)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$1(ClassBasedTestDescriptor.java:423)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:428)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$0(ClassBasedTestDescriptor.java:422)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1724)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:632)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:422)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$0(ClassBasedTestDescriptor.java:334)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:333)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$1(ClassBasedTestDescriptor.java:322)
+	at java.base/java.util.Optional.orElseGet(Optional.java:368)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$0(ClassBasedTestDescriptor.java:321)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:27)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:127)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:126)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:70)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$0(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:110)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41)
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25)
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.processAllTestDefinitions(JUnitPlatformTestDefinitionProcessor.java:179)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.access$000(JUnitPlatformTestDefinitionProcessor.java:122)
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor.stop(JUnitPlatformTestDefinitionProcessor.java:116)
+	at org.gradle.api.internal.tasks.testing.SuiteTestDefinitionProcessor.stop(SuiteTestDefinitionProcessor.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.gradle.internal.dispatch.MethodInvocation.invokeOn(MethodInvocation.java:77)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:28)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:19)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:88)
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:195)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:126)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:122)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/example/demo/ai/config/wsConfig.class]: jakarta.websocket.server.ServerContainer not available
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1815)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1225)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1191)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$2(SpringBootContextLoader.java:155)
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58)
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46)
+	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1465)
+	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:600)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:155)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:114)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:247)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.lambda$loadContext$0(DefaultCacheAwareContextLoaderDelegate.java:167)
+	... 96 common frames omitted
+Caused by: java.lang.IllegalStateException: jakarta.websocket.server.ServerContainer not available
+	at org.springframework.util.Assert.state(Assert.java:80)
+	at org.springframework.web.socket.server.standard.ServerEndpointExporter.afterPropertiesSet(ServerEndpointExporter.java:104)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1862)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1811)
+	... 119 common frames omitted
+2026-06-30 17:31:36.928 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 94386 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 17:31:36.929 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 17:31:36.929 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 17:31:37.229 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 17:31:37.231 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 17:31:37.253 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2026-06-30 17:31:37.429 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8080 (http)
+2026-06-30 17:31:37.435 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:31:37.435 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-06-30 17:31:37.435 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-06-30 17:31:37.463 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 521 ms
+2026-06-30 17:31:37.496 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:31:37.496 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 17:31:37.496 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:31:37.496 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-30 17:31:37.496 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 17:31:37.496 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 17:31:37.496 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 17:31:37.496 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:31:37.497 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 17:31:37.497 [main] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 17:31:37.497 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:31:37.497 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 17:31:37.498 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 17:31:37.498 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 17:31:37.498 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 17:31:37.498 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 17:31:37.498 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:31:38.021 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 17:31:38.021 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 17:31:38.021 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 17:31:38.022 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 17:31:38.022 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 17:31:38.022 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 17:31:38.023 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 17:31:38.023 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 17:31:38.023 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 17:31:38.038 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 17:31:38.276 [main] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-06-30 17:31:38.353 [redisson-netty-4-4] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:31:38.379 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:31:38.554 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:31:38.557 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat started on port 8080 (http) with context path '/api'
+2026-06-30 17:31:38.561 [main] INFO  com.example.demo.DemoApplication [no-trace] — Started DemoApplication in 1.832 seconds (process running for 2.047)
+2026-06-30 17:32:02.338 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] [no-trace] — Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-30 17:32:02.338 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Initializing Servlet 'dispatcherServlet'
+2026-06-30 17:32:02.340 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Completed initialization in 2 ms
+2026-06-30 17:32:02.359 [http-nio-8080-exec-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接已建立, chatId=7c44cf9a-08b1-48d9-83d0-2ca87366523b
+2026-06-30 17:32:02.381 [http-nio-8080-exec-1] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"你好","uuid":"2pL-N-ZUKygmlkaFYIlg2"}
+2026-06-30 17:32:03.162 [boundedElastic-2] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-06-30 17:32:05.142 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好呀！很高兴见到你！😊 有什么我可以帮你的吗？, metadata={finishReason=STOP, role=ASSISTANT, id=a8355737-20f6-48fe-8469-b50f326aa1c1, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-06-30 17:32:05.143 [boundedElastic-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=7c44cf9a-08b1-48d9-83d0-2ca87366523b
+2026-06-30 17:32:19.035 [Test worker] INFO  c.example.demo.DemoApplicationTests [no-trace] — Starting DemoApplicationTests using Java 26 with PID 94599 (started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 17:32:19.036 [Test worker] DEBUG c.example.demo.DemoApplicationTests [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 17:32:19.037 [Test worker] INFO  c.example.demo.DemoApplicationTests [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 17:32:19.280 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 17:32:19.281 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 17:32:19.293 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-06-30 17:32:19.455 [Test worker] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 0 (http)
+2026-06-30 17:32:19.460 [Test worker] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-auto-1"]
+2026-06-30 17:32:19.461 [Test worker] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-06-30 17:32:19.461 [Test worker] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-06-30 17:32:19.487 [Test worker] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 439 ms
+2026-06-30 17:32:19.517 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:32:19.517 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 17:32:19.517 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:32:19.517 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-30 17:32:19.518 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 17:32:19.518 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 17:32:19.518 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 17:32:19.518 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:32:19.521 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 17:32:19.522 [Test worker] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 17:32:19.522 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:32:19.522 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 17:32:19.522 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 17:32:19.523 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 17:32:19.523 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 17:32:19.523 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 17:32:19.523 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:32:20.029 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 17:32:20.029 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 17:32:20.030 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 17:32:20.031 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 17:32:20.031 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 17:32:20.032 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 17:32:20.032 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 17:32:20.032 [Test worker] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 17:32:20.033 [Test worker] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 17:32:20.052 [Test worker] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 17:32:20.300 [Test worker] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-06-30 17:32:20.360 [redisson-netty-4-5] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:32:20.384 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:32:20.569 [Test worker] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-auto-1"]
+2026-06-30 17:32:20.573 [Test worker] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat started on port 49330 (http) with context path '/api'
+2026-06-30 17:32:20.577 [Test worker] INFO  c.example.demo.DemoApplicationTests [no-trace] — Started DemoApplicationTests in 1.683 seconds (process running for 2.143)
+2026-06-30 17:32:20.707 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-30 17:32:20.709 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Graceful shutdown complete
+2026-06-30 17:32:35.280 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 94722 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 17:32:35.282 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 17:32:35.282 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 17:32:35.509 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 17:32:35.510 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 17:32:35.520 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2026-06-30 17:32:35.669 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8080 (http)
+2026-06-30 17:32:35.674 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:32:35.675 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-06-30 17:32:35.675 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-06-30 17:32:35.699 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 405 ms
+2026-06-30 17:32:35.727 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:32:35.727 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 17:32:35.727 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:32:35.727 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     (未配置)
+2026-06-30 17:32:35.728 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 17:32:35.728 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 17:32:35.728 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 17:32:35.728 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:32:35.729 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 17:32:35.729 [main] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 17:32:35.729 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:32:35.729 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 17:32:35.729 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 17:32:35.730 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 17:32:35.730 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 17:32:35.730 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 17:32:35.730 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:32:36.233 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 17:32:36.234 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 17:32:36.234 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 17:32:36.235 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 17:32:36.235 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 17:32:36.236 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 17:32:36.236 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 17:32:36.236 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 17:32:36.236 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 17:32:36.254 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 17:32:36.485 [main] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-06-30 17:32:36.550 [redisson-netty-4-4] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:32:36.573 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:32:36.724 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:32:36.727 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext [no-trace] — Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-06-30 17:32:36.740 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger [no-trace] — 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-06-30 17:32:36.744 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter [no-trace] — 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2026-06-30 17:32:53.098 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-30 17:32:53.100 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Graceful shutdown complete
+2026-06-30 17:32:53.116 [SpringApplicationShutdownHook] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接关闭, chatId=7c44cf9a-08b1-48d9-83d0-2ca87366523b
+2026-06-30 17:32:53.116 [SpringApplicationShutdownHook] WARN  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 会话不可用, chatId=7c44cf9a-08b1-48d9-83d0-2ca87366523b, 跳过消息
+2026-06-30 17:32:54.367 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 94788 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 17:32:54.368 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 17:32:54.368 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 17:32:54.661 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 17:32:54.662 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 17:32:54.673 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2026-06-30 17:32:54.830 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8080 (http)
+2026-06-30 17:32:54.835 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:32:54.836 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-06-30 17:32:54.836 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-06-30 17:32:54.860 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 480 ms
+2026-06-30 17:32:54.896 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:32:54.896 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 17:32:54.896 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:32:54.896 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-30 17:32:54.896 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 17:32:54.896 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 17:32:54.896 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 17:32:54.897 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:32:54.898 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 17:32:54.898 [main] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 17:32:54.898 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:32:54.898 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 17:32:54.898 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 17:32:54.899 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 17:32:54.899 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 17:32:54.899 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 17:32:54.899 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:32:55.404 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 17:32:55.405 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 17:32:55.405 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 17:32:55.405 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 17:32:55.405 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 17:32:55.406 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 17:32:55.406 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 17:32:55.406 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 17:32:55.406 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 17:32:55.423 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 17:32:55.651 [main] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-06-30 17:32:55.725 [redisson-netty-4-4] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:32:55.750 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:32:55.919 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:32:55.923 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat started on port 8080 (http) with context path '/api'
+2026-06-30 17:32:55.927 [main] INFO  com.example.demo.DemoApplication [no-trace] — Started DemoApplication in 1.753 seconds (process running for 1.978)
+2026-06-30 17:33:02.260 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] [no-trace] — Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-30 17:33:02.260 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Initializing Servlet 'dispatcherServlet'
+2026-06-30 17:33:02.261 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Completed initialization in 1 ms
+2026-06-30 17:33:02.279 [http-nio-8080-exec-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接已建立, chatId=9f1c2293-802d-4b11-841d-79091963211a
+2026-06-30 17:33:02.308 [http-nio-8080-exec-1] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"你好","uuid":"B0FuekmX7DHyM3uZ6bhXk"}
+2026-06-30 17:33:02.511 [boundedElastic-2] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-06-30 17:33:04.350 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[ToolCall[id=call_00_em3BdH5Bf09Z2s52ZTIs8565, type=function, name=getCurrentDateTime, arguments={}]], textContent=, metadata={finishReason=TOOL_CALLS, role=ASSISTANT, id=afea67ac-27ae-42cf-81a4-6bd36c9db154, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='TOOL_CALLS', filters=0, metadata=0]]
+2026-06-30 17:33:04.363 [boundedElastic-2] WARN  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到非 DeepSeek 消息类型: org.springframework.ai.chat.messages.AssistantMessage
+2026-06-30 17:33:04.363 [boundedElastic-2] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=9f1c2293-802d-4b11-841d-79091963211a
+2026-06-30 17:34:22.115 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-30 17:34:22.120 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Graceful shutdown complete
+2026-06-30 17:34:22.139 [SpringApplicationShutdownHook] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接关闭, chatId=9f1c2293-802d-4b11-841d-79091963211a
+2026-06-30 17:34:22.139 [SpringApplicationShutdownHook] WARN  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 会话不可用, chatId=9f1c2293-802d-4b11-841d-79091963211a, 跳过消息
+2026-06-30 17:34:23.806 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 94976 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 17:34:23.807 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 17:34:23.807 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 17:34:24.106 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 17:34:24.107 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 17:34:24.120 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2026-06-30 17:34:24.293 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8080 (http)
+2026-06-30 17:34:24.298 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:34:24.298 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-06-30 17:34:24.298 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-06-30 17:34:24.323 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 500 ms
+2026-06-30 17:34:24.357 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:34:24.357 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 17:34:24.357 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:34:24.358 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-30 17:34:24.358 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 17:34:24.358 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 17:34:24.358 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 17:34:24.358 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:34:24.359 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 17:34:24.359 [main] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 17:34:24.360 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:34:24.360 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 17:34:24.360 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 17:34:24.360 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 17:34:24.360 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 17:34:24.360 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 17:34:24.360 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:34:24.903 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 17:34:24.904 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 17:34:24.904 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 17:34:24.904 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 17:34:24.905 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 17:34:24.905 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 17:34:24.906 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 17:34:24.906 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 17:34:24.906 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 17:34:24.923 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 17:34:25.193 [main] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-06-30 17:34:25.259 [redisson-netty-4-4] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:34:25.285 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:34:25.483 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:34:25.486 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat started on port 8080 (http) with context path '/api'
+2026-06-30 17:34:25.489 [main] INFO  com.example.demo.DemoApplication [no-trace] — Started DemoApplication in 1.894 seconds (process running for 2.106)
+2026-06-30 17:34:28.762 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] [no-trace] — Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-30 17:34:28.762 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Initializing Servlet 'dispatcherServlet'
+2026-06-30 17:34:28.763 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Completed initialization in 1 ms
+2026-06-30 17:34:28.782 [http-nio-8080-exec-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接已建立, chatId=e81b69f5-cd62-4f8e-9510-044545ffa021
+2026-06-30 17:34:28.804 [http-nio-8080-exec-1] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"你好","uuid":"ku0Z66aGS4pHCKTYHJ_zZ"}
+2026-06-30 17:34:29.017 [boundedElastic-2] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-06-30 17:34:30.841 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！很高兴见到你！👋
+
+有什么我可以帮你的吗？无论是聊天、查询信息，还是需要我帮你处理什么任务，尽管说！, metadata={finishReason=STOP, role=ASSISTANT, id=26e9cc86-c824-4ef1-97ba-38983c41adb1, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-06-30 17:34:30.841 [boundedElastic-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=e81b69f5-cd62-4f8e-9510-044545ffa021
+2026-06-30 17:52:28.097 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-30 17:52:28.100 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Graceful shutdown complete
+2026-06-30 17:52:28.122 [SpringApplicationShutdownHook] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接关闭, chatId=e81b69f5-cd62-4f8e-9510-044545ffa021
+2026-06-30 17:52:28.122 [SpringApplicationShutdownHook] WARN  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 会话不可用, chatId=e81b69f5-cd62-4f8e-9510-044545ffa021, 跳过消息
+2026-06-30 17:52:30.201 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 97343 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 17:52:30.202 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 17:52:30.202 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 17:52:30.621 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 17:52:30.622 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 17:52:30.634 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-06-30 17:52:30.808 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8080 (http)
+2026-06-30 17:52:30.813 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:52:30.814 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-06-30 17:52:30.814 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-06-30 17:52:30.840 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 619 ms
+2026-06-30 17:52:30.875 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:52:30.876 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 17:52:30.876 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:52:30.876 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-30 17:52:30.876 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 17:52:30.876 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 17:52:30.876 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 17:52:30.876 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:52:30.878 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 17:52:30.878 [main] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 17:52:30.878 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:52:30.878 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 17:52:30.878 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 17:52:30.878 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 17:52:30.878 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 17:52:30.879 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 17:52:30.879 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:52:31.432 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 17:52:31.433 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 17:52:31.434 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 17:52:31.434 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 17:52:31.435 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 17:52:31.435 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 17:52:31.436 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 17:52:31.436 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 17:52:31.436 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 17:52:31.454 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 17:52:31.708 [main] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-06-30 17:52:31.780 [redisson-netty-4-4] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:52:31.805 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:52:31.975 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:52:31.979 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat started on port 8080 (http) with context path '/api'
+2026-06-30 17:52:31.982 [main] INFO  com.example.demo.DemoApplication [no-trace] — Started DemoApplication in 1.968 seconds (process running for 2.372)
+2026-06-30 17:52:49.511 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] [no-trace] — Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-30 17:52:49.511 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Initializing Servlet 'dispatcherServlet'
+2026-06-30 17:52:49.513 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Completed initialization in 2 ms
+2026-06-30 17:52:49.532 [http-nio-8080-exec-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接已建立, chatId=b949cbee-78ab-4162-ab42-fdbd42cefe03
+2026-06-30 17:52:49.556 [http-nio-8080-exec-1] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"你好","uuid":"-pYp7zJQvCZeOvVotCBtp"}
+2026-06-30 17:52:50.326 [boundedElastic-2] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-06-30 17:52:51.424 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=, metadata={finishReason=STOP, id=01eca0ff-6dff-4bf9-aafc-30f8fd0a9a23, role=ASSISTANT, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-06-30 17:52:51.424 [boundedElastic-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=b949cbee-78ab-4162-ab42-fdbd42cefe03
+2026-06-30 17:53:19.684 [http-nio-8080-exec-3] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"你是谁","uuid":"su-A9O2l2QZVcjzWqsjBA"}
+2026-06-30 17:53:19.752 [boundedElastic-2] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你是谁', metadata={messageType=USER}, messageType=USER}
+2026-06-30 17:53:20.893 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！我是你的对话智能体助手，擅长用中文与你交流，并能够调用各种技能来帮助你完成不同的任务。有什么我可以帮你的吗？, metadata={finishReason=STOP, id=01431f4a-2a70-4e11-8e66-28360fad12e4, role=ASSISTANT, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-06-30 17:53:20.894 [boundedElastic-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=b949cbee-78ab-4162-ab42-fdbd42cefe03
+2026-06-30 17:53:23.988 [http-nio-8080-exec-4] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"你好","uuid":"b1Hl_g4l00MC_67UhKmQf"}
+2026-06-30 17:53:24.060 [boundedElastic-2] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-06-30 17:53:25.568 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好呀！很高兴见到你！😊 有什么我可以帮你的吗？无论是查信息、写东西、还是其他需求，尽管说～, metadata={finishReason=STOP, id=da05e415-4223-4b60-a8df-65661f609feb, role=ASSISTANT, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-06-30 17:53:25.569 [boundedElastic-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=b949cbee-78ab-4162-ab42-fdbd42cefe03
+2026-06-30 17:58:09.445 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-30 17:58:09.448 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Graceful shutdown complete
+2026-06-30 17:58:09.472 [SpringApplicationShutdownHook] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接关闭, chatId=b949cbee-78ab-4162-ab42-fdbd42cefe03
+2026-06-30 17:58:09.472 [SpringApplicationShutdownHook] WARN  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 会话不可用, chatId=b949cbee-78ab-4162-ab42-fdbd42cefe03, 跳过消息
+2026-06-30 17:58:11.142 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 98623 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 17:58:11.143 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 17:58:11.143 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 17:58:11.428 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 17:58:11.429 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 17:58:11.440 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 5 ms. Found 0 Redis repository interfaces.
+2026-06-30 17:58:11.595 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8080 (http)
+2026-06-30 17:58:11.600 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:58:11.600 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-06-30 17:58:11.600 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-06-30 17:58:11.622 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 465 ms
+2026-06-30 17:58:11.654 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:58:11.654 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 17:58:11.654 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:58:11.654 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-30 17:58:11.655 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 17:58:11.655 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 17:58:11.655 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 17:58:11.655 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 17:58:11.656 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 17:58:11.656 [main] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 17:58:11.656 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:58:11.657 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 17:58:11.657 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 17:58:11.657 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 17:58:11.657 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 17:58:11.657 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 17:58:11.657 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 17:58:12.202 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 17:58:12.203 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 17:58:12.203 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 17:58:12.204 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 17:58:12.204 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 17:58:12.205 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 17:58:12.205 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 17:58:12.205 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 17:58:12.205 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 17:58:12.222 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 17:58:12.461 [main] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-06-30 17:58:12.535 [redisson-netty-4-4] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:58:12.561 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 17:58:12.725 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-8080"]
+2026-06-30 17:58:12.729 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat started on port 8080 (http) with context path '/api'
+2026-06-30 17:58:12.732 [main] INFO  com.example.demo.DemoApplication [no-trace] — Started DemoApplication in 1.765 seconds (process running for 1.987)
+2026-06-30 17:58:20.386 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] [no-trace] — Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-30 17:58:20.387 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Initializing Servlet 'dispatcherServlet'
+2026-06-30 17:58:20.387 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Completed initialization in 0 ms
+2026-06-30 17:58:20.402 [http-nio-8080-exec-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接已建立, chatId=918c030d-1bfb-415a-9091-562e1acef57b
+2026-06-30 17:58:20.422 [http-nio-8080-exec-1] DEBUG c.e.d.a.serviceImpl.WebsocketService [no-trace] — 收到消息: {"type":"text","data":"你好","uuid":"qV7jqdyTLf96BMpd9EzWZ"}
+2026-06-30 17:58:20.676 [boundedElastic-2] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-06-30 17:58:22.219 [boundedElastic-1] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！很高兴见到你！有什么我可以帮你的吗？😊, metadata={finishReason=STOP, role=ASSISTANT, id=83837d78-d8c3-4a69-b5a8-83aac7e0afb0, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-06-30 17:58:22.220 [boundedElastic-1] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — 流式生成正常完成, chatId=918c030d-1bfb-415a-9091-562e1acef57b
+2026-06-30 18:05:00.705 [Test worker] INFO  c.example.demo.DemoApplicationTests [no-trace] — Starting DemoApplicationTests using Java 26 with PID 99689 (started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-06-30 18:05:00.705 [Test worker] DEBUG c.example.demo.DemoApplicationTests [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-30 18:05:00.706 [Test worker] INFO  c.example.demo.DemoApplicationTests [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-06-30 18:05:00.945 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-06-30 18:05:00.946 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-06-30 18:05:00.956 [Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-06-30 18:05:01.116 [Test worker] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 0 (http)
+2026-06-30 18:05:01.121 [Test worker] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-auto-1"]
+2026-06-30 18:05:01.122 [Test worker] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-06-30 18:05:01.122 [Test worker] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-06-30 18:05:01.147 [Test worker] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 433 ms
+2026-06-30 18:05:01.178 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 18:05:01.178 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-06-30 18:05:01.178 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 18:05:01.178 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-06-30 18:05:01.179 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-06-30 18:05:01.179 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-06-30 18:05:01.179 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-06-30 18:05:01.179 [Test worker] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-06-30 18:05:01.180 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-06-30 18:05:01.181 [Test worker] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-06-30 18:05:01.181 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 18:05:01.181 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-06-30 18:05:01.181 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-06-30 18:05:01.181 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-06-30 18:05:01.181 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-06-30 18:05:01.181 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-06-30 18:05:01.181 [Test worker] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-06-30 18:05:01.661 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-06-30 18:05:01.662 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jjj ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jjj/SKILL.md
+2026-06-30 18:05:01.663 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: kk ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/kk/SKILL.md
+2026-06-30 18:05:01.664 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: jhhh ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/jhhh/SKILL.md
+2026-06-30 18:05:01.665 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/aaa/SKILL.md
+2026-06-30 18:05:01.665 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/fhf/SKILL.md
+2026-06-30 18:05:01.666 [Test worker] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: find-skills ← /Users/xiaozhang/project/AIDemo/backent/skills/upload/find-skill-1/SKILL.md
+2026-06-30 18:05:01.666 [Test worker] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-06-30 18:05:01.666 [Test worker] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 5 个技能（系统: 1, 用户: 4）
+2026-06-30 18:05:01.687 [Test worker] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-06-30 18:05:01.926 [Test worker] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-06-30 18:05:01.985 [redisson-netty-4-5] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 18:05:02.020 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-06-30 18:05:02.193 [Test worker] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-auto-1"]
+2026-06-30 18:05:02.198 [Test worker] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat started on port 51126 (http) with context path '/api'
+2026-06-30 18:05:02.202 [Test worker] INFO  c.example.demo.DemoApplicationTests [no-trace] — Started DemoApplicationTests in 1.653 seconds (process running for 2.261)
+2026-06-30 18:05:02.326 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-30 18:05:02.329 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Graceful shutdown complete
+2026-06-30 18:06:40.592 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Commencing graceful shutdown. Waiting for active requests to complete
+2026-06-30 18:06:40.594 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Graceful shutdown complete
+2026-06-30 18:06:40.612 [SpringApplicationShutdownHook] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接关闭, chatId=918c030d-1bfb-415a-9091-562e1acef57b
+2026-06-30 18:06:40.612 [SpringApplicationShutdownHook] WARN  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 会话不可用, chatId=918c030d-1bfb-415a-9091-562e1acef57b, 跳过消息

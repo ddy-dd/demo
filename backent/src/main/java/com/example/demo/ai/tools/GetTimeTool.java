@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class GetTimeTool {
 
-    @Tool(description = "获取用户当前时区的日期和时间", returnDirect = true)
+    @Tool(description = "获取用户当前时区的日期和时间")
     public String getCurrentDateTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
                 "yyyy-MM-dd HH:mm:ss EEEE", LocaleContextHolder.getLocale());
