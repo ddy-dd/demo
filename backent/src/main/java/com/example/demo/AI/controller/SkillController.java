@@ -1,5 +1,7 @@
 package com.example.demo.ai.controller;
 
+import com.example.demo.ai.db.SkillRecordDao;
+import com.example.demo.ai.db.model.SkillRecordEntity;
 import com.example.demo.ai.skill.SkillRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,18 +11,27 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 @RestController
 @Slf4j
 @RequestMapping("/skill")
 public class SkillController {
 
+    private final SkillRecordDao skillRecordDao;
+
+    private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     private final Path uploadDir;
 
     private final SkillRegistry skillRegistry;
 
     public SkillController(SkillRegistry skillRegistry,
-                           @Value("${app.skills-dir:skills}") String skillsDir) {
+                           @Value("${app.skills-dir:skills}") String skillsDir,
+                           SkillRecordDao skillRecordDao) {
+        this.skillRecordDao = skillRecordDao;
         this.skillRegistry = skillRegistry;
         Path base = resolveBaseDir(skillsDir);
         this.uploadDir = base.resolve("upload");
@@ -75,6 +86,7 @@ public class SkillController {
         if (skillDir == null) {
             throw new RuntimeException("上传失败: 包名重复过多（已达上限）");
         }
+        String now = LocalDateTime.now().format(DTF);
         log.info("保存技能到: {}", skillDir.toAbsolutePath().normalize());
         try {
             Files.createDirectories(skillDir);
@@ -84,7 +96,26 @@ public class SkillController {
             // 重新加载技能注册表
             skillRegistry.loadAll();
             log.info("技能上传成功: {}", packageName);
+
+            // 保存记录到 SQLite
+            SkillRecordEntity record = new SkillRecordEntity(
+                UUID.randomUUID().toString(),
+                filename,
+                packageName,
+                "success",
+                now
+            );
+            skillRecordDao.insert(record);
         } catch (IOException e) {
+            // 失败也记录
+            SkillRecordEntity record = new SkillRecordEntity(
+                UUID.randomUUID().toString(),
+                filename,
+                packageName,
+                "error",
+                now
+            );
+            skillRecordDao.insert(record);
             throw new RuntimeException("技能保存失败: " + e.getMessage());
         }
         return "上传成功";
