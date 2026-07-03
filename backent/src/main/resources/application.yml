@@ -38,6 +38,17 @@ spring:
         metricType: COSINE
         initializeSchema: true
 
+    # ── MCP 客户端（novelbase 知识图谱） ──────────────────────────────
+    mcp:
+      client:
+        enabled: true
+        stdio:
+          connections:
+            novelbase:
+              command: ${NOVELBASE_BINARY:novelbase-memory-mcp}
+              args:
+                - server
+
   # ── Redis 缓存 ─────────────────────────────────────────────────────────
   data:
     redis:
@@ -71,7 +82,7 @@ app:
 server:
   servlet:
     context-path: /api
-  port: ${SERVER_PORT:8080}
+  port: ${SERVER_PORT:8888}
 
 # ── 日志级别 ────────────────────────────────────────────────────────────
 logging:

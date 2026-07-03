@@ -44,5 +44,10 @@ out/
 .agents/
 .claude/
 
-
-
+### runtime ###
+*.db
+*.log
+backent/logs/
+backent/knowledge/
+backent/novel/
+aifront/dist/

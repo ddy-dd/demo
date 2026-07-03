@@ -3,6 +3,9 @@ package com.example.demo.ai.config;
 import com.example.demo.ai.tools.GetTimeTool;
 import com.example.demo.ai.tools.GetUserLocationTool;
 import com.example.demo.ai.tools.GetWeatherTool;
+import com.example.demo.ai.tools.FileWriterTool;
+import com.example.demo.ai.tools.ImportDocumentTool;
+import com.example.demo.ai.tools.NovelReaderTool;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,6 +21,10 @@ import java.util.List;
  * - GetTimeTool         获取当前日期时间
  * - GetUserLocationTool 获取用户地理位置（交互式）
  * - GetWeatherTool      获取天气信息（模拟）
+ * - NovelReaderTool     读取上传的小说文件内容
+ * - ImportDocumentTool  导入结构化 Markdown 到 novelbase 知识图谱
+ * - FileWriterTool      将 .md 文件写入磁盘供导入
+ * - novelbase MCP       小说创作知识图谱管理（由自动配置注入）
  */
 @Configuration
 public class ToolConfig {
@@ -26,7 +33,10 @@ public class ToolConfig {
     public List<Object> myCustomTools(
             GetTimeTool timeTool,
             GetUserLocationTool locationTool,
-            GetWeatherTool weatherTool) {
-        return List.of(timeTool, locationTool, weatherTool);
+            GetWeatherTool weatherTool,
+            NovelReaderTool novelReaderTool,
+            ImportDocumentTool importDocumentTool,
+            FileWriterTool fileWriterTool) {
+        return List.of(timeTool, locationTool, weatherTool, novelReaderTool, importDocumentTool, fileWriterTool);
     }
 }

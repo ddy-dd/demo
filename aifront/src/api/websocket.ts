@@ -1,6 +1,6 @@
 import type {WsMessage} from '@/type/request.ts';
 
-const BASE_WS_URL = `ws://localhost:8080/api/websocket/`;
+const BASE_WS_URL = `ws://localhost:8888/api/websocket/`;
 
 /**
  * WebSocket 客户端（单例）

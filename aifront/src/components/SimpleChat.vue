@@ -22,6 +22,7 @@ import 'katex/dist/katex.min.css';
 import { nanoid } from 'nanoid';
 import type {userLocation} from "@/type/userLocation.ts";
 import {locationStore} from "@/stores/loaction.ts"
+import {storeToRefs} from 'pinia';
 import {chatStore} from "@/stores/chat.ts"
 import {useKnowledgeStore} from "@/stores/knowledge.ts"
 import {useSkillStore} from "@/stores/skill.ts"
@@ -37,7 +38,7 @@ const knowledgeStore = useKnowledgeStore()
 const skillStore = useSkillStore()
 const showFileManager = ref(false)
 
-const conversations = useChatStore.conversations
+const { conversations } = storeToRefs(useChatStore)
 
 const messagesContainer = ref<HTMLElement | null>(null)
 const isConnected = ref(false)
@@ -348,6 +349,24 @@ const upload = async (options: any) => {
   }
 }
 
+/** 上传小说供 AI 分析 */
+const uploadNovel = async (options: any) => {
+  const formData = new FormData()
+  formData.append('file', options.file)
+  const file = options.file as File
+  try {
+    const res: any = await http.uploadNovel(formData)
+    showFeedback('success', `小说已上传: ${file.name}`)
+    // 把文件路径填入输入框，引导用户分析
+    message.value = `读取这篇小说分析一下：${res.path}`
+    ElMessage.success('小说上传成功，发送消息让 AI 分析吧')
+    console.log('小说上传结果:', res)
+  } catch (e) {
+    ElMessage.error('上传失败')
+    showFeedback('error', '小说上传失败')
+  }
+}
+
 /** 上传 skill */
 const onSkillFileSelected = (e: Event) => {
   const input = e.target as HTMLInputElement
@@ -467,6 +486,9 @@ const handleClose = () => {
 
 onMounted(() => {
   messagesContainer.value?.addEventListener('scroll', onScroll, { passive: true })
+  // skill 和知识库记录从后端加载
+  knowledgeStore.loadRecords()
+  skillStore.loadRecords()
 })
 
 onUnmounted(() => {
@@ -480,7 +502,7 @@ onUnmounted(() => {
   <div class="chat-page">
     <div class="chat-card">
       <header class="chat-header">
-        <h1 class="chat-title">对话</h1>
+        <h1 class="chat-title">对话 <span style="font-size:12px;color:#999;font-weight:normal">({{ conversations.length }} 组)</span></h1>
         <span class="status-dot" :class="{ connected: isConnected }"></span>
       </header>
 
@@ -602,6 +624,10 @@ onUnmounted(() => {
           <label class="upload-label">
             <input type="file" accept=".md" hidden @change="onSkillFileSelected" />
             <span class="upload-trigger">上传 Skill</span>
+          </label>
+          <label class="upload-label upload-label--novel">
+            <input type="file" hidden @change="(e: any) => uploadNovel({ file: e.target.files[0] })" />
+            <span class="upload-trigger">上传小说</span>
           </label>
           <button class="btn btn-outline btn-files" @click="showFileManager = true">
             已上传
@@ -1180,7 +1206,7 @@ onUnmounted(() => {
 .scroll-to-bottom-btn {
   position: absolute;
   left: 50%;
-  bottom: 4.5rem;          /* 刚好在 input-area 上方 */
+  bottom: 7rem;          /* input-area 上方留足空间 */
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;

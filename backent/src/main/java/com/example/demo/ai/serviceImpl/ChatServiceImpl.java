@@ -22,6 +22,7 @@ import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -85,7 +86,8 @@ public class ChatServiceImpl implements ChatService {
             SkillAgentService skillAgentService,
             SkillRegistry skillRegistry,
             @Value("${app.context.max-summary-tokens:80000}") int maxSummaryTokens,
-            @Value("${app.context.compression-cooldown-rounds:3}") int compressionCooldown) {
+            @Value("${app.context.compression-cooldown-rounds:3}") int compressionCooldown,
+            @Autowired(required = false) ToolCallbackProvider novelbaseMcpTools) {
 
         // ── 1. 构建对话记忆系统（支持自动摘要） ─────────────────
         // 底层使用 InMemoryChatMemoryRepository，
@@ -131,6 +133,11 @@ public class ChatServiceImpl implements ChatService {
         providers.add(MethodToolCallbackProvider.builder()
                 .toolObjects(skillAgentService)
                 .build());
+
+        // ── 4c. 注册 novelbase MCP 工具（addCharacter、listCharacters 等） ──
+        if (novelbaseMcpTools != null) {
+            providers.add(novelbaseMcpTools);
+        }
 
         // ── 5. 构建系统提示（含技能清单） ─────────────────
         String skillListing = buildSkillListing(skillRegistry);

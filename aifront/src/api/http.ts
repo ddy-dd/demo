@@ -1,7 +1,7 @@
 import axios, { type AxiosResponse } from 'axios';
 
 /** 后端 API 基础地址 */
-const BaseURL = 'http://localhost:8080/api';
+const BaseURL = 'http://localhost:8888/api';
 
 /**
  * HTTP 工具类（基于 Axios）
@@ -61,6 +61,58 @@ class AxiosUtils {
       },
     });
     return response.data;
+  }
+
+  /** 上传小说文件供 AI 分析 */
+  static async uploadNovel<T>(data: FormData): Promise<T> {
+    const url = '/file/novel-upload';
+    const response: AxiosResponse<T> = await this.instance.post(url, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  }
+
+  // ── 对话相关 ─────────────────────────────────────────────
+
+  /** 获取所有对话列表 */
+  static async listConversations<T>(): Promise<T> {
+    return this.get<T>('/conversations');
+  }
+
+  /** 获取对话的详细消息 */
+  static async getConversationMessages<T>(conversationId: string): Promise<T> {
+    return this.get<T>(`/conversations/${conversationId}/messages`);
+  }
+
+  /** 删除对话 */
+  static async deleteConversation(conversationId: string): Promise<void> {
+    return this.delete(`/conversations/${conversationId}`);
+  }
+
+  // ── Skill 记录相关 ───────────────────────────────────────
+
+  /** 获取所有 Skill 上传记录 */
+  static async listSkillRecords<T>(): Promise<T> {
+    return this.get<T>('/skill-records');
+  }
+
+  /** 删除一条 Skill 记录 */
+  static async deleteSkillRecord(id: string): Promise<void> {
+    return this.delete(`/skill-records/${id}`);
+  }
+
+  // ── 知识库文件记录相关 ───────────────────────────────────
+
+  /** 获取所有知识库文件上传记录 */
+  static async listKnowledgeFiles<T>(): Promise<T> {
+    return this.get<T>('/knowledge-files');
+  }
+
+  /** 删除一条知识库文件记录 */
+  static async deleteKnowledgeFile(id: string): Promise<void> {
+    return this.delete(`/knowledge-files/${id}`);
   }
 }
 
