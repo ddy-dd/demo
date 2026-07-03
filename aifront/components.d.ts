@@ -12,6 +12,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     FileManager: typeof import('./src/components/FileManager.vue')['default']
+    SearchDialog: typeof import('./src/components/SearchDialog.vue')['default']
     SimpleChat: typeof import('./src/components/SimpleChat.vue')['default']
   }
 }
