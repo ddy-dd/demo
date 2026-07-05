@@ -930,3 +930,694 @@ Consider defining a bean of type 'com.fasterxml.jackson.databind.ObjectMapper' i
 2026-07-05 14:52:40.600 [http-nio-8888-exec-2] INFO  o.a.c.c.C.[.[localhost].[/api] [no-trace] — Initializing Spring DispatcherServlet 'dispatcherServlet'
 2026-07-05 14:52:40.600 [http-nio-8888-exec-2] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Initializing Servlet 'dispatcherServlet'
 2026-07-05 14:52:40.603 [http-nio-8888-exec-2] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Completed initialization in 3 ms
+2026-07-05 16:47:38.257 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-05 16:47:38.263 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Graceful shutdown complete
+2026-07-05 16:47:38.302 [SpringApplicationShutdownHook] INFO  c.e.demo.ai.config.AsrProcessManager [no-trace] — 🛑 停止 ASR 服务进程...
+2026-07-05 16:47:38.303 [SpringApplicationShutdownHook] INFO  c.e.demo.ai.config.AsrProcessManager [no-trace] — ASR 进程已终止
+2026-07-05 16:47:39.682 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 79584 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-07-05 16:47:39.683 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-07-05 16:47:39.683 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-07-05 16:47:39.976 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-07-05 16:47:39.977 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-07-05 16:47:39.988 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-07-05 16:47:40.358 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8888 (http)
+2026-07-05 16:47:40.363 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8888"]
+2026-07-05 16:47:40.364 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-07-05 16:47:40.364 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-05 16:47:40.386 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 689 ms
+2026-07-05 16:47:40.418 [main] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — 🚀 ASR 进程已拉起，后台等待就绪...
+2026-07-05 16:47:40.420 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-07-05 16:47:40.420 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-07-05 16:47:40.420 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-07-05 16:47:40.420 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-07-05 16:47:40.420 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-07-05 16:47:40.420 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-07-05 16:47:40.420 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-07-05 16:47:40.420 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-07-05 16:47:40.421 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-07-05 16:47:40.421 [main] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-07-05 16:47:40.421 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-07-05 16:47:40.421 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-07-05 16:47:40.421 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-07-05 16:47:40.421 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-07-05 16:47:40.421 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-07-05 16:47:40.421 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-07-05 16:47:40.421 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-07-05 16:47:40.860 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 16:47:40.860 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] [notice] A new release of pip is available: 26.1.1 -> 26.1.2
+2026-07-05 16:47:40.860 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] [notice] To update, run: pip install --upgrade pip
+2026-07-05 16:47:40.888 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 🚀 ASR Service starting on port 8001 (model: mlx-community/whisper-large-v3-turbo)
+2026-07-05 16:47:40.946 [main] INFO  c.e.d.a.c.NovelbaseGraphController [no-trace] — novelbase 图谱数据源已连接: /Users/xiaozhang/project/novelbase-memory-mcp/novelbase.db
+2026-07-05 16:47:40.949 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-07-05 16:47:40.950 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: convert-document ← /Users/xiaozhang/project/AIDemo/backent/skills/system/convert-document/SKILL.md
+2026-07-05 16:47:40.950 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: import-document ← /Users/xiaozhang/project/AIDemo/backent/skills/system/import-document/SKILL.md
+2026-07-05 16:47:40.950 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录不存在，跳过: /Users/xiaozhang/project/AIDemo/backent/skills/upload
+2026-07-05 16:47:40.950 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-07-05 16:47:40.950 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 3 个技能（系统: 3, 用户: 0）
+2026-07-05 16:47:41.121 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     Started server process [79598]
+2026-07-05 16:47:41.121 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     Waiting for application startup.
+2026-07-05 16:47:41.122 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 16:47:41,122 [INFO] 加载模型: mlx-community/whisper-large-v3-turbo ...
+2026-07-05 16:47:41.122 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     Application startup complete.
+2026-07-05 16:47:41.122 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2026-07-05 16:47:41.236 [main] INFO  c.e.demo.ai.db.DatabaseInitializer [no-trace] — SQLite 数据库表初始化完成
+2026-07-05 16:47:41.255 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-07-05 16:47:41.409 [boundedElastic-1] INFO  i.m.c.transport.StdioClientTransport [no-trace] — MCP server starting.
+2026-07-05 16:47:41.418 [boundedElastic-1] INFO  i.m.c.transport.StdioClientTransport [no-trace] — MCP server started
+2026-07-05 16:47:41.460 [pool-4-thread-1] INFO  i.m.client.LifecycleInitializer [no-trace] — Server response with Protocol: 2024-11-05, Capabilities: ServerCapabilities[completions=null, experimental=null, logging=null, prompts=null, resources=null, tools=ToolCapabilities[listChanged=null]], Info: Implementation[name=novelbase-memory-mcp, title=null, version=0.1.0, description=null, icons=null, websiteUrl=null] and Instructions null
+2026-07-05 16:47:41.738 [main] INFO  c.e.demo.ai.tools.ImportDocumentTool [no-trace] — novelbase 导入工具就绪, 二进制: /Users/xiaozhang/project/novelbase-memory-mcp/target/release/novelbase-memory-mcp
+2026-07-05 16:47:41.826 [main] WARN  c.e.demo.ai.config.RedissonConfig [no-trace] — 当前Redis为硬编码连接地址，后续应改为从配置文件读取
+2026-07-05 16:47:41.828 [main] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-07-05 16:47:41.907 [redisson-netty-4-4] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-07-05 16:47:41.933 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-07-05 16:47:42.058 [main] WARN  o.s.a.m.a.p.s.SyncMcpSamplingProvider [no-trace] — No sampling methods found
+2026-07-05 16:47:42.059 [main] WARN  o.s.a.m.a.p.e.SyncMcpElicitationProvider [no-trace] — No elicitation methods found
+2026-07-05 16:47:42.077 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-8888"]
+2026-07-05 16:47:42.081 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat started on port 8888 (http) with context path '/api'
+2026-07-05 16:47:42.084 [main] INFO  com.example.demo.DemoApplication [no-trace] — Started DemoApplication in 2.562 seconds (process running for 2.801)
+2026-07-05 16:47:42.437 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:52240 - "GET /health HTTP/1.1" 200 OK
+2026-07-05 16:47:42.441 [asr-health] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — ✅ ASR 服务就绪 (localhost:8001)
+2026-07-05 16:47:45.431 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 16:47:45,431 [INFO] HTTP Request: GET https://hf-mirror.com/api/models/mlx-community/whisper-large-v3-turbo/revision/main "HTTP/1.1 200 OK"
+2026-07-05 16:47:45.439 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 16:47:45.440 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+2026-07-05 16:47:45.440 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 5154.29it/s]
+2026-07-05 16:47:46.142 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 16:47:47.229 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/100 [00:00<?, ?frames/s]
+2026-07-05 16:47:47.230 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 100/100 [00:01<00:00, 91.99frames/s]
+2026-07-05 16:47:47.230 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 100/100 [00:01<00:00, 91.89frames/s]
+2026-07-05 16:47:47.230 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 16:47:47,230 [INFO] 模型加载完成 (6.1s)
+2026-07-05 16:47:49.967 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-05 16:47:49.971 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Graceful shutdown complete
+2026-07-05 16:47:49.992 [SpringApplicationShutdownHook] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — 🛑 停止 ASR 服务进程...
+2026-07-05 16:47:49.992 [SpringApplicationShutdownHook] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — ASR 进程已终止
+2026-07-05 16:56:11.170 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 80399 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-07-05 16:56:11.170 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-07-05 16:56:11.170 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-07-05 16:56:11.479 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-07-05 16:56:11.480 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-07-05 16:56:11.492 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-07-05 16:56:11.892 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8888 (http)
+2026-07-05 16:56:11.897 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8888"]
+2026-07-05 16:56:11.897 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-07-05 16:56:11.898 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-05 16:56:11.921 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 737 ms
+2026-07-05 16:56:11.953 [main] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — 🚀 ASR 进程已拉起，后台等待就绪...
+2026-07-05 16:56:11.959 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-07-05 16:56:11.959 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-07-05 16:56:11.959 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-07-05 16:56:11.959 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-07-05 16:56:11.960 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-07-05 16:56:11.960 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-07-05 16:56:11.960 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-07-05 16:56:11.960 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-07-05 16:56:11.961 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-07-05 16:56:11.961 [main] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-07-05 16:56:11.961 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-07-05 16:56:11.961 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-07-05 16:56:11.961 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-07-05 16:56:11.961 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-07-05 16:56:11.961 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-07-05 16:56:11.961 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-07-05 16:56:11.961 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-07-05 16:56:12.373 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 16:56:12.374 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] [notice] A new release of pip is available: 26.1.1 -> 26.1.2
+2026-07-05 16:56:12.374 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] [notice] To update, run: pip install --upgrade pip
+2026-07-05 16:56:12.407 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] 🚀 ASR Service starting on port 8001 (model: mlx-community/whisper-large-v3-turbo)
+2026-07-05 16:56:12.504 [main] INFO  c.e.d.a.c.NovelbaseGraphController [no-trace] — novelbase 图谱数据源已连接: /Users/xiaozhang/project/novelbase-memory-mcp/novelbase.db
+2026-07-05 16:56:12.506 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-07-05 16:56:12.507 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: convert-document ← /Users/xiaozhang/project/AIDemo/backent/skills/system/convert-document/SKILL.md
+2026-07-05 16:56:12.508 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: import-document ← /Users/xiaozhang/project/AIDemo/backent/skills/system/import-document/SKILL.md
+2026-07-05 16:56:12.508 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录不存在，跳过: /Users/xiaozhang/project/AIDemo/backent/skills/upload
+2026-07-05 16:56:12.508 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-07-05 16:56:12.508 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 3 个技能（系统: 3, 用户: 0）
+2026-07-05 16:56:12.616 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] INFO:     Started server process [80426]
+2026-07-05 16:56:12.616 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] INFO:     Waiting for application startup.
+2026-07-05 16:56:12.616 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] 2026-07-05 16:56:12,616 [INFO] 加载模型: mlx-community/whisper-large-v3-turbo ...
+2026-07-05 16:56:12.616 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] INFO:     Application startup complete.
+2026-07-05 16:56:12.617 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2026-07-05 16:56:12.781 [main] INFO  c.e.demo.ai.db.DatabaseInitializer [no-trace] — SQLite 数据库表初始化完成
+2026-07-05 16:56:12.803 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-07-05 16:56:12.963 [boundedElastic-1] INFO  i.m.c.transport.StdioClientTransport [no-trace] — MCP server starting.
+2026-07-05 16:56:12.969 [boundedElastic-1] INFO  i.m.c.transport.StdioClientTransport [no-trace] — MCP server started
+2026-07-05 16:56:13.004 [pool-4-thread-1] INFO  i.m.client.LifecycleInitializer [no-trace] — Server response with Protocol: 2024-11-05, Capabilities: ServerCapabilities[completions=null, experimental=null, logging=null, prompts=null, resources=null, tools=ToolCapabilities[listChanged=null]], Info: Implementation[name=novelbase-memory-mcp, title=null, version=0.1.0, description=null, icons=null, websiteUrl=null] and Instructions null
+2026-07-05 16:56:13.242 [main] INFO  c.e.demo.ai.tools.ImportDocumentTool [no-trace] — novelbase 导入工具就绪, 二进制: /Users/xiaozhang/project/novelbase-memory-mcp/target/release/novelbase-memory-mcp
+2026-07-05 16:56:13.330 [main] WARN  c.e.demo.ai.config.RedissonConfig [no-trace] — 当前Redis为硬编码连接地址，后续应改为从配置文件读取
+2026-07-05 16:56:13.332 [main] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-07-05 16:56:13.410 [redisson-netty-4-4] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-07-05 16:56:13.439 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-07-05 16:56:13.569 [main] WARN  o.s.a.m.a.p.s.SyncMcpSamplingProvider [no-trace] — No sampling methods found
+2026-07-05 16:56:13.570 [main] WARN  o.s.a.m.a.p.e.SyncMcpElicitationProvider [no-trace] — No elicitation methods found
+2026-07-05 16:56:13.587 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-8888"]
+2026-07-05 16:56:13.591 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat started on port 8888 (http) with context path '/api'
+2026-07-05 16:56:13.594 [main] INFO  com.example.demo.DemoApplication [no-trace] — Started DemoApplication in 2.601 seconds (process running for 2.822)
+2026-07-05 16:56:13.965 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:54533 - "GET /health HTTP/1.1" 200 OK
+2026-07-05 16:56:13.966 [asr-health] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — ✅ ASR 服务就绪 (localhost:8001)
+2026-07-05 16:56:14.808 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] 2026-07-05 16:56:14,808 [INFO] HTTP Request: GET https://hf-mirror.com/api/models/mlx-community/whisper-large-v3-turbo/revision/main "HTTP/1.1 200 OK"
+2026-07-05 16:56:14.815 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 16:56:14.815 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+2026-07-05 16:56:14.815 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 7703.04it/s]
+2026-07-05 16:56:15.799 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 16:56:16.860 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/100 [00:00<?, ?frames/s]
+2026-07-05 16:56:16.861 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 100/100 [00:01<00:00, 94.18frames/s]
+2026-07-05 16:56:16.861 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 100/100 [00:01<00:00, 94.16frames/s]
+2026-07-05 16:56:16.861 [asr-log-reader] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — [ASR] 2026-07-05 16:56:16,860 [INFO] 模型加载完成 (4.2s)
+2026-07-05 16:56:18.267 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-05 16:56:18.271 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown [no-trace] — Graceful shutdown complete
+2026-07-05 16:56:18.294 [SpringApplicationShutdownHook] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — 🛑 停止 ASR 服务进程...
+2026-07-05 16:56:18.294 [SpringApplicationShutdownHook] INFO  c.e.d.a.asr.config.AsrProcessManager [no-trace] — ASR 进程已终止
+2026-07-05 18:22:04.237 [main] INFO  com.example.demo.DemoApplication [no-trace] — Starting DemoApplication using Java 26 with PID 84349 (/Users/xiaozhang/project/AIDemo/backent/build/classes/java/main started by xiaozhang in /Users/xiaozhang/project/AIDemo/backent)
+2026-07-05 18:22:04.238 [main] DEBUG com.example.demo.DemoApplication [no-trace] — Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-07-05 18:22:04.238 [main] INFO  com.example.demo.DemoApplication [no-trace] — No active profile set, falling back to 1 default profile: "default"
+2026-07-05 18:22:04.522 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Multiple Spring Data modules found, entering strict repository configuration mode
+2026-07-05 18:22:04.523 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-07-05 18:22:04.535 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate [no-trace] — Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-07-05 18:22:04.894 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat initialized with port 8888 (http)
+2026-07-05 18:22:04.899 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Initializing ProtocolHandler ["http-nio-8888"]
+2026-07-05 18:22:04.900 [main] INFO  o.a.catalina.core.StandardService [no-trace] — Starting service [Tomcat]
+2026-07-05 18:22:04.900 [main] INFO  o.a.catalina.core.StandardEngine [no-trace] — Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-05 18:22:04.922 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer [no-trace] — Root WebApplicationContext: initialization completed in 671 ms
+2026-07-05 18:22:04.956 [main] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — 🚀 ASR 进程已拉起，后台等待就绪...
+2026-07-05 18:22:04.958 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-07-05 18:22:04.958 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   AI Demo 配置校验
+2026-07-05 18:22:04.958 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-07-05 18:22:04.958 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   DeepSeek API Key:     sk-ba9f0****
+2026-07-05 18:22:04.958 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Ollama Base URL:      http://localhost:11434
+2026-07-05 18:22:04.958 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   Milvus:               localhost:19530
+2026-07-05 18:22:04.958 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] —   API Auth:             未启用（开发模式）
+2026-07-05 18:22:04.958 [main] INFO  c.example.demo.ai.config.AppConfig [no-trace] — ========================================
+2026-07-05 18:22:04.959 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — MaxTokenMenu 初始化: 模型=deepseek-v4-flash, 阈值=80000
+2026-07-05 18:22:04.959 [main] DEBUG c.e.demo.ai.config.MaxTokenMenu [no-trace] — maxToken resolve: model=deepseek-v4-flash (window=131072) scenario=CHAT (budget=65536) → 65536
+2026-07-05 18:22:04.959 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-07-05 18:22:04.959 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   MaxTokenMenu 就绪
+2026-07-05 18:22:04.959 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前模型:       deepseek-v4-flash (128K (131072))
+2026-07-05 18:22:04.959 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   当前场景:       CHAT (64K (65536))
+2026-07-05 18:22:04.959 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   有效上下文:     64K (65536)
+2026-07-05 18:22:04.959 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] —   压缩硬阈值:     64K (65536) (100%)
+2026-07-05 18:22:04.959 [main] INFO  c.e.demo.ai.config.MaxTokenMenu [no-trace] — ──────────────────────────────────────────
+2026-07-05 18:22:05.441 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 18:22:05.441 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] [notice] A new release of pip is available: 26.1.1 -> 26.1.2
+2026-07-05 18:22:05.441 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] [notice] To update, run: pip install --upgrade pip
+2026-07-05 18:22:05.473 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 🚀 ASR Service starting on port 8001 (model: mlx-community/whisper-large-v3-turbo)
+2026-07-05 18:22:05.527 [main] INFO  c.e.d.a.c.NovelbaseGraphController [no-trace] — novelbase 图谱数据源已连接: /Users/xiaozhang/project/novelbase-memory-mcp/novelbase.db
+2026-07-05 18:22:05.529 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: stop-slop ← /Users/xiaozhang/project/AIDemo/backent/skills/system/stop-slop/SKILL.md
+2026-07-05 18:22:05.530 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: convert-document ← /Users/xiaozhang/project/AIDemo/backent/skills/system/convert-document/SKILL.md
+2026-07-05 18:22:05.530 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 加载技能: import-document ← /Users/xiaozhang/project/AIDemo/backent/skills/system/import-document/SKILL.md
+2026-07-05 18:22:05.530 [main] DEBUG c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录不存在，跳过: /Users/xiaozhang/project/AIDemo/backent/skills/upload
+2026-07-05 18:22:05.530 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 技能目录: /Users/xiaozhang/project/AIDemo/backent/skills  (系统: /Users/xiaozhang/project/AIDemo/backent/skills/system, 上传: /Users/xiaozhang/project/AIDemo/backent/skills/upload)
+2026-07-05 18:22:05.530 [main] INFO  c.e.demo.ai.skill.SkillRegistry [no-trace] — 已加载 3 个技能（系统: 3, 用户: 0）
+2026-07-05 18:22:05.700 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     Started server process [84361]
+2026-07-05 18:22:05.700 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     Waiting for application startup.
+2026-07-05 18:22:05.700 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 18:22:05,700 [INFO] 加载模型: mlx-community/whisper-large-v3-turbo ...
+2026-07-05 18:22:05.700 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     Application startup complete.
+2026-07-05 18:22:05.701 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2026-07-05 18:22:06.042 [main] INFO  c.e.demo.ai.db.DatabaseInitializer [no-trace] — SQLite 数据库表初始化完成
+2026-07-05 18:22:06.063 [main] ERROR i.n.r.d.DnsServerAddressStreamProviders [no-trace] — Unable to load io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'. Use DEBUG level to see the full stack: java.lang.UnsatisfiedLinkError: failed to load the required native library
+2026-07-05 18:22:06.262 [boundedElastic-1] INFO  i.m.c.transport.StdioClientTransport [no-trace] — MCP server starting.
+2026-07-05 18:22:06.268 [boundedElastic-1] INFO  i.m.c.transport.StdioClientTransport [no-trace] — MCP server started
+2026-07-05 18:22:06.302 [pool-4-thread-1] INFO  i.m.client.LifecycleInitializer [no-trace] — Server response with Protocol: 2024-11-05, Capabilities: ServerCapabilities[completions=null, experimental=null, logging=null, prompts=null, resources=null, tools=ToolCapabilities[listChanged=null]], Info: Implementation[name=novelbase-memory-mcp, title=null, version=0.1.0, description=null, icons=null, websiteUrl=null] and Instructions null
+2026-07-05 18:22:06.558 [main] INFO  c.e.demo.ai.tools.ImportDocumentTool [no-trace] — novelbase 导入工具就绪, 二进制: /Users/xiaozhang/project/novelbase-memory-mcp/target/release/novelbase-memory-mcp
+2026-07-05 18:22:06.596 [main] WARN  c.e.demo.ai.config.RedissonConfig [no-trace] — 当前Redis为硬编码连接地址，后续应改为从配置文件读取
+2026-07-05 18:22:06.598 [main] INFO  org.redisson.Version [no-trace] — Redisson 4.6.1
+2026-07-05 18:22:06.675 [redisson-netty-4-4] INFO  o.r.connection.ConnectionsHolder [no-trace] — 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-07-05 18:22:06.703 [redisson-netty-4-19] INFO  o.r.connection.ConnectionsHolder [no-trace] — 24 connections initialized for 127.0.0.1/127.0.0.1:6379
+2026-07-05 18:22:06.833 [main] WARN  o.s.a.m.a.p.s.SyncMcpSamplingProvider [no-trace] — No sampling methods found
+2026-07-05 18:22:06.834 [main] WARN  o.s.a.m.a.p.e.SyncMcpElicitationProvider [no-trace] — No elicitation methods found
+2026-07-05 18:22:06.852 [main] INFO  o.a.coyote.http11.Http11NioProtocol [no-trace] — Starting ProtocolHandler ["http-nio-8888"]
+2026-07-05 18:22:06.855 [main] INFO  o.s.boot.tomcat.TomcatWebServer [no-trace] — Tomcat started on port 8888 (http) with context path '/api'
+2026-07-05 18:22:06.859 [main] INFO  com.example.demo.DemoApplication [no-trace] — Started DemoApplication in 2.782 seconds (process running for 2.996)
+2026-07-05 18:22:06.966 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:51930 - "GET /health HTTP/1.1" 200 OK
+2026-07-05 18:22:06.967 [asr-health] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — ✅ ASR 服务就绪 (localhost:8001)
+2026-07-05 18:22:09.497 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 18:22:09,497 [INFO] HTTP Request: GET https://hf-mirror.com/api/models/mlx-community/whisper-large-v3-turbo/revision/main "HTTP/1.1 200 OK"
+2026-07-05 18:22:09.503 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 18:22:09.504 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+2026-07-05 18:22:09.504 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 7547.11it/s]
+2026-07-05 18:22:10.267 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 18:22:11.402 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/100 [00:00<?, ?frames/s]
+2026-07-05 18:22:11.402 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 100/100 [00:01<00:00, 88.16frames/s]
+2026-07-05 18:22:11.402 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 100/100 [00:01<00:00, 88.15frames/s]
+2026-07-05 18:22:11.403 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 18:22:11,402 [INFO] 模型加载完成 (5.7s)
+2026-07-05 18:22:12.765 [http-nio-8888-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] [no-trace] — Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-05 18:22:12.766 [http-nio-8888-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Initializing Servlet 'dispatcherServlet'
+2026-07-05 18:22:12.768 [http-nio-8888-exec-1] INFO  o.s.web.servlet.DispatcherServlet [no-trace] — Completed initialization in 2 ms
+2026-07-05 19:40:37.662 [http-nio-8888-exec-9] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接已建立, chatId=04c68819-124f-40a3-9459-8a843f2350c4
+2026-07-05 19:43:09.238 [http-nio-8888-exec-3] INFO  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 连接关闭, chatId=04c68819-124f-40a3-9459-8a843f2350c4
+2026-07-05 19:43:09.239 [http-nio-8888-exec-3] WARN  c.e.d.a.serviceImpl.WebsocketService [no-trace] — WebSocket 会话不可用, chatId=04c68819-124f-40a3-9459-8a843f2350c4, 跳过消息
+2026-07-05 19:43:12.022 [http-nio-8888-exec-1] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [5c6b721d-1b00-4676-93a8-667f1de3fd9c] 通话连接已建立
+2026-07-05 19:43:39.762 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 19:43:39,762 [INFO] 音频解码完成: 436800 样本 (27.3s)
+2026-07-05 19:43:39.763 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 19:43:40.751 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/2730 [00:00<?, ?frames/s]
+2026-07-05 19:43:40.751 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 2730/2730 [00:00<00:00, 2763.93frames/s]
+2026-07-05 19:43:40.751 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 2730/2730 [00:00<00:00, 2763.59frames/s]
+2026-07-05 19:43:40.751 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 19:43:40,751 [INFO] 转写完成 (1.0s): 你好你好你好
+2026-07-05 19:43:40.751 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53296 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 19:43:41.562 [boundedElastic-3] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好你好你好', metadata={messageType=USER}, messageType=USER}
+2026-07-05 19:43:43.615 [boundedElastic-2] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好你好你好！😊 有什么我可以帮你的吗？, metadata={finishReason=STOP, role=ASSISTANT, id=3bf63d14-9552-41ea-9a49-ff4c5e0ca1ad, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 19:44:13.712 [http-nio-8888-exec-10] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [5c6b721d-1b00-4676-93a8-667f1de3fd9c] 通话连接已关闭
+2026-07-05 19:51:06.238 [http-nio-8888-exec-3] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [c063918d-111d-4412-ae36-63d9d5357f44] 通话连接已建立
+2026-07-05 19:51:08.957 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 19:51:08,957 [INFO] 音频解码完成: 15360 样本 (1.0s)
+2026-07-05 19:51:08.958 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 19:51:09.943 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/96 [00:00<?, ?frames/s]
+2026-07-05 19:51:09.943 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 96/96 [00:00<00:00, 97.48frames/s]
+2026-07-05 19:51:09.943 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 96/96 [00:00<00:00, 97.47frames/s]
+2026-07-05 19:51:09.943 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 19:51:09,943 [INFO] 转写完成 (1.0s): 好
+2026-07-05 19:51:09.943 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53468 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 19:51:10.553 [boundedElastic-5] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='好', metadata={messageType=USER}, messageType=USER}
+2026-07-05 19:51:13.219 [boundedElastic-4] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！我是你的创作智能助手 😊
+
+我能帮你做很多事，比如：
+
+- 📖 **分析小说文档** — 读取 Word/PDF 小说，梳理人物关系、情节脉络、伏笔结构
+- 🧠 **导入知识图谱** — 将文档导入 novelbase，自动提取人物、情节、环境
+- ✍️ **润色文字** — 去除 AI 痕迹，让文字更自然
+- 🌤 **查天气**、📍 **定位**等实用功能
+
+有什么我可以帮你的吗？比如你想处理一部小说，或者聊聊创作相关的内容？, metadata={finishReason=STOP, role=ASSISTANT, id=229bfe84-b2b0-433c-90d9-66a174dc4e02, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 19:58:32.664 [http-nio-8888-exec-2] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [c063918d-111d-4412-ae36-63d9d5357f44] 通话连接已关闭
+2026-07-05 19:59:06.940 [http-nio-8888-exec-4] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [455f0080-109c-4381-a16c-5a5123b2a7a8] 通话连接已建立
+2026-07-05 19:59:09.873 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 19:59:09,873 [INFO] 音频解码完成: 20160 样本 (1.3s)
+2026-07-05 19:59:09.874 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 19:59:10.807 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/126 [00:00<?, ?frames/s]
+2026-07-05 19:59:10.808 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 126/126 [00:00<00:00, 134.94frames/s]
+2026-07-05 19:59:10.808 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 126/126 [00:00<00:00, 134.92frames/s]
+2026-07-05 19:59:10.808 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 19:59:10,808 [INFO] 转写完成 (0.9s): 你好
+2026-07-05 19:59:10.808 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53670 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 19:59:11.411 [boundedElastic-7] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-07-05 19:59:12.618 [boundedElastic-6] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！欢迎！😊 有什么我可以帮你的吗？比如处理小说文档、编辑文字，或者其他问题，尽管说！, metadata={finishReason=STOP, role=ASSISTANT, id=345d3046-293a-48c7-8367-06e819d5fe7e, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 19:59:15.745 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 19:59:15,744 [INFO] 音频解码完成: 24960 样本 (1.6s)
+2026-07-05 19:59:15.745 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 19:59:16.654 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/156 [00:00<?, ?frames/s]
+2026-07-05 19:59:16.654 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 156/156 [00:00<00:00, 171.71frames/s]
+2026-07-05 19:59:16.654 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 156/156 [00:00<00:00, 171.66frames/s]
+2026-07-05 19:59:16.654 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 19:59:16,654 [INFO] 转写完成 (0.9s): 你是谁
+2026-07-05 19:59:16.654 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53670 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 19:59:16.729 [boundedElastic-7] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你是谁', metadata={messageType=USER}, messageType=USER}
+2026-07-05 19:59:18.418 [boundedElastic-6] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=我是你的对话智能体助手！🤖 我具备多种能力，比如处理小说文档（分析人物关系、情节脉络等）、编辑文字（去除AI写作痕迹），以及其他日常协助功能。你可以随时告诉我需要什么帮助，我会尽力为你服务！😊, metadata={finishReason=STOP, role=ASSISTANT, id=a0b6c16f-ad1e-40db-833d-15572d8aca42, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 19:59:52.769 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 19:59:52,769 [INFO] 音频解码完成: 17280 样本 (1.1s)
+2026-07-05 19:59:52.769 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 19:59:59.297 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/108 [00:00<?, ?frames/s]
+2026-07-05 19:59:59.297 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 108/108 [00:06<00:00, 16.55frames/s]
+2026-07-05 19:59:59.297 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 108/108 [00:06<00:00, 16.54frames/s]
+2026-07-05 19:59:59.297 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 19:59:59,297 [INFO] 转写完成 (6.5s): $$
+2026-07-05 19:59:59.298 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53716 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 19:59:59.356 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 19:59:59,355 [INFO] 音频解码完成: 17280 样本 (1.1s)
+2026-07-05 19:59:59.356 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 19:59:59.358 [boundedElastic-7] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='$$', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:00:01.342 [boundedElastic-6] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=哈哈，这个符号看起来像是在测试键盘或者发了个暗号？😄 
+
+有什么具体的事情需要我帮忙吗？比如处理文档、分析小说、查询天气之类的，尽管说～, metadata={finishReason=STOP, role=ASSISTANT, id=49c9de69-3b0a-463f-8391-63240fa6cc33, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:00:05.928 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/108 [00:00<?, ?frames/s]
+2026-07-05 20:00:05.928 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 108/108 [00:06<00:00, 16.44frames/s]
+2026-07-05 20:00:05.928 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 108/108 [00:06<00:00, 16.43frames/s]
+2026-07-05 20:00:05.928 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:00:05,928 [INFO] 转写完成 (6.6s): $$$
+2026-07-05 20:00:05.929 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53716 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:00:06.000 [boundedElastic-7] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='$$$', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:00:08.318 [boundedElastic-6] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=看来你在尝试用摩斯密码或者某种暗号跟我沟通？😂 
+
+不过可惜，我暂时没有解码"$$$"的技能包……不如直接告诉我你想干嘛？聊天、处理文档、分析小说，我都很在行！😊, metadata={finishReason=STOP, role=ASSISTANT, id=29659862-8426-4a49-9042-deafee3b1f60, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:00:12.453 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:00:12,453 [INFO] 音频解码完成: 34560 样本 (2.2s)
+2026-07-05 20:00:12.454 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:00:15.367 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/216 [00:00<?, ?frames/s]
+2026-07-05 20:00:15.368 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 216/216 [00:02<00:00, 74.14frames/s]
+2026-07-05 20:00:15.368 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 216/216 [00:02<00:00, 74.13frames/s]
+2026-07-05 20:00:15.368 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:00:15,368 [INFO] 转写完成 (2.9s): 我去你妈的
+2026-07-05 20:00:15.368 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53731 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:00:15.430 [boundedElastic-7] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='我去你妈的', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:00:16.352 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:00:16,351 [INFO] 音频解码完成: 17280 样本 (1.1s)
+2026-07-05 20:00:16.353 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:00:17.411 [boundedElastic-6] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=抱歉让你感到不愉快了。如果刚才我的回答有什么不周到的地方，或者你有什么真正需要帮助的事情，请告诉我，我会认真倾听并尽力帮你解决。🙏, metadata={finishReason=STOP, role=ASSISTANT, id=818dcfa2-32a2-427f-9063-33a4119b8369, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:00:21.549 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/108 [00:00<?, ?frames/s]
+2026-07-05 20:00:21.549 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 108/108 [00:05<00:00, 20.79frames/s]
+2026-07-05 20:00:21.549 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 108/108 [00:05<00:00, 20.79frames/s]
+2026-07-05 20:00:21.549 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:00:21,549 [INFO] 转写完成 (5.2s): 请不吝点赞 订阅 转发 打赏支持明镜与点点栏目
+2026-07-05 20:00:21.549 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53731 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:00:21.609 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:00:21,608 [INFO] 音频解码完成: 17280 样本 (1.1s)
+2026-07-05 20:00:21.610 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:00:21.623 [boundedElastic-7] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='请不吝点赞 订阅 转发 打赏支持明镜与点点栏目', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:00:24.767 [boundedElastic-6] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=感谢你的支持意愿！不过，作为一个人工智能助手，我没办法直接去外部平台进行点赞、订阅、转发或打赏等操作——我没有访问外部社交媒体或支付系统的权限。😅
+
+如果你需要的话，我可以帮你：
+- 撰写一段推荐语或宣传文案
+- 整理栏目的亮点介绍
+- 或者其他文字方面的协助
+
+希望你能理解！祝"明镜与点点"栏目越办越好～🌟, metadata={finishReason=STOP, role=ASSISTANT, id=fa066332-093b-47e9-b9ab-6b384e9e53f9, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:00:29.096 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/108 [00:00<?, ?frames/s]
+2026-07-05 20:00:29.097 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 108/108 [00:07<00:00, 14.43frames/s]
+2026-07-05 20:00:29.097 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 108/108 [00:07<00:00, 14.43frames/s]
+2026-07-05 20:00:29.097 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:00:29,097 [INFO] 转写完成 (7.5s): 嗯
+2026-07-05 20:00:29.097 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53731 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:00:29.170 [boundedElastic-7] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='嗯', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:00:30.530 [boundedElastic-6] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=嗯，随时欢迎你再来找我！有什么需要帮忙的，一句话的事～😊, metadata={finishReason=STOP, role=ASSISTANT, id=07867145-fd8a-4ec5-b521-7625487eb3e9, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:00:39.894 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:00:39,894 [INFO] 音频解码完成: 17280 样本 (1.1s)
+2026-07-05 20:00:39.895 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:00:40.858 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/108 [00:00<?, ?frames/s]
+2026-07-05 20:00:40.858 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 108/108 [00:00<00:00, 112.12frames/s]
+2026-07-05 20:00:40.859 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 108/108 [00:00<00:00, 112.11frames/s]
+2026-07-05 20:00:40.859 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:00:40,858 [INFO] 转写完成 (1.0s): 你好
+2026-07-05 20:00:40.859 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53756 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:00:40.909 [boundedElastic-7] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:00:42.156 [boundedElastic-6] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好呀！又见面了～😊 有什么需要帮忙的吗？随时开口！, metadata={finishReason=STOP, role=ASSISTANT, id=e119c2e3-601d-4c56-bdaa-f259d4582c3d, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:02:12.612 [http-nio-8888-exec-3] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [455f0080-109c-4381-a16c-5a5123b2a7a8] 通话连接已关闭
+2026-07-05 20:02:55.952 [http-nio-8888-exec-1] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [c94b70eb-7455-4eaf-8ba3-e8ae785e1e4d] 通话连接已建立
+2026-07-05 20:02:58.590 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:02:58,590 [INFO] 音频解码完成: 22080 样本 (1.4s)
+2026-07-05 20:02:58.591 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:03:05.032 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/138 [00:00<?, ?frames/s]
+2026-07-05 20:03:06.041 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]  99%|█████████▊| 136/138 [00:06<00:00, 21.11frames/s]
+2026-07-05 20:03:06.041 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 138/138 [00:07<00:00, 18.52frames/s]
+2026-07-05 20:03:06.041 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:03:06,041 [INFO] 转写完成 (7.5s): $$请不吝点赞 订阅 转发 打赏支持明镜与点点栏目
+2026-07-05 20:03:06.041 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53808 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:03:06.100 [boundedElastic-9] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='$$请不吝点赞 订阅 转发 打赏支持明镜与点点栏目', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:03:09.979 [boundedElastic-8] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=看来你希望获得点赞、订阅、转发和打赏的支持！不过，我目前是一个专注于**小说文档处理、知识图谱构建和文本润色**的对话智能体，暂时没有与点赞、订阅、转发或打赏相关的功能或技能哦😅
+
+我的核心能力是：
+- 📄 **文档解析**：读取 Word/PDF 小说，提取人物、情节、环境
+- 🧠 **知识图谱**：构建人物关系网、情节脉络、伏笔结构
+- ✍️ **文本润色**：消除 AI 写作痕迹，让文字更自然
+
+如果你有小说需要处理、文档需要分析，或者需要文本润色，请随时告诉我，我会全力帮你！🙌, metadata={finishReason=STOP, role=ASSISTANT, id=c1f24f98-f212-4bf6-8a0d-7a5672fc2155, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:03:18.864 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:03:18,864 [INFO] 音频解码完成: 20160 样本 (1.3s)
+2026-07-05 20:03:18.865 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:03:19.784 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/126 [00:00<?, ?frames/s]
+2026-07-05 20:03:19.784 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 126/126 [00:00<00:00, 137.12frames/s]
+2026-07-05 20:03:19.784 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 126/126 [00:00<00:00, 137.09frames/s]
+2026-07-05 20:03:19.784 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:03:19,784 [INFO] 转写完成 (0.9s): 很好喔
+2026-07-05 20:03:19.784 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53815 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:03:19.844 [boundedElastic-9] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='很好喔', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:03:22.540 [boundedElastic-8] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=谢谢你的认可！😊
+
+既然你对我的能力感兴趣，不妨试试看？如果你有**小说文档、创作素材**需要处理，我可以：
+
+- 📖 **帮你梳理人物关系** — 把你的 Word/PDF 小说解析成清晰的关系网
+- 🗺️ **构建情节脉络** — 提取伏笔、关键事件、故事结构
+- ✍️ **润色文本** — 让文字去掉 AI 腔，读起来更自然
+
+随时丢个文件过来，或者说说你的创作项目，咱们这就开干！🔥, metadata={finishReason=STOP, role=ASSISTANT, id=1d29f2ee-659e-418a-8ccc-42be33162eed, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:03:28.162 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:03:28,162 [INFO] 音频解码完成: 20160 样本 (1.3s)
+2026-07-05 20:03:28.163 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:03:35.700 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/126 [00:00<?, ?frames/s]
+2026-07-05 20:03:35.701 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 126/126 [00:07<00:00, 16.72frames/s]
+2026-07-05 20:03:35.701 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 126/126 [00:07<00:00, 16.72frames/s]
+2026-07-05 20:03:35.701 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:03:35,700 [INFO] 转写完成 (7.5s): 其中其其其
+2026-07-05 20:03:35.701 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53822 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:03:35.760 [boundedElastic-9] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='其中其其其', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:03:38.220 [boundedElastic-8] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=哈哈，这看起来像是键盘上不小心多按了几下，或者是在测试我呀～😄
+
+没关系的，无论你是想聊聊创作、处理小说文档，还是只是随便打打，我都在这儿！
+
+有什么需要我帮忙的吗？随时开口～🎯, metadata={finishReason=STOP, role=ASSISTANT, id=d80af662-2852-49f2-ab82-afd422cbf331, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:04:16.811 [http-nio-8888-exec-6] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [c94b70eb-7455-4eaf-8ba3-e8ae785e1e4d] 通话连接已关闭
+2026-07-05 20:04:23.251 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:04:23,251 [INFO] 音频解码完成: 76800 样本 (4.8s)
+2026-07-05 20:04:23.253 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:04:24.204 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/480 [00:00<?, ?frames/s]
+2026-07-05 20:04:24.204 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 480/480 [00:00<00:00, 504.77frames/s]
+2026-07-05 20:04:24.204 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 480/480 [00:00<00:00, 504.70frames/s]
+2026-07-05 20:04:24.204 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:04:24,204 [INFO] 转写完成 (0.9s): 你好
+2026-07-05 20:04:24.204 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53856 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:04:29.365 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:04:29,364 [INFO] 音频解码完成: 43200 样本 (2.7s)
+2026-07-05 20:04:29.365 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:04:30.315 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/270 [00:00<?, ?frames/s]
+2026-07-05 20:04:30.315 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 270/270 [00:00<00:00, 284.42frames/s]
+2026-07-05 20:04:30.315 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 270/270 [00:00<00:00, 284.38frames/s]
+2026-07-05 20:04:30.315 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:04:30,315 [INFO] 转写完成 (0.9s): 你是谁
+2026-07-05 20:04:30.315 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53859 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:04:35.641 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:04:35,641 [INFO] 音频解码完成: 62400 样本 (3.9s)
+2026-07-05 20:04:35.642 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:04:36.617 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/390 [00:00<?, ?frames/s]
+2026-07-05 20:04:36.617 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 390/390 [00:00<00:00, 400.01frames/s]
+2026-07-05 20:04:36.618 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 390/390 [00:00<00:00, 399.95frames/s]
+2026-07-05 20:04:36.618 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:04:36,617 [INFO] 转写完成 (1.0s): 现实主义小说
+2026-07-05 20:04:36.618 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53860 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:04:40.909 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:04:40,909 [INFO] 音频解码完成: 42240 样本 (2.6s)
+2026-07-05 20:04:40.910 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:04:42.004 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/264 [00:00<?, ?frames/s]
+2026-07-05 20:04:42.004 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 264/264 [00:01<00:00, 241.42frames/s]
+2026-07-05 20:04:42.004 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 264/264 [00:01<00:00, 241.38frames/s]
+2026-07-05 20:04:42.004 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:04:42,004 [INFO] 转写完成 (1.1s): 命运轨迹
+2026-07-05 20:04:42.004 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53860 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:04:46.194 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:04:46,194 [INFO] 音频解码完成: 38400 样本 (2.4s)
+2026-07-05 20:04:46.195 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:04:47.149 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/240 [00:00<?, ?frames/s]
+2026-07-05 20:04:47.149 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 240/240 [00:00<00:00, 251.50frames/s]
+2026-07-05 20:04:47.149 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 240/240 [00:00<00:00, 251.45frames/s]
+2026-07-05 20:04:47.149 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:04:47,149 [INFO] 转写完成 (1.0s): 性格特征
+2026-07-05 20:04:47.150 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:53860 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:10:15.923 [http-nio-8888-exec-2] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [081eda2b-286f-4e03-b50f-842a1460ca72] 通话连接已建立
+2026-07-05 20:12:14.965 [http-nio-8888-exec-4] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [081eda2b-286f-4e03-b50f-842a1460ca72] 通话连接已关闭
+2026-07-05 20:13:05.765 [http-nio-8888-exec-5] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [32c75622-1822-4709-b14d-4d2f9fa30730] 通话连接已建立
+2026-07-05 20:13:09.161 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:13:09,161 [INFO] 音频解码完成: 24000 样本 (1.5s)
+2026-07-05 20:13:09.162 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:13:10.103 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/150 [00:00<?, ?frames/s]
+2026-07-05 20:13:10.103 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 150/150 [00:00<00:00, 159.46frames/s]
+2026-07-05 20:13:10.103 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 150/150 [00:00<00:00, 159.44frames/s]
+2026-07-05 20:13:10.103 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:13:10,103 [INFO] 转写完成 (0.9s): 好
+2026-07-05 20:13:10.103 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:54057 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:13:10.709 [boundedElastic-11] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='好', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:13:11.957 [boundedElastic-10] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！有什么我可以帮你的吗？😊, metadata={finishReason=STOP, role=ASSISTANT, id=c8c88211-0bfe-4567-8bae-c8d422745ecf, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:13:15.227 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:13:15,227 [INFO] 音频解码完成: 24000 样本 (1.5s)
+2026-07-05 20:13:15.228 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:13:21.897 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/150 [00:00<?, ?frames/s]
+2026-07-05 20:13:21.898 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 150/150 [00:06<00:00, 22.49frames/s]
+2026-07-05 20:13:21.898 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 150/150 [00:06<00:00, 22.49frames/s]
+2026-07-05 20:13:21.899 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:13:21,897 [INFO] 转写完成 (6.7s): 其中其其中其其中其其中其其中其其中其其中其其中其其中其其中其其中其其中其其中其
+2026-07-05 20:13:21.899 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:54067 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:13:21.968 [boundedElastic-11] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='其中其其中其其中其其中其其中其其中其其中其其中其其中其其中其其中其其中其其中其', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:13:23.337 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:13:23,337 [INFO] 音频解码完成: 31680 样本 (2.0s)
+2026-07-05 20:13:23.338 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:13:24.064 [boundedElastic-10] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！看起来你输入了一串重复的"其中其"，是不是不小心碰到了键盘，或者有什么想聊的？😊
+
+有什么我可以帮你的吗？比如：
+- 帮你处理文档、编辑文本
+- 分析小说内容
+- 查询天气或时间
+- 或者其他任何问题
+
+尽管说！, metadata={finishReason=STOP, role=ASSISTANT, id=ac945d16-b82e-4dcb-846a-259dcb3cb1ba, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:13:24.260 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/198 [00:00<?, ?frames/s]
+2026-07-05 20:13:24.260 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 198/198 [00:00<00:00, 214.76frames/s]
+2026-07-05 20:13:24.260 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 198/198 [00:00<00:00, 214.73frames/s]
+2026-07-05 20:13:24.260 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:13:24,260 [INFO] 转写完成 (0.9s): 是
+2026-07-05 20:13:24.260 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:54067 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:13:24.312 [boundedElastic-11] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='是', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:13:25.632 [boundedElastic-10] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[ToolCall[id=call_00_n865Ba16zcZJnG9ZCFsj4083, type=function, name=listSkills, arguments={}]], textContent=好的，那我先看看我现在有哪些能力可以为你服务！, metadata={finishReason=TOOL_CALLS, role=ASSISTANT, id=64f16222-bdd7-49da-851c-9f5f7024e442, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='TOOL_CALLS', filters=0, metadata=0]]
+2026-07-05 20:13:25.675 [http-nio-8888-exec-9] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [32c75622-1822-4709-b14d-4d2f9fa30730] 通话连接已关闭
+2026-07-05 20:13:25.715 [boundedElastic-10] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='是', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:13:27.789 [boundedElastic-12] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=目前我具备以下能力：
+
+1. **📝 润色文本** — 去除AI写作痕迹，让文字更自然
+2. **📖 小说分析** — 读取 Word/PDF 小说，梳理人物关系、情节脉络、伏笔结构
+3. **🗂️ 导入知识图谱** — 将文档导入 novelbase 构建知识图谱
+
+有什么具体任务需要我帮忙吗？随时开口！😊, metadata={finishReason=STOP, role=ASSISTANT, id=16fecaa0-f4ad-49b8-8e4d-33a2375a0c7f, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:13:27.790 [boundedElastic-12] ERROR reactor.core.publisher.Operators [no-trace] — Operator called default onErrorDropped
+java.lang.NullPointerException: Cannot invoke "java.util.concurrent.atomic.AtomicInteger.incrementAndGet()" because the return value of "java.util.concurrent.ConcurrentHashMap.get(Object)" is null
+	at com.example.demo.ai.serviceImpl.CallingWebsocketService.lambda$handleAudioEnd$2(CallingWebsocketService.java:210)
+	at reactor.core.publisher.LambdaSubscriber.onComplete(LambdaSubscriber.java:136)
+	at reactor.core.publisher.FluxFilter$FilterSubscriber.onComplete(FluxFilter.java:167)
+	at reactor.core.publisher.FluxMap$MapConditionalSubscriber.onComplete(FluxMap.java:275)
+	at reactor.core.publisher.FluxHandle$HandleConditionalSubscriber.onComplete(FluxHandle.java:445)
+	at reactor.core.publisher.FluxMapFuseable$MapFuseableConditionalSubscriber.onComplete(FluxMapFuseable.java:351)
+	at reactor.core.publisher.FluxPeekFuseable$PeekFuseableConditionalSubscriber.onComplete(FluxPeekFuseable.java:596)
+	at reactor.core.publisher.FluxPeekFuseable$PeekFuseableConditionalSubscriber.onComplete(FluxPeekFuseable.java:596)
+	at reactor.core.publisher.FluxPeekFuseable$PeekFuseableConditionalSubscriber.onComplete(FluxPeekFuseable.java:596)
+	at reactor.core.publisher.FluxPeekFuseable$PeekFuseableConditionalSubscriber.onComplete(FluxPeekFuseable.java:596)
+	at reactor.core.publisher.FluxHandleFuseable$HandleFuseableConditionalSubscriber.onComplete(FluxHandleFuseable.java:609)
+	at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onComplete(FluxContextWrite.java:128)
+	at reactor.core.publisher.FluxDoFinally$DoFinallySubscriber.onComplete(FluxDoFinally.java:128)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxMap$MapConditionalSubscriber.onComplete(FluxMap.java:275)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxHandle$HandleConditionalSubscriber.onComplete(FluxHandle.java:445)
+	at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onComplete(FluxContextWrite.java:128)
+	at reactor.core.publisher.FluxDoFinally$DoFinallySubscriber.onComplete(FluxDoFinally.java:128)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxMap$MapConditionalSubscriber.onComplete(FluxMap.java:275)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxHandle$HandleConditionalSubscriber.onComplete(FluxHandle.java:445)
+	at reactor.core.publisher.MonoFlatMapMany$FlatMapManyInner.onComplete(MonoFlatMapMany.java:261)
+	at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:263)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:263)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:263)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:263)
+	at reactor.core.publisher.FluxHandle$HandleSubscriber.onComplete(FluxHandle.java:226)
+	at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onComplete(FluxContextWrite.java:128)
+	at reactor.core.publisher.FluxDoFinally$DoFinallySubscriber.onComplete(FluxDoFinally.java:128)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxFilter$FilterConditionalSubscriber.onComplete(FluxFilter.java:301)
+	at reactor.core.publisher.FluxConcatArray$ConcatArraySubscriber.onComplete(FluxConcatArray.java:213)
+	at reactor.core.publisher.FluxSubscribeOn$SubscribeOnSubscriber.onComplete(FluxSubscribeOn.java:169)
+	at reactor.core.publisher.FluxFilter$FilterSubscriber.onComplete(FluxFilter.java:167)
+	at reactor.core.publisher.FluxConcatArray$ConcatArraySubscriber.onComplete(FluxConcatArray.java:213)
+	at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:263)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:263)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:263)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:263)
+	at reactor.core.publisher.FluxHandle$HandleSubscriber.onComplete(FluxHandle.java:226)
+	at reactor.core.publisher.FluxMap$MapConditionalSubscriber.onComplete(FluxMap.java:275)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxHandle$HandleConditionalSubscriber.onComplete(FluxHandle.java:445)
+	at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onComplete(FluxContextWrite.java:128)
+	at reactor.core.publisher.FluxDoFinally$DoFinallySubscriber.onComplete(FluxDoFinally.java:128)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onComplete(Operators.java:2225)
+	at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144)
+	at reactor.core.publisher.MonoFlatMapMany$FlatMapManyInner.onComplete(MonoFlatMapMany.java:261)
+	at reactor.core.publisher.FluxMap$MapSubscriber.onComplete(FluxMap.java:144)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:263)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:263)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:263)
+	at reactor.core.publisher.FluxPeek$PeekSubscriber.onComplete(FluxPeek.java:263)
+	at reactor.core.publisher.FluxHandle$HandleSubscriber.onComplete(FluxHandle.java:226)
+	at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onComplete(FluxContextWrite.java:128)
+	at reactor.core.publisher.FluxDoFinally$DoFinallySubscriber.onComplete(FluxDoFinally.java:128)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxMap$MapConditionalSubscriber.onComplete(FluxMap.java:275)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxHandle$HandleConditionalSubscriber.onComplete(FluxHandle.java:445)
+	at reactor.core.publisher.FluxMap$MapConditionalSubscriber.onComplete(FluxMap.java:275)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxHandle$HandleConditionalSubscriber.onComplete(FluxHandle.java:445)
+	at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onComplete(FluxContextWrite.java:128)
+	at reactor.core.publisher.FluxDoFinally$DoFinallySubscriber.onComplete(FluxDoFinally.java:128)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxMap$MapConditionalSubscriber.onComplete(FluxMap.java:275)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxPeekFuseable$PeekConditionalSubscriber.onComplete(FluxPeekFuseable.java:936)
+	at reactor.core.publisher.FluxHandle$HandleConditionalSubscriber.onComplete(FluxHandle.java:445)
+	at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onComplete(FluxContextWrite.java:128)
+	at reactor.core.publisher.FluxDoFinally$DoFinallySubscriber.onComplete(FluxDoFinally.java:128)
+	at reactor.core.publisher.FluxPeekFuseable$PeekFuseableConditionalSubscriber.onComplete(FluxPeekFuseable.java:596)
+	at reactor.core.publisher.FluxPublishOn$PublishOnConditionalSubscriber.doComplete(FluxPublishOn.java:1109)
+	at reactor.core.publisher.FluxPublishOn$PublishOnConditionalSubscriber.checkTerminated(FluxPublishOn.java:1143)
+	at reactor.core.publisher.FluxPublishOn$PublishOnConditionalSubscriber.runAsync(FluxPublishOn.java:999)
+	at reactor.core.publisher.FluxPublishOn$PublishOnConditionalSubscriber.run(FluxPublishOn.java:1083)
+	at reactor.core.scheduler.WorkerTask.call(WorkerTask.java:90)
+	at reactor.core.scheduler.WorkerTask.call(WorkerTask.java:37)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:330)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:309)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+2026-07-05 20:13:32.286 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:13:32,286 [INFO] 音频解码完成: 79680 样本 (5.0s)
+2026-07-05 20:13:32.287 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:13:33.272 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/498 [00:00<?, ?frames/s]
+2026-07-05 20:13:33.272 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 498/498 [00:00<00:00, 505.64frames/s]
+2026-07-05 20:13:33.272 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 498/498 [00:00<00:00, 505.58frames/s]
+2026-07-05 20:13:33.272 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:13:33,272 [INFO] 转写完成 (1.0s): 你好
+2026-07-05 20:13:33.272 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:54100 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:14:25.582 [http-nio-8888-exec-9] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [43d7853d-4128-4470-9226-2519d0a40ee6] 通话连接已建立
+2026-07-05 20:14:28.860 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:14:28,860 [INFO] 音频解码完成: 33600 样本 (2.1s)
+2026-07-05 20:14:28.861 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:14:29.826 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/210 [00:00<?, ?frames/s]
+2026-07-05 20:14:29.826 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 210/210 [00:00<00:00, 217.69frames/s]
+2026-07-05 20:14:29.826 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 210/210 [00:00<00:00, 217.65frames/s]
+2026-07-05 20:14:29.826 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:14:29,826 [INFO] 转写完成 (1.0s): 你好
+2026-07-05 20:14:29.826 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:54123 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:14:29.913 [boundedElastic-11] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:14:31.396 [boundedElastic-12] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好！很高兴见到你！😊 有什么我可以帮你的吗？
+
+无论是写作、编辑、整理小说文档，还是其他问题，都可以告诉我！, metadata={finishReason=STOP, role=ASSISTANT, id=2b1e584c-10bd-4e01-92a0-6e49c90b2367, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:14:35.026 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:14:35,026 [INFO] 音频解码完成: 32640 样本 (2.0s)
+2026-07-05 20:14:35.026 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:14:36.021 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/204 [00:00<?, ?frames/s]
+2026-07-05 20:14:36.021 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 204/204 [00:00<00:00, 205.21frames/s]
+2026-07-05 20:14:36.021 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 204/204 [00:00<00:00, 205.18frames/s]
+2026-07-05 20:14:36.021 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:14:36,021 [INFO] 转写完成 (1.0s): 你是谁
+2026-07-05 20:14:36.021 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:54129 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:14:36.089 [boundedElastic-11] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你是谁', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:14:38.775 [boundedElastic-12] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=我是你的**对话智能体助手**！🤖
+
+简单来说，我是一个：
+
+- **多才多艺的助手**：可以和你聊天、回答问题、帮你写作、分析文档，甚至管理小说创作的知识图谱
+- **支持多种技能**：比如去除AI风格的写作痕迹（`stop-slop`）、导入/分析小说文档、整理人物关系网等
+- **实时工具调用**：需要查询天气、时间、处理文件等，我都可以直接帮你操作
+
+如果你有具体需求，尽管告诉我，我会尽力帮你搞定！😊 比如你现在是在写作，还是想处理什么文档呢？, metadata={finishReason=STOP, role=ASSISTANT, id=7f0142d5-3083-4132-a2a3-6fcb588c03f0, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:14:43.720 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:14:43,720 [INFO] 音频解码完成: 24000 样本 (1.5s)
+2026-07-05 20:14:43.721 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:14:44.710 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/150 [00:00<?, ?frames/s]
+2026-07-05 20:14:44.711 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 150/150 [00:00<00:00, 151.62frames/s]
+2026-07-05 20:14:44.711 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 150/150 [00:00<00:00, 151.59frames/s]
+2026-07-05 20:14:44.711 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:14:44,710 [INFO] 转写完成 (1.0s): 也好
+2026-07-05 20:14:44.711 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:54142 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:14:44.764 [boundedElastic-11] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='也好', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:14:46.565 [boundedElastic-12] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=哈哈，看来你还在考虑~没关系，不急！😊
+
+如果你暂时没什么具体需求，也可以随便聊聊。或者，你想看看我有哪些**可用技能**吗？我可以列出来给你参考参考！, metadata={finishReason=STOP, role=ASSISTANT, id=8fb71462-7ad0-482a-920a-4d87b673463d, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:15:21.850 [http-nio-8888-exec-6] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [43d7853d-4128-4470-9226-2519d0a40ee6] 通话连接已关闭
+2026-07-05 20:15:22.013 [http-nio-8888-exec-8] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [37571f57-91c5-443a-9496-5d226c2938c5] 通话连接已建立
+2026-07-05 20:15:24.907 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:15:24,907 [INFO] 音频解码完成: 34560 样本 (2.2s)
+2026-07-05 20:15:24.908 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:15:25.860 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/216 [00:00<?, ?frames/s]
+2026-07-05 20:15:25.860 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 216/216 [00:00<00:00, 226.96frames/s]
+2026-07-05 20:15:25.860 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 216/216 [00:00<00:00, 226.93frames/s]
+2026-07-05 20:15:25.860 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:15:25,860 [INFO] 转写完成 (0.9s): 你好
+2026-07-05 20:15:25.861 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:54166 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:15:25.927 [boundedElastic-11] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你好', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:15:27.418 [boundedElastic-12] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=你好呀！👋 很高兴见到你！有什么我可以帮你的吗？比如处理文档、分析小说、整理创作思路，或者聊聊天都行~, metadata={finishReason=STOP, role=ASSISTANT, id=ceee8fb3-752d-45a4-afc5-e6f22e031f51, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:15:30.078 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:15:30,078 [INFO] 音频解码完成: 10560 样本 (0.7s)
+2026-07-05 20:15:30.080 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:15:36.535 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/66 [00:00<?, ?frames/s]
+2026-07-05 20:15:36.535 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 66/66 [00:06<00:00, 10.22frames/s]
+2026-07-05 20:15:36.535 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 66/66 [00:06<00:00, 10.22frames/s]
+2026-07-05 20:15:36.535 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:15:36,535 [INFO] 转写完成 (6.5s): 其他其他其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其
+2026-07-05 20:15:36.535 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:54166 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:15:36.564 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:15:36,564 [INFO] 音频解码完成: 10560 样本 (0.7s)
+2026-07-05 20:15:36.564 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:15:36.720 [boundedElastic-11] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='其他其他其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其其', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:15:38.933 [boundedElastic-12] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=哈哈，你这是按着键盘睡着了，还是想测试我的耐心呀？😄
+
+"其他"大军都排到天边去了，我接不住这么多呀！要不咱们聊点正经的？比如：
+
+- 📄 处理文档（Word / PDF）
+- 📚 分析小说、梳理情节和人物
+- 🧠 导入知识图谱
+- ✍️ 帮你润色文字
+
+你说呢？, metadata={finishReason=STOP, role=ASSISTANT, id=b8637e75-e968-4b57-a9b6-5a4680d342cd, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:15:42.009 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/66 [00:00<?, ?frames/s]
+2026-07-05 20:15:42.009 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 66/66 [00:05<00:00, 12.12frames/s]
+2026-07-05 20:15:42.009 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 66/66 [00:05<00:00, 12.12frames/s]
+2026-07-05 20:15:42.009 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:15:42,009 [INFO] 转写完成 (5.5s): 是不是
+2026-07-05 20:15:42.009 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:54166 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:15:42.041 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:15:42,041 [INFO] 音频解码完成: 20160 样本 (1.3s)
+2026-07-05 20:15:42.041 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 
+2026-07-05 20:15:42.082 [boundedElastic-11] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='是不是', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:15:42.968 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR]   0%|          | 0/126 [00:00<?, ?frames/s]
+2026-07-05 20:15:42.968 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 126/126 [00:00<00:00, 135.98frames/s]
+2026-07-05 20:15:42.968 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 100%|██████████| 126/126 [00:00<00:00, 135.97frames/s]
+2026-07-05 20:15:42.968 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] 2026-07-05 20:15:42,968 [INFO] 转写完成 (0.9s): 你是谁
+2026-07-05 20:15:42.968 [asr-log-reader] INFO  c.e.demo.ai.asr.AsrProcessManager [no-trace] — [ASR] INFO:     127.0.0.1:54166 - "POST /transcribe HTTP/1.1" 200 OK
+2026-07-05 20:15:43.011 [boundedElastic-13] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — request: 请求: UserMessage{content='你是谁', metadata={messageType=USER}, messageType=USER}
+2026-07-05 20:15:45.265 [boundedElastic-11] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=哈哈，我是**你的对话智能体小伙伴**呀！🤖✨
+
+你可以把我当成一个全能小助手，擅长：
+
+- 📖 **分析小说** — 梳理人物关系、情节脉络、伏笔结构
+- 📄 **处理文档** — 读取 Word / PDF 文件，生成结构化内容
+- 🧠 **知识图谱** — 导入内容到 novelbase，帮你搭建创作体系
+- ✍️ **润色文字** — 去除 AI 腔，让文字更自然
+
+至于"我是谁"这个问题嘛——我就是现在正陪你聊天、随时准备帮你的那个智能体！有啥需要，尽管吩咐~ 😄, metadata={finishReason=STOP, role=ASSISTANT, id=63b7971b-3ce2-4f95-a854-c0203879c76e, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:15:45.486 [boundedElastic-12] DEBUG o.s.a.c.c.a.SimpleLoggerAdvisor [no-trace] — response: 响应: Generation[assistantMessage=AssistantMessage [messageType=ASSISTANT, toolCalls=[], textContent=是不是我猜中了你的小心思？😄
+
+好啦，不闹了～有什么实际需要帮忙的吗？文件处理、小说分析、知识图谱整理，或者让我看看有哪些技能能为你效劳？, metadata={finishReason=STOP, role=ASSISTANT, id=c367affa-8686-41f6-b41b-8ba556588283, messageType=ASSISTANT}], chatGenerationMetadata=DefaultChatGenerationMetadata[finishReason='STOP', filters=0, metadata=0]]
+2026-07-05 20:17:20.975 [http-nio-8888-exec-3] INFO  c.e.d.a.s.CallingWebsocketService [no-trace] — [37571f57-91c5-443a-9496-5d226c2938c5] 通话连接已关闭

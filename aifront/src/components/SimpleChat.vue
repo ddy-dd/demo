@@ -15,10 +15,9 @@ import WebsocketClient from "@/api/websocket.ts";
 import type {WsMessage} from "@/type/request.ts";
 import {ElMessage} from "element-plus";
 import http from "@/api/http.ts";
-import {ref, nextTick, onMounted, onUnmounted} from "vue";
-import {marked} from "marked";
-import katex from 'katex';
-import 'katex/dist/katex.min.css';
+import { ref, onMounted, onUnmounted, watch } from "vue";
+import {useRouter} from "vue-router";
+import { renderMarkdown, stripMarkdown } from "@/composables/useMarkdown"
 import { nanoid } from 'nanoid';
 import type {userLocation} from "@/type/userLocation.ts";
 import {locationStore} from "@/stores/loaction.ts"
@@ -26,8 +25,8 @@ import {storeToRefs} from 'pinia';
 import {chatStore} from "@/stores/chat.ts"
 import {useKnowledgeStore} from "@/stores/knowledge.ts"
 import {useSkillStore} from "@/stores/skill.ts"
-import FileManager from "@/components/FileManager.vue"
-import SearchDialog from "@/components/SearchDialog.vue"
+import FileManager from "@/views/FileManager.vue"
+import SearchDialog from "@/views/SearchDialog.vue"
 import { useRecorder } from "@/composables/useRecorder"
 import { v4 as uuidv4 } from 'uuid';
 
@@ -42,11 +41,14 @@ const showFileManager = ref(false)
 
 const { conversations } = storeToRefs(useChatStore)
 
+const router = useRouter()
+
 const messagesContainer = ref<HTMLElement | null>(null)
 const isConnected = ref(false)
 const isSending = ref(false)            // 是否正在等待 AI 回复，控制停止按钮显示
 const isComposing = ref(false)          // 是否处在输入法选词状态
 const userScrolledUp = ref(false)       // 用户是否手动向上滚动了（不跟随流式）
+const scrollReady = ref(false)          // 首次加载 & 滚到底部后才显示，彻底消除闪烁
 
 const showSkillDialog = ref(false)
 const skillFile = ref<File | null>(null)
@@ -143,7 +145,7 @@ function isNearBottom(): boolean {
 }
 
 function scrollToBottom() {
-  nextTick(() => {
+  requestAnimationFrame(() => {
     if (messagesContainer.value) {
       // 如果用户已经手动滚上去了，不抢滚动，避免干扰阅读历史内容
       if (userScrolledUp.value && !isNearBottom()) return
@@ -464,73 +466,8 @@ const uploadSkill = async () => {
 }
 
 /**
- * 将文本渲染为 HTML（Markdown + 数学公式）
- *
- * 处理顺序（重要）：
- * 1. 先用占位符替换所有数学公式（$$...$$ 和 $...$）
- * 2. 用 marked 解析 Markdown
- * 3. 还原 KaTeX 渲染后的公式 HTML
- *
- * 这保证了 marked 不会破坏公式中的特殊字符（如下划线、星号）
+ * renderMarkdown / stripMarkdown — 见 composables/useMarkdown.ts
  */
-const renderMarkdown = (text: string): string => {
-  // 1) 用占位符替换所有数学公式，防止被 marked 破坏
-  const placeholders: string[] = []
-  let idx = 0
-
-  // 块级公式 $$...$$ 优先
-  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (_, math: string) => {
-    const key = `\x00MATH${idx}\x00`
-    placeholders[idx] = katex.renderToString(math.trim(), {
-      displayMode: true,
-      throwOnError: false,
-    })
-    idx++
-    return key
-  })
-
-  // 行内公式 $...$
-  text = text.replace(/\$([^\$]+)\$/g, (_, math: string) => {
-    const key = `\x00MATH${idx}\x00`
-    placeholders[idx] = katex.renderToString(math.trim(), {
-      displayMode: false,
-      throwOnError: false,
-    })
-    idx++
-    return key
-  })
-
-  // 2) 渲染 markdown
-  let html = marked.parse(text, { async: false }) as string
-
-  // 3) 还原数学公式
-  placeholders.forEach((katexHtml, i) => {
-    html = html.replace(`\x00MATH${i}\x00`, katexHtml)
-  })
-
-  return html
-}
-
-/** 去掉 thinking 中的 markdown 标记，只留纯文本 */
-function stripMarkdown(text: string): string {
-  if (!text) return text
-  return text
-    .replace(/```[\s\S]*?```/g, '')
-    .replace(/`([^`]+)`/g, '$1')
-    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
-    .replace(/\[([^\]]*)\]\([^)]+\)/g, '$1')
-    .replace(/\*\*(.+?)\*\*/g, '$1').replace(/__(.+?)__/g, '$1')
-    .replace(/\*(.+?)\*/g, '$1').replace(/_(.+?)_/g, '$1')
-    .replace(/~~(.+?)~~/g, '$1')
-    .replace(/^#{1,6}\s+/gm, '')
-    .replace(/^>\s+/gm, '')
-    .replace(/^[\s]*[-*+]\s+\[[ x]\]\s+/gm, '')
-    .replace(/^[\s]*[-*+]\s+/gm, '')
-    .replace(/^[\s]*\d+\.\s+/gm, '')
-    .replace(/^-{3,}$|^\*{3,}$|^_{3,}$/gm, '\n\n')
-    .replace(/\n{4,}/g, '\n\n\n')
-    .trim()
-}
 
 const handleClose = () => {
   wsClient?.close()
@@ -543,6 +480,22 @@ onMounted(() => {
   knowledgeStore.loadRecords()
   skillStore.loadRecords()
 })
+
+// 首次加载或对话变化时：先滚到底部再显示，用户完全看不到"在顶部"的过程
+watch(() => conversations.value.length, (newLen) => {
+  if (scrollReady.value) {
+    // 已有会话时新增对话，正常滚动
+    scrollToBottom()
+    return
+  }
+  // 首次渲染：同一帧内先滚到底部，再显示
+  requestAnimationFrame(() => {
+    if (messagesContainer.value && newLen > 0) {
+      messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+    }
+    scrollReady.value = true             // 无消息时也显示空状态
+  })
+}, { flush: 'post' })
 
 onUnmounted(() => {
   messagesContainer.value?.removeEventListener('scroll', onScroll)
@@ -561,6 +514,9 @@ onUnmounted(() => {
         <button class="search-toggle-btn" @click="openSearchDialog" title="搜索对话内容">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
         </button>
+        <button class="nav-btn" @click="router.push('/calling')" title="语音通话">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </button>
         <span class="status-dot" :class="{ connected: isConnected }"></span>
       </header>
 
@@ -570,7 +526,7 @@ onUnmounted(() => {
         @navigate="handleSearchNavigate"
       />
 
-      <div class="messages-area" ref="messagesContainer">
+      <div class="messages-area" :class="{ 'scroll-ready': scrollReady }" ref="messagesContainer">
         <div v-if="conversations.length === 0" class="messages-empty">
           <p>开始一段新的对话</p>
         </div>
@@ -819,6 +775,11 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  opacity: 0;                             /* 首次加载前隐藏，避免闪烁 */
+  transition: opacity 0.18s ease;
+}
+.messages-area.scroll-ready {
+  opacity: 1;                             /* 滚到底部后再显示 */
   scroll-behavior: smooth;
 }
 
@@ -1423,6 +1384,26 @@ onUnmounted(() => {
   margin-right: 0.25rem;
 }
 .search-toggle-btn:hover {
+  background: #f0eeeb;
+  color: #5a5750;
+}
+
+/* 导航按钮（通话入口） */
+.nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #bbb8b2;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  margin-right: 0.25rem;
+}
+.nav-btn:hover {
   background: #f0eeeb;
   color: #5a5750;
 }

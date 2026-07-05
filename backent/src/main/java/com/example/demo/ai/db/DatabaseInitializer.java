@@ -28,6 +28,8 @@ public class DatabaseInitializer {
         createChatMessagesTable();
         createSkillRecordsTable();
         createKnowledgeFileRecordsTable();
+        createCallRecordsTable();
+        createCallMessagesTable();
         log.info("SQLite 数据库表初始化完成");
     }
 
@@ -89,5 +91,35 @@ public class DatabaseInitializer {
         } catch (Exception ignored) {
             // 列已存在，忽略
         }
+    }
+
+    /** 通话记录表 */
+    private void createCallRecordsTable() {
+        jdbcTemplate.execute("""
+            CREATE TABLE IF NOT EXISTS call_records (
+                id TEXT PRIMARY KEY,
+                status TEXT NOT NULL DEFAULT 'active',
+                duration_ms INTEGER DEFAULT 0,
+                started_at TEXT NOT NULL,
+                ended_at TEXT,
+                created_at TEXT NOT NULL
+            )
+        """);
+    }
+
+    /** 通话消息表 */
+    private void createCallMessagesTable() {
+        jdbcTemplate.execute("""
+            CREATE TABLE IF NOT EXISTS call_messages (
+                id TEXT PRIMARY KEY,
+                call_id TEXT NOT NULL,
+                role TEXT NOT NULL,
+                content TEXT NOT NULL,
+                asr_segments TEXT DEFAULT '',
+                seq INTEGER DEFAULT 0,
+                created_at TEXT NOT NULL,
+                FOREIGN KEY (call_id) REFERENCES call_records(id) ON DELETE CASCADE
+            )
+        """);
     }
 }

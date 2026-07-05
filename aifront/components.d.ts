@@ -11,7 +11,10 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CallingPage: typeof import('./src/components/CallingPage.vue')['default']
     FileManager: typeof import('./src/components/FileManager.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
     SearchDialog: typeof import('./src/components/SearchDialog.vue')['default']
     SimpleChat: typeof import('./src/components/SimpleChat.vue')['default']
   }
