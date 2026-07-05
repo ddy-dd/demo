@@ -1,4 +1,4 @@
-package com.example.demo.ai.config;
+package com.example.demo.ai.asr;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -16,8 +16,7 @@ import java.util.concurrent.TimeUnit;
  * ASR（语音转文字）进程管理器
  *
  * <p>当 app.asr.managed=true 时，Spring Boot 启动后自动拉起 Python ASR 微服务，
- * 关闭时自动终止进程。
- * 已注册 JVM Shutdown Hook 作为兜底，即使 @PreDestroy 未触发也能清理。</p>
+ * 关闭时自动终止进程。</p>
  */
 @Slf4j
 @Component
@@ -26,7 +25,6 @@ public class AsrProcessManager {
 
     private final AsrConfig config;
     private Process asrProcess;
-    private int port;
 
     public AsrProcessManager(AsrConfig config) {
         this.config = config;
@@ -35,9 +33,7 @@ public class AsrProcessManager {
     @PostConstruct
     public void start() {
         int port = extractPort(config.getBaseUrl());
-        this.port = port;
 
-        // 启动新的 ASR 进程
         String userDir = System.getProperty("user.dir");
         File workingDir = new File(userDir, config.getScriptDir() != null
                 ? config.getScriptDir() : "asr-server");
@@ -63,7 +59,6 @@ public class AsrProcessManager {
 
             asrProcess = pb.start();
 
-            // 异步读取 Python 进程日志
             Thread outputReader = new Thread(() -> {
                 try (var reader = asrProcess.inputReader()) {
                     String line;
@@ -79,7 +74,6 @@ public class AsrProcessManager {
 
             log.info("🚀 ASR 进程已拉起，后台等待就绪...");
 
-            // 后台等待 health 就绪
             Thread healthChecker = new Thread(() -> waitForHealth(port), "asr-health");
             healthChecker.setDaemon(true);
             healthChecker.start();
@@ -108,9 +102,6 @@ public class AsrProcessManager {
         }
     }
 
-    // ===== 内部 =====
-
-    /** 轮询等待 ASR 服务 health 端点返回 200 */
     private void waitForHealth(int port) {
         long deadline = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(120);
         int attempt = 0;
@@ -147,7 +138,6 @@ public class AsrProcessManager {
         log.warn("⚠ ASR 服务未能在 120s 内就绪，请检查 Python/mlx-whisper 环境");
     }
 
-    /** 从 baseUrl 中提取端口号 */
     private static int extractPort(String baseUrl) {
         if (baseUrl == null) return 8001;
         try {

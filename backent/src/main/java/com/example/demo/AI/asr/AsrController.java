@@ -1,7 +1,5 @@
-package com.example.demo.ai.controller;
+package com.example.demo.ai.asr;
 
-import com.example.demo.ai.exception.AsrException;
-import com.example.demo.ai.serviceImpl.AsrService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +15,8 @@ import java.util.Map;
  * <p>接收前端上传的音频文件，转发给 Python mlx-whisper 微服务，
  * 返回转写文本。</p>
  */
-@Slf4j
 @RestController
+@Slf4j
 @RequestMapping("/asr")
 public class AsrController {
 

@@ -1,4 +1,4 @@
-package com.example.demo.ai.config;
+package com.example.demo.ai.asr;
 
 import lombok.Getter;
 import lombok.Setter;

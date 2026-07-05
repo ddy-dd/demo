@@ -1,4 +1,4 @@
-package com.example.demo.ai.exception;
+package com.example.demo.ai.asr;
 
 /**
  * ASR 服务异常
