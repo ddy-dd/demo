@@ -74,6 +74,17 @@ class AxiosUtils {
     return response.data;
   }
 
+  /** ASR 语音转写（上传音频 → 返回转写文本） */
+  static async asrTranscribe<T>(data: FormData): Promise<T> {
+    const url = '/asr/transcribe';
+    const response: AxiosResponse<T> = await this.instance.post(url, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  }
+
   // ── 对话相关 ─────────────────────────────────────────────
 
   /** 获取所有对话列表 */

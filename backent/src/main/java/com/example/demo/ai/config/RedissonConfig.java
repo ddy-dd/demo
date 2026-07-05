@@ -1,5 +1,6 @@
 package com.example.demo.ai.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * TODO: 当前为硬编码连接地址，后续应改为从配置文件读取
  */
+@Slf4j
 @Configuration
 public class RedissonConfig {
 
@@ -21,6 +23,7 @@ public class RedissonConfig {
     public RedissonClient redissonClient() {
         Config config = new Config();
         config.useSingleServer().setAddress("redis://127.0.0.1:6379");
+        log.warn("当前Redis为硬编码连接地址，后续应改为从配置文件读取");
         return Redisson.create(config);
     }
 }

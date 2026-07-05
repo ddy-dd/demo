@@ -28,6 +28,7 @@ import {useKnowledgeStore} from "@/stores/knowledge.ts"
 import {useSkillStore} from "@/stores/skill.ts"
 import FileManager from "@/components/FileManager.vue"
 import SearchDialog from "@/components/SearchDialog.vue"
+import { useRecorder } from "@/composables/useRecorder"
 import { v4 as uuidv4 } from 'uuid';
 
 let wsClient: WebsocketClient | null
@@ -73,6 +74,32 @@ function handleSearchNavigate(uuid: string) {
     const target = el as HTMLElement
     target.classList.add('conv-flash')
     setTimeout(() => target.classList.remove('conv-flash'), 2000)
+  }
+}
+
+// ── 语音输入 ──
+const {
+  isRecording,
+  isProcessing: asrProcessing,
+  error: asrError,
+  startRecording,
+  stopRecording,
+} = useRecorder()
+
+async function toggleRecording() {
+  if (isRecording.value) {
+    try {
+      const text = await stopRecording()
+      if (text) message.value = text
+    } catch {
+      // error is already set in asrError
+    }
+  } else {
+    try {
+      await startRecording()
+    } catch {
+      // error is already set in asrError
+    }
   }
 }
 
@@ -643,6 +670,20 @@ onUnmounted(() => {
             @compositionend="isComposing = false"
             @keydown.enter="!isComposing && send()"
           />
+          <button
+            class="btn-mic"
+            :class="{ recording: isRecording, processing: asrProcessing }"
+            :title="isRecording ? '点击停止录音' : '语音输入'"
+            @click="toggleRecording"
+            :disabled="asrProcessing"
+          >
+            <!-- 录音中 -->
+            <svg v-if="isRecording" class="mic-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="16" rx="2"/><path d="M12 22v-4"/><path d="M5 12a7 7 0 0 0 14 0"/></svg>
+            <!-- 转写中 -->
+            <span v-else-if="asrProcessing" class="mic-spinner"></span>
+            <!-- 空闲 -->
+            <svg v-else class="mic-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+          </button>
           <button v-if="!isSending" class="btn btn-send" @click="send" :disabled="!message.trim()">
             发送
           </button>
@@ -678,6 +719,11 @@ onUnmounted(() => {
           <span v-if="uploadFeedback.type === 'success'" class="feedback-icon">✓</span>
           <span v-else class="feedback-icon">✕</span>
           {{ uploadFeedback.msg }}
+        </div>
+        <!-- ASR 错误提示 -->
+        <div v-if="asrError" class="upload-feedback upload-feedback--error">
+          <span class="feedback-icon">✕</span>
+          {{ asrError }}
         </div>
       </div>
     </div>
@@ -1073,6 +1119,59 @@ onUnmounted(() => {
   display: inline-block;
   vertical-align: middle;
   margin-right: 0.1rem;
+}
+
+/* ===== 麦克风按钮 ===== */
+.btn-mic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #e5e3df;
+  border-radius: 12px;
+  background: #fafaf9;
+  color: #7d7a74;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  padding: 0;
+}
+.btn-mic:hover:not(:disabled) {
+  background: #fff;
+  border-color: #b5b0a8;
+  color: #2c2c2c;
+}
+.btn-mic:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-mic.recording {
+  background: #fce4ec;
+  border-color: #e57373;
+  color: #e05050;
+  animation: mic-pulse 1.2s ease-in-out infinite;
+}
+.btn-mic.processing {
+  background: #e8eaf6;
+  border-color: #9fa8da;
+  color: #5c6bc0;
+}
+.mic-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #c5cae9;
+  border-top-color: #5c6bc0;
+  border-radius: 50%;
+  animation: mic-spin 0.7s linear infinite;
+  display: block;
+}
+@keyframes mic-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes mic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(224, 80, 80, 0.25); }
+  50% { box-shadow: 0 0 0 6px rgba(224, 80, 80, 0.08); }
 }
 
 .action-row {

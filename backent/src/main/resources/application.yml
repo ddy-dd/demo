@@ -77,6 +77,15 @@ app:
     max-summary-tokens: ${APP_CONTEXT_MAX_SUMMARY_TOKENS:80000}
     # 相邻两次压缩之间至少间隔的消息轮次数（防止频繁压缩）
     compression-cooldown-rounds: ${APP_CONTEXT_COMPRESSION_COOLDOWN:3}
+  # ASR（语音转文字）服务
+  asr:
+    base-url: ${ASR_BASE_URL:http://localhost:8001}
+    timeout: ${ASR_TIMEOUT:30000}
+
+    # 设为 true 后 Spring Boot 启动时自动拉起 Python ASR 进程
+    managed: ${ASR_MANAGED:true}
+    # ASR 脚本目录（相对于 user.dir，默认 backent/asr-server）
+    script-dir: ${ASR_SCRIPT_DIR:asr-server}
 
 # ── 服务端 ──────────────────────────────────────────────────────────────
 server:
