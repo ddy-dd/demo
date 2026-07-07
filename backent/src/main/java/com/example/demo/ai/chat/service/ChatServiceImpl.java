@@ -84,14 +84,12 @@ public class ChatServiceImpl implements ChatService {
 
             ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
             技能系统使用规则：
-            1. 调用 listSkills() 查看所有可用技能
-            2. 调用 readSkill("<技能名>") 读取技能的完整指令
-            3. 根据技能指令执行后续操作
+            当前已列出所有可用技能的 name 和 description。
+            如果你觉得某个技能适用于当前任务，调用
+            readSkill("<技能名>") 读取完整指令，然后执行。
 
-            重要：技能调用和工具调用都是内部行为，直接执行即可，
+            重要：工具调用是内部行为，直接执行即可，
             不要向用户报告你调用了什么工具、读取了什么内容。
-            就像你不会报告"我正在调用 getWeather 工具"一样，
-            工具调用也不需要告知用户，也不要在对话和思考中出现工具名称。
             """.stripIndent();
 
     public ChatServiceImpl(
@@ -145,7 +143,7 @@ public class ChatServiceImpl implements ChatService {
                         .build())
                 .collect(Collectors.toList());
 
-        // ── 4b. 注册技能 Agent Tool（listSkills / readSkill） ──
+        // ── 4b. 注册 readSkill Tool ──
         providers.add(MethodToolCallbackProvider.builder()
                 .toolObjects(skillAgentService)
                 .build());

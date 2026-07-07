@@ -1,6 +1,7 @@
 package com.example.demo.ai.skills.controller;
 
 import com.example.demo.ai.skills.dao.SkillRecordDao;
+import com.example.demo.ai.skills.model.SkillDefinition;
 import com.example.demo.ai.skills.model.SkillRecordEntity;
 import com.example.demo.ai.skills.service.SkillRegistry;
 import lombok.extern.slf4j.Slf4j;
@@ -89,29 +90,42 @@ public class SkillController {
         String now = LocalDateTime.now().format(DTF);
         log.info("保存技能到: {}", skillDir.toAbsolutePath().normalize());
         try {
+            // 读文件内容并解析 frontmatter
+            byte[] fileBytes = file.getBytes();
+            String rawContent = new String(fileBytes);
+            SkillDefinition parsed = SkillDefinition.parse(rawContent, packageName);
+
+            // 写文件系统（保留用于排查）
             Files.createDirectories(skillDir);
             Path target = skillDir.resolve("SKILL.md");
-            file.transferTo(target.toFile());
+            Files.write(target, fileBytes);
 
-            // 重新加载技能注册表
-            skillRegistry.loadAll();
-            log.info("技能上传成功: {}", packageName);
-
-            // 保存记录到 SQLite
+            // 保存到数据库
             SkillRecordEntity record = new SkillRecordEntity(
                 UUID.randomUUID().toString(),
                 filename,
                 packageName,
+                parsed.description(),
+                rawContent,
+                0,        // is_system = 0（用户上传）
                 "success",
                 now
             );
             skillRecordDao.insert(record);
+
+            // 重新加载技能注册表
+            skillRegistry.loadAll();
+            log.info("技能上传成功: {} (description: {})", packageName, parsed.description());
+
         } catch (IOException e) {
             // 失败也记录
             SkillRecordEntity record = new SkillRecordEntity(
                 UUID.randomUUID().toString(),
                 filename,
                 packageName,
+                "",
+                "",
+                0,
                 "error",
                 now
             );

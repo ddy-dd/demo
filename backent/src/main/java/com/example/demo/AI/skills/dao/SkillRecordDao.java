@@ -24,9 +24,18 @@ public class SkillRecordDao {
     /** 插入一条记录 */
     public void insert(SkillRecordEntity record) {
         jdbcTemplate.update(
-            "INSERT INTO skill_records (id, name, package_name, status, created_at) VALUES (?, ?, ?, ?, ?)",
+            "INSERT INTO skill_records (id, name, package_name, description, raw_content, is_system, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
             record.getId(), record.getName(), record.getPackageName(),
+            record.getDescription(), record.getRawContent(), record.getIsSystem(),
             record.getStatus(), record.getCreatedAt()
+        );
+    }
+
+    /** 更新已有记录的 description 和 raw_content（用于重新解析） */
+    public void updateContent(String id, String description, String rawContent) {
+        jdbcTemplate.update(
+            "UPDATE skill_records SET description = ?, raw_content = ? WHERE id = ?",
+            description, rawContent, id
         );
     }
 
@@ -35,6 +44,22 @@ public class SkillRecordDao {
         return jdbcTemplate.query(
             "SELECT * FROM skill_records ORDER BY created_at DESC",
             new SkillRecordRowMapper()
+        );
+    }
+
+    /** 查询所有记录，按系统内置→用户上传排序（用于注册表加载） */
+    public List<SkillRecordEntity> findAllForRegistry() {
+        return jdbcTemplate.query(
+            "SELECT * FROM skill_records ORDER BY is_system DESC, created_at ASC",
+            new SkillRecordRowMapper()
+        );
+    }
+
+    /** 按 package_name 查询（用于去重检测） */
+    public List<SkillRecordEntity> findByPackageName(String packageName) {
+        return jdbcTemplate.query(
+            "SELECT * FROM skill_records WHERE package_name = ? ORDER BY created_at DESC",
+            new SkillRecordRowMapper(), packageName
         );
     }
 
@@ -50,6 +75,9 @@ public class SkillRecordDao {
                 rs.getString("id"),
                 rs.getString("name"),
                 rs.getString("package_name"),
+                rs.getString("description"),
+                rs.getString("raw_content"),
+                rs.getInt("is_system"),
                 rs.getString("status"),
                 rs.getString("created_at")
             );

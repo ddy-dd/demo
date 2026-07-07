@@ -22,7 +22,7 @@ public class NovelReaderTool {
 
     private final Tika tika = new Tika();
 
-    @Tool(description = "读取上传的小说文件内容（支持 txt、docx、pdf 格式），返回纯文本。如需分页读取请指定 startLine 和 maxLines")
+    @Tool(description = "读取上传的小说文件内容（支持 txt、docx、pdf、doc 格式），返回纯文本。如需分页读取请指定 startLine 和 maxLines")
     public String readNovelFile(String filePath, Integer startLine, Integer maxLines) {
         Path path = Path.of(filePath);
         if (!Files.exists(path)) {

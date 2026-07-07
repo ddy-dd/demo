@@ -37,6 +37,7 @@ public class ToolConfig {
             NovelReaderTool novelReaderTool,
             ImportDocumentTool importDocumentTool,
             FileWriterTool fileWriterTool) {
-        return List.of(timeTool, locationTool, weatherTool, novelReaderTool, importDocumentTool, fileWriterTool);
+        return List.of(timeTool, locationTool, weatherTool,
+                novelReaderTool, importDocumentTool, fileWriterTool);
     }
 }

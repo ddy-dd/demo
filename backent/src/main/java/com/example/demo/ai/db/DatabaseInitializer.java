@@ -60,13 +60,16 @@ public class DatabaseInitializer {
         """);
     }
 
-    /** Skill 上传记录表（仅存元数据，不含文件内容） */
+    /** Skill 记录表（含技能正文和解析后的描述） */
     private void createSkillRecordsTable() {
         jdbcTemplate.execute("""
             CREATE TABLE IF NOT EXISTS skill_records (
                 id TEXT PRIMARY KEY,
                 name TEXT NOT NULL,
                 package_name TEXT NOT NULL,
+                description TEXT NOT NULL DEFAULT '',
+                raw_content TEXT NOT NULL DEFAULT '',
+                is_system INTEGER NOT NULL DEFAULT 0,
                 status TEXT NOT NULL DEFAULT 'success',
                 created_at TEXT NOT NULL
             )
