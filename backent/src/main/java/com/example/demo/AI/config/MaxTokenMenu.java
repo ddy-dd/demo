@@ -1,6 +1,6 @@
 package com.example.demo.ai.config;
 
-import com.example.demo.ai.util.SummarizingChatMemoryRepository;
+import com.example.demo.ai.chat.util.SummarizingChatMemoryRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

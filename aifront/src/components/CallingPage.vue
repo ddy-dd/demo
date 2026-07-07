@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { v4 as uuidv4 } from 'uuid'
 import { useRouter } from 'vue-router'
 import { renderMarkdown } from '@/composables/useMarkdown'
+import http from '@/api/http'
 
 const router = useRouter()
 const WS_BASE = 'ws://localhost:8888/api/calling/'
@@ -200,6 +201,24 @@ function hangup() {
 
 function goToChat() { hangup(); router.push('/chat') }
 
+/** 挂载时加载最近通话的历史消息 */
+async function loadHistory() {
+  try {
+    const latest: any = await http.getCallHistoryLatest()
+    const msgs: any[] = latest?.messages
+    if (msgs && msgs.length > 0) {
+      messages.value = msgs.map((m: any) => ({
+        role: m.role === 'assistant' ? 'assistant' : 'user',
+        text: m.content || '',
+      }))
+    }
+  } catch (e) {
+    console.warn('加载通话历史失败（后端可能未重启）:', e)
+  }
+}
+
+onMounted(() => { loadHistory() })
+
 onUnmounted(() => { hangup() })
 </script>
 
@@ -254,7 +273,7 @@ onUnmounted(() => { hangup() })
 .msg--user { align-self: flex-end; background: #d6e4f0; }
 .msg--assistant { align-self: flex-start; background: #fff; }
 .msg-label { font-size: 0.7rem; font-weight: 600; color: #8a8680; flex-shrink: 0; margin-top: 0.1rem; }
-.msg-text { font-size: 0.9rem; line-height: 1.5; color: #2c2c2c; word-break: break-word; }
+.msg-text { font-size: 0.9rem; line-height: 1.5; color: #2c2c2c; word-break: break-word; text-align: left; }
 
 /* ── 底部通话按钮 ── */
 .bottom-bar { display: flex; justify-content: center; align-items: center; padding: 1rem 1.5rem; background: #fff; border-top: 1px solid #f0eeeb; flex-shrink: 0; }

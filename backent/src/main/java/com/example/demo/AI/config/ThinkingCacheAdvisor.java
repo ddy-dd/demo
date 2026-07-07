@@ -1,6 +1,6 @@
 package com.example.demo.ai.config;
 
-import com.example.demo.ai.util.SummarizingChatMemoryRepository;
+import com.example.demo.ai.chat.util.SummarizingChatMemoryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClientRequest;
 import org.springframework.ai.chat.client.ChatClientResponse;

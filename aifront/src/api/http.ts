@@ -125,6 +125,17 @@ class AxiosUtils {
   static async deleteKnowledgeFile(id: string): Promise<void> {
     return this.delete(`/knowledge-files/${id}`);
   }
+  // ── 通话历史相关 ───────────────────────────────────────────
+
+  /** 获取最近的活跃通话和消息 */
+  static async getCallHistoryLatest<T>(): Promise<T> {
+    return this.get<T>('/call-history/latest');
+  }
+
+  /** 获取指定通话的所有消息 */
+  static async getCallMessages<T>(callId: string): Promise<T> {
+    return this.get<T>(`/call-history/${callId}/messages`);
+  }
 }
 
 export default AxiosUtils;
